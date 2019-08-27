@@ -42,7 +42,7 @@
 [31m-        <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
 [31m-        <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>[m
 [31m-        <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>[m
-[31m-        <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
+[31m-        <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
 [31m-        <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>[m
 [31m-        <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [31m-        <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
@@ -62,7 +62,7 @@
 [32m+[m[32m                <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
 [32m+[m[32m                <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>[m
 [32m+[m[32m                <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>[m
-[32m+[m[32m                <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
+[32m+[m[32m                <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
 [32m+[m[32m                <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>[m
 [32m+[m[32m                <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [32m+[m[32m                <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
