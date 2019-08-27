@@ -8,16 +8,19 @@
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
 
     <script type="text/javascript">
         window.onload = function() {
+
             initializeFirebaseProject();
             if (!isUserAnAdmin()) {
                 alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
+
         }
     </script>
 </head>
@@ -37,7 +40,7 @@
             <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
             <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
             <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
     <div id="actions">

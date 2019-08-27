@@ -47,7 +47,7 @@
 [31m-        <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [31m-        <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
 [31m-        <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
-[31m-        <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
+[31m-        <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
 [31m-      </ul>[m
 [32m+[m[32m    <div id="menubar">[m
 [32m+[m[32m        <div id="menubar_top">[m
@@ -67,7 +67,7 @@
 [32m+[m[32m                <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [32m+[m[32m                <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
 [32m+[m[32m                <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
-[32m+[m[32m                <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
+[32m+[m[32m                <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
 [32m+[m[32m            </ul>[m
 [32m+[m[32m        </div>[m
      </div>[m
