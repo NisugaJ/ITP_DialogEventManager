@@ -3,10 +3,17 @@ var currentEventID;
 
 //selects attendees of a given event
 function selectAttendees(eventID) {
+    console.log("Event ID is" + eventID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
     currentEventID = eventID;
     var table = document.getElementById('attendees');
     var rowIndex = 1;
+
+    var tableHeaderRowCount = 1;
+    var rowCount = table.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        table.deleteRow(tableHeaderRowCount);
+    }
 
     var emailRef = dbRef.child('eventAttendees').child(eventID);
     emailRef.once('value').then(function(snapshot) {
@@ -41,7 +48,7 @@ function selectAttendees(eventID) {
 //saves ezcash paymnent details
 function saveEzCashPayment() {
     var dbRef = firebase.database().ref(); // Reference to realtime db
-    var amount = document.getElementById('input_amount');
+    var amount = document.getElementById('input_amount').innerText;
 
     var paymentKey = dbRef.child('ezCashFoodPayments').push().key;
 
