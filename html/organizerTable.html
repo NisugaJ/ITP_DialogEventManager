@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Organizers Details Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -8,72 +9,82 @@
     <link rel="stylesheet" type="text/css" href="../css/organizerTable.css">
 
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-    authDomain: "dialog-internal-event-manager.firebaseapp.com",
-    databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-    projectId: "dialog-internal-event-manager",
-    storageBucket: "dialog-internal-event-manager.appspot.com",
-    messagingSenderId: "168700423082",
-    appId: "1:168700423082:web:6ad2292be26320c9"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
     <script src="../js/organizerTable.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="menubar">
 
-    	<span id="dialog">Dialog Events <br> Admin Panel</span><br>
-		<img src="../images/dialogLogo.png" width="144px" height="162px">
-		 
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
         <ul>
-          <li><a href = "dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-          <li><a href = "eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-          <li><a href = "admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
-          <li><a href = "organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-          <li><a href = "member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-          <li><a href = "eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-          <li><a href = "report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-          <li><a href = "calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
-      </div>
-      <div id="actions">
-      <header id="header">
-      	<nav><i class="fas fa-search" id="searchIcon"></i></nav>
-        <input type="text" name="search" id="search">
-        <button id="logOut">
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
         	Sign Out
         </button>
-      </header>
-        <nav><h1 id="title"><center>organizer Details</center></h1></nav>
+        </header>
+        <nav>
+            <h1 id="title">
+                <center>organizer Details</center>
+            </h1>
+        </nav>
         <button type="button" name="addEvent" id="addEvent">
           <a href="insertOrdetails.html">Add Organizers</a>
         </button>
         <br>
         <table id="organizer_table">
-          <tr>
-            <td>Organizers_ID</td>
-            <td>Name</td>
-            <td>Position</td>
-            <td>Ratings</td>
-            <td>Execution Level</td>
-            <td>Gmail</td>
-            <td>Login PWD</td>
-            <td></td>
-            <td></td>
-          </tr>
+            <tr>
+                <td>Organizers_ID</td>
+                <td>Name</td>
+                <td>Position</td>
+                <td>Ratings</td>
+                <td>Execution Level</td>
+                <td>Gmail</td>
+                <td>Login PWD</td>
+                <td><span class="delete_id">ID</span>
+                    <input type="text" name="title" class="inputs" id="id"></td>
+                <td><button type="button" name="uporg" id="Update1">
+                        <a href="insertOrdetails.html">Update</a>
+                      </button><button class="delete" onclick="delete_event()">Delete</button><br></td>
+            </tr>
         </table>
-      </div>
-  </body>
+
+    </div>
+</body>
+
 </html>
