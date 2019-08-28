@@ -27,7 +27,9 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         console.log("after firebase init");
-
+        sessionStorage.setItem("userkey", "user");
+        sessionStorage.setItem("adminKey", "admin");
+        sessionStorage.setItem("organizerKey", "org");
         isUserLoggedInAtStart();
     </script>
 

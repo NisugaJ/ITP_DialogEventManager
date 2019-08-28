@@ -1,7 +1,3 @@
-var USER_KEY = sessionStorage.getItem("userkey");
-var ADMIN_KEY = sessionStorage.getItem("userkey");
-var ORGANIZER_KEY = sessionStorage.getItem("userkey");
-
 //initialize firebase project
 function initializeFirebaseProject() {
     // Your web app's Firebase configuration
@@ -16,6 +12,7 @@ function initializeFirebaseProject() {
         messagingSenderId: "168700423082",
         appId: "1:168700423082:web:6ad2292be26320c9"
     };
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     console.log("After firebase project initialization");
@@ -70,9 +67,14 @@ function isUserLoggedInAtStart() {
             var emailRef = dbRef.child('users').orderByChild('email').equalTo(userObj.email);
             emailRef.once('value').then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    // key will be "ada" the first time and "alan" the second time
                     var userkey = childSnapshot.key;
                     sessionStorage.setItem("userkey", userkey);
+
+                    var userFirstName = childSnapshot.child("firstName").val();
+                    var userLastName = childSnapshot.child("lastName").val();
+                    sessionStorage.setItem("userFirstName", userFirstName);
+                    sessionStorage.setItem("userLastName", userLastName);
+                    // sessionStorage.setItem("userName", )
                     // childData will be the actual contents of the child
                     var childData = childSnapshot.child('email').val();
                     console.log("userkey -->> " + userkey);
@@ -85,6 +87,9 @@ function isUserLoggedInAtStart() {
                     var currentAdmin = childAdminSnapshot.key;
                     console.log(currentAdmin);
                     if (sessionStorage.getItem("userkey") == currentAdmin) {
+
+
+
                         sessionStorage.setItem("organizerKey", "null");
                         sessionStorage.setItem("adminKey", currentAdmin);
                         window.location.href = "adminDashboard.html";
@@ -142,7 +147,7 @@ function isUserLoggedIn() {
 
 //to check whether the user is an admin
 function isUserAnAdmin() {
-    if (sessionStorage.getItem("adminKey") === sessionStorage.getItem("userkey")) {
+    if (sessionStorage.getItem("adminKey") === sessionStorage.getItem("userkey") && sessionStorage.getItem("userkey") != null) {
         console.log("An admin is logged in");
         return true;
     } else {
@@ -152,10 +157,21 @@ function isUserAnAdmin() {
 
 //to check whether the user is an organizer
 function isUserAnOrganizer() {
-    if (sessionStorage.getItem("organizerKey") === sessionStorage.getItem("userkey")) {
+    if (sessionStorage.getItem("organizerKey") === sessionStorage.getItem("userkey") && sessionStorage.getItem("userkey") != null) {
         console.log("An Organizer is logged in");
         return true;
     } else {
         return false;
     }
+}
+
+function showSnackBar(msg) {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+    document.getElementById('snackbar').innerHTML = msg;
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
 }
