@@ -10,15 +10,44 @@
     <link rel="stylesheet" type="text/css" href="../css/EzcashFoodPayment.css">
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/ezcash.js"></script>
 
     <script type="text/javascript">
         window.onload = function() {
-            initializeFirebaseProject();
+
             if (!isUserAnAdmin()) {
                 alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
+            initializeFirebaseProject();
+
+            //to get current events from db
+            var dbRef = firebase.database().ref(); // Reference to realtime db
+            var eventRef = dbRef.child('events').orderByKey();
+
+            eventRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var evenWt = childSnapshot.val();
+                    console.log(childKey + event);
+                    var eventTitle = childSnapshot.child("event_topic").val();
+                    // get reference to select element
+                    var sel = document.getElementById('event_list');
+                    // create new option element
+                    var opt = document.createElement('option');
+                    opt.appendChild(document.createTextNode(eventTitle));
+                    opt.value = childKey;
+                    sel.appendChild(opt);
+                    console.log(eventTitle);
+                    // ...
+                });
+            });
+
+
+
         }
     </script>
 
@@ -43,7 +72,7 @@
                 <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
                 <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
                 <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-                <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+                <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
             </ul>
         </div>
     </div>
@@ -68,9 +97,10 @@
             <div id="wrapper">
                 <div id="content">
                     <div class="dropdown">
-                        <select class="form-control form-control-me" style="background-color: #d1ecf1">
+
+                        <select onchange="selectAttendees(this.value);" id="event_list" class="form-control form-control-me" style="background-color: #d1ecf1">
               <option selected disabled>Select an ongoing Training </option>
-              <option>IOT Training for 5G devices - Millenium iT </option>
+             
             </select>
 
                     </div><br>
@@ -78,63 +108,15 @@
                         <label id="label_enter_amount" class="alert alert-info">Specify amount for a member </label>
                         <input type="text" id="input_amount" class="form-control" />
                     </div>
-                    <table>
+                    <table id="attendees">
                         <tr id="header_row">
                             <th>Member Name</th>
                             <th>Phone Number</th>
                             <th>eZ Cash Status</th>
                             <th>Select / Unselect</th>
                         </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>enabled</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>enabled</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>enabled</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>enabled</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>enabled</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
+
+
                     </table>
                 </div>
             </div>
@@ -163,10 +145,12 @@
             </div>
         </div>
         <div id="footer">
-            <button id="paynow" type="submit" class="btn btn-primary btn-lg btn-block">Pay Now</button>
+            <button id="paynow" type="submit" class="btn btn-primary btn-lg btn-block" onclick="saveEzCashPayment()">Pay Now</button>
             <button id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block">Cancel</button>
 
         </div>
+        <div id="snackbar">Some text some message..</div>
+
     </div>
 
     <script>

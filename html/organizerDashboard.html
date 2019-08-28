@@ -15,10 +15,10 @@
         window.onload = function() {
             initializeFirebaseProject();
             if (!isUserAnOrganizer()) {
-                document.body.style.visibility = "hidden";
                 alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
+
         }
     </script>
 </head>
