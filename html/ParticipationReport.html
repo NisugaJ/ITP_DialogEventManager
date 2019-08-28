@@ -12,6 +12,7 @@
   <script type="text/javascript" src="../js/common.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script type="text/javascript" src="../js/ezcash.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -29,6 +30,28 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+   //to get current events from db
+   var dbRef = firebase.database().ref(); // Reference to realtime db
+            var eventRef = dbRef.child('users').orderByKey();
+
+            eventRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var evenWt = childSnapshot.val();
+                    console.log(childKey + event);
+                    var userName = childSnapshot.child("firstName").val();
+                    // get reference to select element
+                    var sel = document.getElementById('user_list');
+                    // create new option element
+                    var opt = document.createElement('option');
+                    opt.appendChild(document.createTextNode(firstName));
+                    opt.value = childKey;
+                    sel.appendChild(opt);
+                    console.log(firstName);
+                    // ...
+                });
+            });
 </script>
 </head>
 
@@ -73,6 +96,9 @@
                 <i class="fas fa-search"></i>
               </a>
             </div>
+
+            <select onchange="selectAttendees(this.value);" id="user_list" class="form-control form-control-me" style="background-color: #d1ecf1">
+              <option selected disabled>Select an User </option></select>
 
         <div style="margin-left: 1px; margin-top: 150px">
         <table>
