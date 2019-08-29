@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Member Details</title>
+    <title>Event Participation Report</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/member.css">
@@ -22,6 +22,11 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script type="text/javascript" src="../js/ezcash.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+
+    <script type="text/javascript" src="../js/ParticipationReport.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -98,123 +103,41 @@
 
 
 
-                <div class="col-left">
 
-                    <div class="search-box">
-                        <input class="search-txt" type="text" name="" placeholder="search member">
-                        <a class="search-btn" href="#">
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </div>
-
-                    <select onchange="selectAttendees(this.value);" id="user_list" class="form-control form-control-me" style="background-color: #d1ecf1">
+                <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
               <option selected disabled>Select an User </option></select>
 
-                    <div style="margin-left: 1px; margin-top: 150px">
-                        <table>
-                            <tr>
-                                <th style="border: 1px solid black">Member ID</th>
-                                <th style="border: 1px solid black">Member Name</th>
-                                <th style="border: 1px solid black">Event</th>
-                                <th style="border: 1px solid black">Start Time</th>
-                                <th style="border: 1px solid black">Required(hrs)</th>
-                                <th style="border: 1px solid black">Actual(hrs)</th>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black">
-                                </td>
-                                <td style="border: 1px solid black"></td>
-                                <td style="border: 1px solid black"></td>
+                <div style="margin-left: 1px; margin-top: 150px">
+                    <table id="attendees">
+                        <tr>
+                            <th style="border: 1px solid black">Member ID</th>
+                            <th style="border: 1px solid black">Member Name</th>
+                            <th style="border: 1px solid black">Event</th>
+                            <th style="border: 1px solid black">Arrival Time</th>
 
-                            </tr>
+                        </tr>
 
-                        </table>
-                    </div>
-
-
+                    </table>
                 </div>
-
-
 
 
             </div>
 
 
-        </div>
-
-        <div style="margin-left: 60px">
-            <button class="button">Add Details</button>
-            <button class="button" style="margin-left: 6px">Remove Details</button>
-            <button class="button" style="margin-left: 6px">Update Details</button>
 
         </div>
+
+    </div>
+
+
+    </div>
+
+    <div style="margin-left: 60px">
+        <button class="button">Add Details</button>
+        <button class="button" style="margin-left: 6px">Remove Details</button>
+        <button class="button" style="margin-left: 6px">Update Details</button>
+
+    </div>
     </div>
 
 </body>
