@@ -9,64 +9,60 @@
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript">
-        window.onload = function() {
+    <<<<<<< HEAD <script type="text/javascript">
+        window.onload = function() { if (!isUserAnAdmin()) { alert("You are unorthorized for this content"); window.location.href = "Login.html"; } }
+        </script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+        <script type="text/javascript" src="../js/ezcash.js"></script>
+        ======= >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
 
-            if (!isUserAnAdmin()) {
-                alert("You are unorthorized for this content");
-                window.location.href = "Login.html";
-            }
+        <script type="text/javascript" src="../js/ParticipationReport.js"></script>
 
-        }
-    </script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
-    <script type="text/javascript" src="../js/ezcash.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-
-    <script type="text/javascript" src="../js/ParticipationReport.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+        <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-            authDomain: "dialog-internal-event-manager.firebaseapp.com",
-            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-            projectId: "dialog-internal-event-manager",
-            storageBucket: "dialog-internal-event-manager.appspot.com",
-            messagingSenderId: "168700423082",
-            appId: "1:168700423082:web:ecc1385d6e962236"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        <script>
+            window.onload = function() {
+                // Your web app's Firebase configuration
+                var firebaseConfig = {
+                    apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                    authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                    databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                    projectId: "dialog-internal-event-manager",
+                    storageBucket: "dialog-internal-event-manager.appspot.com",
+                    messagingSenderId: "168700423082",
+                    appId: "1:168700423082:web:ecc1385d6e962236"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
 
-        //to get current events from db
-        var dbRef = firebase.database().ref(); // Reference to realtime db
-        var eventRef = dbRef.child('users').orderByKey();
+                //to get current events from db
+                var dbRef = firebase.database().ref(); // Reference to realtime db
+                var eventRef = dbRef.child('events').orderByKey();
 
-        eventRef.once('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                var childKey = childSnapshot.key;
-                var evenWt = childSnapshot.val();
-                console.log(childKey + event);
-                var userName = childSnapshot.child("firstName").val();
-                // get reference to select element
-                var sel = document.getElementById('user_list');
-                // create new option element
-                var opt = document.createElement('option');
-                opt.appendChild(document.createTextNode(firstName));
-                opt.value = childKey;
-                sel.appendChild(opt);
-                console.log(firstName);
-                // ...
-            });
-        });
-    </script>
+                eventRef.once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var childKey = childSnapshot.key;
+                        var evenWt = childSnapshot.val();
+                        console.log(childKey + event);
+                        var eventTitle = childSnapshot.child("event_topic").val();
+                        // get reference to select element
+                        var sel = document.getElementById('event_list');
+                        // create new option element
+                        var opt = document.createElement('option');
+                        opt.appendChild(document.createTextNode(eventTitle));
+                        opt.value = childKey;
+                        sel.appendChild(opt);
+                        console.log(eventTitle);
+                        // ...
+                    });
+                });
+            }
+        </script>
 </head>
 
 <body>
@@ -76,22 +72,35 @@
         <img src="../images/dialogLogo.png" width="144px" height="162px">
 
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
-            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <<<<<<< HEAD <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+                <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+                <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
+                <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+                <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+                <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+                <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
+                <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+                <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+                =======
+                <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+                <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+                <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+                <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+                <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+                <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+                <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+                <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+                >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
         </ul>
     </div>
     <div id="actions">
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
-            <button id="logOut" onclick="signOutUser()">
+            <<<<<<< HEAD <button id="logOut" onclick="signOutUser()">
+                =======
+                <button id="logOut">
+>>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
         Sign Out
       </button>
         </header>
@@ -114,18 +123,29 @@
                             <th style="border: 1px solid black">Member Name</th>
                             <th style="border: 1px solid black">Event</th>
                             <th style="border: 1px solid black">Arrival Time</th>
-
-                        </tr>
+                            <<<<<<< HEAD=======< /tr>
 
                     </table>
                 </div>
+                >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
 
+                </tr>
 
+                <<<<<<< HEAD </table>
             </div>
-
-
-
+            =======
         </div>
+
+        >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
+
+
+    </div>
+
+
+
+    </div>
+
+    </div>
 
     </div>
 
@@ -138,7 +158,8 @@
         <button class="button" style="margin-left: 6px">Update Details</button>
 
     </div>
-    </div>
+    <<<<<<< HEAD </div>
+        ======= >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
 
 </body>
 
