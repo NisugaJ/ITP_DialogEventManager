@@ -9,6 +9,16 @@
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
     <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
     <link rel="stylesheet" type="text/css" href="../css/piechart.css">
+    <script type="text/javascript">
+        window.onload = function() {
+
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
 </head>
 
 <body>

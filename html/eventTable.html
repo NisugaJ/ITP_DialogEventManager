@@ -15,7 +15,16 @@
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
+    <script type="text/javascript">
+        window.onload = function() {
 
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {

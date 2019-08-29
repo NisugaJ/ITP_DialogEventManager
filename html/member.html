@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Member Details</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+        window.onload = function() {
+
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="menubar">
+
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
+
+        <ul>
+            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
+            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+        </ul>
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
+        Sign Out
+      </button>
+        </header>
+        <br>
+
+        <div class="row">
+            <div class="col-right">
+                <h3 style="margin-left: 150px; margin-top: 10px">Ratings</h3>
+
+                <table>
+                    <tr>
+                        <td>Attendance Rate</td>
+                        <td><span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Collaboration Rate</td>
+                        <td><span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Community Reputation</td>
+                        <td>
+                            <div class="row">
+                                <div><i class="fa fa-thumbs-up"> 10</i></div>
+                                <div><i class="fa fa-thumbs-down" style="margin-left:10px "> 5</i></div>
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+
+
+
+
+
+                <h3 style="margin-left: 150px; margin-top: 60px">Member Details</h3>
+                <table>
+                    <tr>
+                        <td>Member Name</td>
+                        <td><input type="text" name="mname"></td>
+                    </tr>
+                    <tr>
+                        <td>Member ID</td>
+                        <td><input type="text" name="mid"></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><input type="text" name="pno"></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><input type="text" name="eadd"></td>
+                    </tr>
+
+                </table>
+                <div style="margin-left: 60px; margin-top: 5px">
+                    <button class="button">Clear</button>
+                </div><br>
+                <div style="margin-left: 60px">
+                    <button class="button">Add Details</button>
+                    <button class="button" style="margin-left: 6px">Remove Details</button>
+                    <button class="button" style="margin-left: 6px">Update Details</button>
+
+                </div>
+            </div>
+
+            <div class="col-left">
+
+                <div class="search-box">
+                    <input class="search-txt" type="text" name="" placeholder="search member">
+                    <a class="search-btn" href="#">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+
+                <div style="margin-left: 1px; margin-top: 150px">
+                    <table>
+                        <tr>
+                            <th style="border: 1px solid black">Member ID</th>
+                            <th style="border: 1px solid black">Member Name</th>
+                            <th style="border: 1px solid black">Phone Number</th>
+                            <th style="border: 1px solid black">Email Address</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black">10000</td>
+                            <td style="border: 1px solid black">Sujanthan Jayasinghe</td>
+                            <td style="border: 1px solid black">0775165312</td>
+                            <td style="border: 1px solid black">sujanthan.jayasinghe@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black">10001</td>
+                            <td style="border: 1px solid black">Dinara Peiris</td>
+                            <td style="border: 1px solid black">0774567865</td>
+                            <td style="border: 1px solid black">dinara.peiris@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black">10002</td>
+                            <td style="border: 1px solid black">Steffan Fernando</td>
+                            <td style="border: 1px solid black">0777851544</td>
+                            <td style="border: 1px solid black">steffan.fernando@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black">10003</td>
+                            <td style="border: 1px solid black">Rahulan Jayasekara</td>
+                            <td style="border: 1px solid black">0778765165</td>
+                            <td style="border: 1px solid black">rahulan.jayasekara@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black">10004</td>
+                            <td style="border: 1px solid black">Saranga Manamperi</td>
+                            <td style="border: 1px solid black">0771985614</td>
+                            <td style="border: 1px solid black">saranga.manamperi@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                            <td style="border: 1px solid black"></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

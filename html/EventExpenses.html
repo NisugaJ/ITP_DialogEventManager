@@ -10,7 +10,16 @@
     <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
     <link rel="stylesheet" type="text/css" href="../css/pieChart.css">
 
+    <script type="text/javascript">
+        window.onload = function() {
 
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
@@ -71,7 +80,7 @@
         <br><br>
         <nav>
             <h1 id="title">
-                <center>Select Event</center>
+                <center>Select Expense</center>
             </h1>
         </nav>
         <Select type="button" name="addEvent" id="addEvent">
@@ -80,7 +89,7 @@
                         <option value="event140">Event140</option>
                         <option value="event180">Event180</option>
                         <option value="event203">Event203</option>
-		  <a href="registerEvent.html">Add Event</a></select>
+		  <a href="registerEvent.html">Add Expense</a></select>
         </button>
         <br>
         <table id="event_expenses_table">

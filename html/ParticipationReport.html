@@ -9,6 +9,16 @@
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script type="text/javascript" src="../js/ezcash.js"></script>
@@ -76,7 +86,7 @@
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
-            <button id="logOut">
+            <button id="logOut" onclick="signOutUser()">
         Sign Out
       </button>
         </header>
