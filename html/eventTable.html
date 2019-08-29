@@ -7,22 +7,31 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
 
-    <script type="text/javascript">
-        window.onload = function() {
 
-            initializeFirebaseProject();
-            if (!isUserAnAdmin()) {
-                alert("You are unorthorized for this content");
-                window.location.href = "Login.html";
-            }
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
 
-        }
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
     </script>
+
+    <script src="../js/eventTable.js"></script>
 </head>
 
 <body>
@@ -34,7 +43,7 @@
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
@@ -57,32 +66,24 @@
             </h1>
         </nav>
         <button type="button" name="addEvent" id="addEvent">
-          <a href="registerEvent.html">Add Event</a>
+          <a href="registerEvent.html">Add/Edit Event</a>
         </button>
         <br>
-        <table>
+        <br><br><br>
+        <span class="delete_id">Id</span>
+        <input type="text" name="title" class="inputs" id="id"><button class="delete" onclick="delete_event()">Delete</button><br>
+
+        <table id="event_table">
             <tr>
-                <th>Title</th>
-                <th>Photo</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End time</th>
-                <th>Location</th>
-                <th>No of Guests</th>
-                <th>Descritption</th>
-                <th>Edit</th>
-            </tr>
-            <tr>
-                <td>Google I/O</td>
-                <td><img src="../images/google.png" width="150" height="50"></td>
-                <td>2019/11/15</td>
-                <td>14:00</td>
-                <td>17:00</td>
-                <td>Dialog</td>
-                <td>102</td>
-                <td>Google shows their future technologies</td>
-                <td><img src="../images/edit.png" width="25" height="25">
-                    <img src="../images/delete.png" width="25" height="25"></td>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Date</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Descritption</td>
+                <td>Location</td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </div>
