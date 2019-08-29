@@ -3,17 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Organizers Details Table</title>
+    <title>Add an event</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/registerEvent.css">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
-    <link rel="stylesheet" type="text/css" href="../css/organizerTable.css">
-
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
+      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
         // Your web app's Firebase configuration
@@ -30,10 +29,13 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <script src="../js/organizerTable.js"></script>
+    <script src="../js/update.js"></script>
+
+
 </head>
 
 <body>
+
     <div id="menubar">
 
         <span id="dialog">Dialog Events <br> Admin Panel</span><br>
@@ -42,49 +44,61 @@
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
             <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
+
     <div id="actions">
+
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
             <button id="logOut">
-        	Sign Out
+          Sign Out
         </button>
         </header>
+
         <nav>
             <h1 id="title">
-                <center>organizer Details</center>
+                <center>Event Expenses</center>
             </h1>
         </nav>
-        <button type="button" name="addEvent" id="addEvent">
-          <a href="insertOrdetails.html">Add Organizers</a>
-        </button>
-        <br>
-        <table id="organizer_table">
-            <tr>
-                <td>Organizers_ID</td>
-                <td>Name</td>
-                <td>Position</td>
-                <td>Ratings</td>
-                <td>Execution Level</td>
-                <td>Gmail</td>
-                <td>Login PWD</td>
-                <td><span class="delete_id">ID</span>
-                    <input type="text" name="title" class="inputs" id="id"></td>
-                <td><button type="button" name="uporg" id="Update1">
-                        <a href="insertOrdetails.html">Update</a>
-                      </button><button class="delete" onclick="delete_event()">Delete</button><br></td>
-            </tr>
-        </table>
 
+        <form class="addEvent" method="post">
+
+            <h4>Id</h4>
+            <input type="text" name="title" class="inputs" id="id"><br>
+
+            <h4>Event Expense Name</h4>
+            <input type="text" name="title" class="inputs" id="name"><br>
+
+            <h4> Amount</h4>
+            <input type="text" name="amount" class="inputs" id="amount"><br>
+
+            <h4> Time</h4>
+            <input type="time" name="Time" class="inputs" id="time"><br>
+
+
+
+            <h4>Status</h4>
+            <textarea name="status" rows="8" cols="80" class="inputs" id="status"></textarea><br>
+
+
+
+            <input type="submit" name="create" value="Create" class="submit" onclick="save_eventexpenses()">
+            <button type="button" name="button" class="button" onclick="update_event()">Update</button>
+            <a href="eventTable.html"><button type="button" name="button" class="button">Cancel</button></a>
+
+        </form>
     </div>
+
+    </section>
 </body>
 
 </html>

@@ -3,17 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Organizers Details Table</title>
+    <title>Event Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
-    <link rel="stylesheet" type="text/css" href="../css/organizerTable.css">
+    <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
+    <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
+    <link rel="stylesheet" type="text/css" href="../css/pieChart.css">
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
+      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
         // Your web app's Firebase configuration
@@ -30,7 +32,7 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <script src="../js/organizerTable.js"></script>
+    <script src="../js/eventExpenses.js"></script>
 </head>
 
 <body>
@@ -42,12 +44,13 @@
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
             <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
     <div id="actions">
@@ -58,32 +61,44 @@
         	Sign Out
         </button>
         </header>
+        <h4>
+            <p align="right">
+                <img src="../images/edit.png" width="25" height="25">Edit &nbsp;
+                <img src="../images/delete.png" width="25" height="25">Delete&nbsp;
+                <img src="../images/update.png" width="25" height="25">Update</td>
+            </p>
+        </h4>
+        <br><br>
         <nav>
             <h1 id="title">
-                <center>organizer Details</center>
+                <center>Select Event</center>
             </h1>
         </nav>
-        <button type="button" name="addEvent" id="addEvent">
-          <a href="insertOrdetails.html">Add Organizers</a>
+        <Select type="button" name="addEvent" id="addEvent">
+					    <option value="event123">SelectEvent</option>
+                        <option value="event123">Event123</option>
+                        <option value="event140">Event140</option>
+                        <option value="event180">Event180</option>
+                        <option value="event203">Event203</option>
+		  <a href="registerEvent.html">Add Event</a></select>
         </button>
         <br>
-        <table id="organizer_table">
+        <table id="event_expenses_table">
             <tr>
-                <td>Organizers_ID</td>
-                <td>Name</td>
-                <td>Position</td>
-                <td>Ratings</td>
-                <td>Execution Level</td>
-                <td>Gmail</td>
-                <td>Login PWD</td>
-                <td><span class="delete_id">ID</span>
-                    <input type="text" name="title" class="inputs" id="id"></td>
-                <td><button type="button" name="uporg" id="Update1">
-                        <a href="insertOrdetails.html">Update</a>
-                      </button><button class="delete" onclick="delete_event()">Delete</button><br></td>
+                <td>Id</td>
+                <td>Item</td>
+                <td>Amount(Rs)</td>
+                <td>Time</td>
+                <td>Status</td>
+                <td></td>
+                <td></td>
             </tr>
-        </table>
 
+        </table>
+        <br><br>
+        <button type="button" name="pieChart" id="pieChart">
+          <a href="pieChart.html">Create PieChart</a>
+        </button>
     </div>
 </body>
 
