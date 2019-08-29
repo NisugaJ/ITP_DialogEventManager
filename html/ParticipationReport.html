@@ -2,209 +2,133 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Member Details</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="../css/menubar.css">
-  <link rel="stylesheet" type="text/css" href="../css/member.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="../js/common.js"></script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
-    <script type="text/javascript" src="../js/ezcash.js"></script>
+    <meta charset="utf-8">
+    <title>Event Participation Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../js/common.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <script type="text/javascript" src="../js/ParticipationReport.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-    authDomain: "dialog-internal-event-manager.firebaseapp.com",
-    databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-    projectId: "dialog-internal-event-manager",
-    storageBucket: "dialog-internal-event-manager.appspot.com",
-    messagingSenderId: "168700423082",
-    appId: "1:168700423082:web:ecc1385d6e962236"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+    <script>
+        window.onload = function() {
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:ecc1385d6e962236"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
 
-   //to get current events from db
-   var dbRef = firebase.database().ref(); // Reference to realtime db
-            var eventRef = dbRef.child('users').orderByKey();
+            //to get current events from db
+            var dbRef = firebase.database().ref(); // Reference to realtime db
+            var eventRef = dbRef.child('events').orderByKey();
 
             eventRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var childKey = childSnapshot.key;
                     var evenWt = childSnapshot.val();
                     console.log(childKey + event);
-                    var userName = childSnapshot.child("firstName").val();
+                    var eventTitle = childSnapshot.child("event_topic").val();
                     // get reference to select element
-                    var sel = document.getElementById('user_list');
+                    var sel = document.getElementById('event_list');
                     // create new option element
                     var opt = document.createElement('option');
-                    opt.appendChild(document.createTextNode(firstName));
+                    opt.appendChild(document.createTextNode(eventTitle));
                     opt.value = childKey;
                     sel.appendChild(opt);
-                    console.log(firstName);
+                    console.log(eventTitle);
                     // ...
                 });
             });
-</script>
+        }
+    </script>
 </head>
 
 <body>
-  <div id="menubar">
+    <div id="menubar">
 
-    <span id="dialog">Dialog Events <br> Admin Panel</span><br>
-    <img src="../images/dialogLogo.png" width="144px" height="162px">
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-    <ul>
-      <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-      <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-      <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
-      <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-      <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-      <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-      <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-      <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-    </ul>
-  </div>
-  <div id="actions">
-    <header id="header">
-      <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-      <input type="text" name="search" id="search">
-      <button id="logOut">
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+        </ul>
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
         Sign Out
       </button>
-    </header>
-    <br>
+        </header>
+        <br>
 
-    <div class="row">
-      <div class="col-right">
-        <h3 style="margin-left: 150px; margin-top: 10px">Individual Participation Report</h3>
+        <div class="row">
+            <div class="col-right">
+                <h3 style="margin-left: 150px; margin-top: 10px">Individual Participation Report</h3>
 
-    
 
-      <div class="col-left">
 
-          <div class="search-box">
-              <input class="search-txt" type="text" name="" placeholder="search member">
-              <a class="search-btn" href="#">
-                <i class="fas fa-search"></i>
-              </a>
-            </div>
+                <div class="col-left">
 
-            <select onchange="selectAttendees(this.value);" id="user_list" class="form-control form-control-me" style="background-color: #d1ecf1">
+                    <div class="search-box">
+                        <input class="search-txt" type="text" name="" placeholder="search member">
+                        <a class="search-btn" href="#">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </div>
+
+                    <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
               <option selected disabled>Select an User </option></select>
 
-        <div style="margin-left: 1px; margin-top: 150px">
-        <table>
-          <tr>
-            <th style="border: 1px solid black">Member ID</th>
-            <th style="border: 1px solid black">Member Name</th>
-            <th style="border: 1px solid black">Event</th>
-            <th style="border: 1px solid black">Start Time</th>
-            <th style="border: 1px solid black">Required(hrs)</th>
-            <th style="border: 1px solid black">Actual(hrs)</th>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-          </tr>
-          <tr>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-              </tr>
-              <tr>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black">
-                    </td><td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
+                    <div style="margin-left: 1px; margin-top: 150px">
+                        <table id="attendees">
+                            <tr>
+                                <th style="border: 1px solid black">Member ID</th>
+                                <th style="border: 1px solid black">Member Name</th>
+                                <th style="border: 1px solid black">Event</th>
+                                <th style="border: 1px solid black">Arrival Time</th>
 
-                  </tr>
+                            </tr>
 
-        </table>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
         </div>
 
 
-      </div>
-
-
-
-
     </div>
-
-
-  </div>
-  
-  <div style="margin-left: 60px">
-    <button class="button">Add Details</button>
-    <button class="button" style="margin-left: 6px">Remove Details</button>
-    <button class="button" style="margin-left: 6px">Update Details</button>
-    
-  </div>
-</div>
 
 </body>
 
