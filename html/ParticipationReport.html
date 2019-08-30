@@ -9,60 +9,64 @@
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="../js/common.js"></script>
-    <<<<<<< HEAD <script type="text/javascript">
-        window.onload = function() { if (!isUserAnAdmin()) { alert("You are unorthorized for this content"); window.location.href = "Login.html"; } }
-        </script>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
-        <script type="text/javascript" src="../js/ezcash.js"></script>
-        ======= >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            if (!isUserAnAdmin()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+        }
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script type="text/javascript" src="../js/ezcash.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
 
-        <script type="text/javascript" src="../js/ParticipationReport.js"></script>
+    <script type="text/javascript" src="../js/ParticipationReport.js"></script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-        <script>
-            window.onload = function() {
-                // Your web app's Firebase configuration
-                var firebaseConfig = {
-                    apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-                    authDomain: "dialog-internal-event-manager.firebaseapp.com",
-                    databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-                    projectId: "dialog-internal-event-manager",
-                    storageBucket: "dialog-internal-event-manager.appspot.com",
-                    messagingSenderId: "168700423082",
-                    appId: "1:168700423082:web:ecc1385d6e962236"
-                };
-                // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
+    <script>
+        window.onload = function() {
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:ecc1385d6e962236"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
 
-                //to get current events from db
-                var dbRef = firebase.database().ref(); // Reference to realtime db
-                var eventRef = dbRef.child('events').orderByKey();
+            //to get current events from db
+            var dbRef = firebase.database().ref(); // Reference to realtime db
+            var eventRef = dbRef.child('events').orderByKey();
 
-                eventRef.once('value', function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                        var childKey = childSnapshot.key;
-                        var evenWt = childSnapshot.val();
-                        console.log(childKey + event);
-                        var eventTitle = childSnapshot.child("event_topic").val();
-                        // get reference to select element
-                        var sel = document.getElementById('event_list');
-                        // create new option element
-                        var opt = document.createElement('option');
-                        opt.appendChild(document.createTextNode(eventTitle));
-                        opt.value = childKey;
-                        sel.appendChild(opt);
-                        console.log(eventTitle);
-                        // ...
-                    });
+            eventRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var evenWt = childSnapshot.val();
+                    console.log(childKey + event);
+                    var eventTitle = childSnapshot.child("event_topic").val();
+                    // get reference to select element
+                    var sel = document.getElementById('event_list');
+                    // create new option element
+                    var opt = document.createElement('option');
+                    opt.appendChild(document.createTextNode(eventTitle));
+                    opt.value = childKey;
+                    sel.appendChild(opt);
+                    console.log(eventTitle);
+                    // ...
                 });
-            }
-        </script>
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -80,7 +84,8 @@
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
             <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
             <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
 
         </ul>
     </div>
@@ -96,13 +101,13 @@
 
         <div class="row">
             <div class="col-right">
-                <h3 style="margin-left: 150px; margin-top: 10px">Individual Participation Report</h3>
+                <h3 style="margin-left: 150px; margin-top: 10px"> Participation Report</h3>
 
 
 
 
                 <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
-              <option selected disabled>Select an User </option></select>
+              <option selected disabled>Select an Event </option></select>
 
                 <div style="margin-left: 1px; margin-top: 150px">
                     <table id="attendees">
@@ -111,27 +116,19 @@
                             <th style="border: 1px solid black">Member Name</th>
                             <th style="border: 1px solid black">Event</th>
                             <th style="border: 1px solid black">Arrival Time</th>
-                            <<<<<<< HEAD=======< /tr>
 
+
+                        </tr>
                     </table>
                 </div>
-                >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
 
-                </tr>
 
-                <<<<<<< HEAD </table>
+
             </div>
-            =======
+
+
+
         </div>
-
-        >>>>>>> 4cd3b81cf9d7829bf308c16948487f372ae11b20
-
-
-    </div>
-
-
-
-    </div>
 
     </div>
 

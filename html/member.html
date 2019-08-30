@@ -8,6 +8,15 @@
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+    <script type="text/javascript" src="../js/common.js"></script>
+
     <script type="text/javascript">
         window.onload = function() {
 
@@ -18,6 +27,21 @@
 
         }
     </script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
 </head>
 
 <body>
@@ -26,17 +50,15 @@
         <span id="dialog">Dialog Events <br> Admin Panel</span><br>
         <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
-            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
     <div id="actions">
@@ -93,19 +115,19 @@
                 <table>
                     <tr>
                         <td>Member Name</td>
-                        <td><input type="text" name="mname"></td>
+                        <td><input type="text" name="mname" id="name"></td>
                     </tr>
                     <tr>
                         <td>Member ID</td>
-                        <td><input type="text" name="mid"></td>
+                        <td><input type="text" name="mid" id="id"></td>
                     </tr>
                     <tr>
                         <td>Phone Number</td>
-                        <td><input type="text" name="pno"></td>
+                        <td><input type="text" name="pno" id="phone"></td>
                     </tr>
                     <tr>
                         <td>Email Address</td>
-                        <td><input type="text" name="eadd"></td>
+                        <td><input type="text" name="eadd" id="email"></td>
                     </tr>
 
                 </table>
@@ -113,9 +135,9 @@
                     <button class="button">Clear</button>
                 </div><br>
                 <div style="margin-left: 60px">
-                    <button class="button">Add Details</button>
-                    <button class="button" style="margin-left: 6px">Remove Details</button>
-                    <button class="button" style="margin-left: 6px">Update Details</button>
+                    <button class="button" onclick="save_user();">Add Details</button>
+                    <button class="button" style="margin-left: 6px" onclick="delete_user();">Remove Details</button>
+                    <button class="button" style="margin-left: 6px" onclick="update_user();">Update Details</button>
 
                 </div>
             </div>
@@ -129,67 +151,13 @@
                     </a>
                 </div>
 
-                <div style="margin-left: 1px; margin-top: 150px">
-                    <table>
+                <div style="margin-left: 1px; margin-top: 200px">
+                    <table id="tbl_users_list" style="border: 1px solid black">
                         <tr>
                             <th style="border: 1px solid black">Member ID</th>
                             <th style="border: 1px solid black">Member Name</th>
                             <th style="border: 1px solid black">Phone Number</th>
                             <th style="border: 1px solid black">Email Address</th>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black">10000</td>
-                            <td style="border: 1px solid black">Sujanthan Jayasinghe</td>
-                            <td style="border: 1px solid black">0775165312</td>
-                            <td style="border: 1px solid black">sujanthan.jayasinghe@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black">10001</td>
-                            <td style="border: 1px solid black">Dinara Peiris</td>
-                            <td style="border: 1px solid black">0774567865</td>
-                            <td style="border: 1px solid black">dinara.peiris@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black">10002</td>
-                            <td style="border: 1px solid black">Steffan Fernando</td>
-                            <td style="border: 1px solid black">0777851544</td>
-                            <td style="border: 1px solid black">steffan.fernando@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black">10003</td>
-                            <td style="border: 1px solid black">Rahulan Jayasekara</td>
-                            <td style="border: 1px solid black">0778765165</td>
-                            <td style="border: 1px solid black">rahulan.jayasekara@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black">10004</td>
-                            <td style="border: 1px solid black">Saranga Manamperi</td>
-                            <td style="border: 1px solid black">0771985614</td>
-                            <td style="border: 1px solid black">saranga.manamperi@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
-                            <td style="border: 1px solid black"></td>
                         </tr>
 
                     </table>
@@ -203,8 +171,99 @@
 
         </div>
 
-
     </div>
+
+    <script>
+        var tblUsers = document.getElementById('tbl_users_list');
+
+        var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
+
+        var rowIndex = 1;
+
+        databaseRef.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var childKey = childSnapshot.key;
+                if (childKey >= 10000) {
+                    var childData = childSnapshot.val();
+
+                    var row = tblUsers.insertRow(rowIndex);
+                    var cell_Id = row.insertCell(0);
+                    var cell_name = row.insertCell(1);
+                    var cell_phone = row.insertCell(2);
+                    var cell_email = row.insertCell(3);
+
+                    //document.getElementById("tbl_users_list").style.border = "1px solid black";
+
+
+                    cell_Id.appendChild(document.createTextNode(childKey));
+                    cell_name.appendChild(document.createTextNode(childData.firstName));
+                    cell_phone.appendChild(document.createTextNode(childData.mobile));
+                    cell_email.appendChild(document.createTextNode(childData.email));
+
+                    rowIndex = rowIndex + 1;
+
+                }
+
+            });
+        });
+
+
+        function save_user() {
+            var user_name = document.getElementById('name').value;
+            var user_id = document.getElementById('id').value;
+            var user_phone = document.getElementById('phone').value;
+            var user_email = document.getElementById('email').value;
+
+            var data = {
+                firstName: user_name,
+                mobile: user_phone,
+                email: user_email
+            }
+
+            var updates = {};
+            updates['/users/' + user_id] = data;
+            firebase.database().ref().update(updates);
+
+            alert('The user is created successfully');
+            reload_page();
+
+        }
+
+        function update_user() {
+            var user_name = document.getElementById('name').value;
+            var user_id = document.getElementById('id').value;
+            var user_phone = document.getElementById('phone').value;
+            var user_email = document.getElementById('email').value;
+
+            var data = {
+                firstName: user_name,
+                mobile: user_phone,
+                email: user_email
+            }
+            var updates = {};
+            updates['/users/' + user_id] = data;
+            firebase.database().ref().update(updates);
+
+            alert('The user is updated successfully!');
+
+            reload_page();
+
+        }
+
+        function delete_user() {
+            var user_id = document.getElementById('id').value;
+            firebase.database().ref().child('/users/' + user_id).remove();
+            alert('The user is deleted successfully!');
+
+            reload_page();
+
+
+        }
+
+        function reload_page() {
+            window.location.reload();
+        }
+    </script>
 
 </body>
 

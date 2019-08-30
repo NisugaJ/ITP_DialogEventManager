@@ -25,7 +25,7 @@ function selectAttendees(eventID) {
                 console.log(attendeesShot.val());
                 var memberName = row.insertCell(0);
                 var memberPhone = row.insertCell(1);
-                var ezcashStat = row.insertCell(2).appendChild(document.createTextNode("enabled"));
+                var ezcashStat = row.insertCell(2).appendChild(document.createTextNode("ontime"));
                 //var selectCell = row.insertCell(3);
                 var timeStampCell = row.insertCell(3).appendChild(document.createTextNode(timeStamp));
 
