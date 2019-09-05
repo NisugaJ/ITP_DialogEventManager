@@ -11,13 +11,13 @@ databaseRef.once('value', function(snapshot) {
         var childData = childSnapshot.val();
 
         var row = event.insertRow(rowIndex);
-        var cellId = row.insertCell(0);
-        var cellName = row.insertCell(1);
-        var cellAmount = row.insertCell(2);
-        var cellTime = row.insertCell(3);
-        var cellStatus = row.insertCell(4);
+        // var cellId = row.insertCell(0);
+        var cellName = row.insertCell(0);
+        var cellAmount = row.insertCell(1);
+        var cellTime = row.insertCell(2);
+        var cellStatus = row.insertCell(3);
 
-        cellId.appendChild(document.createTextNode(childKey));
+        // cellId.appendChild(document.createTextNode(childKey));
         cellName.appendChild(document.createTextNode(childData.event_name));
         cellAmount.appendChild(document.createTextNode(childData.amount));
         cellTime.appendChild(document.createTextNode(childData.time));

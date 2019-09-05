@@ -1,76 +1,110 @@
-function loadPolls() {
-    var databaseRef = firebase.database().ref();
-    var rowIndex = 1;
+var databaseRef = firebase.database().ref('polls/');
 
-    databaseRef.once('value', function(snapshot) {
+ //read  
+ var rowIndex = 1;
 
-        var pollForm = document.getElementById('tblPollList');
+databaseRef.once('value', function(snapshot) {
 
-        snapshot.forEach(function(childSnapshot) {
-            var childKey = childSnapshot.key;
-            var childData = childSnapshot.val();
+    var poll_Form = document.getElementById('poll_table');
 
-            var row = pollForm.insertRow(rowIndex);
+    snapshot.forEach(function(childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
 
-            var cellpollid = row.insertCell(0);
-            var cellorganizerid = row.insertCell(1);
-            var cellques = row.insertCell(2);
+        var row = poll_Form.insertRow(rowIndex);
 
-            cellpollid.appendChild(document.createTextNode(childKey));
-            cellorganizerid.appendChild(document.createTextNode(childData.organizeid));
-            cellques.appendChild(document.createTextNode(childData.ques));
+        var cellPollId = row.insertCell(0);
+        var cellQues = row.insertCell(1);
 
-            rowIndex = rowIndex + 1;
+        cellPollId.appendChild(document.createTextNode(childKey));
+			
+        cellQues.appendChild(document.createTextNode(childData.ques));
+			
+		delChildKey = "\"" + childKey.toString() + "\"";
+
+        rowIndex = rowIndex + 1;
 
         });
     });
+
+
+//create 
+function check_blank_create(){
+  var question = document.getElementById('ques').value;
+
+      create_poll();
+  
 }
 
-function add_poll() {
-    var pollid = document.getElementById('pollid').value;
+function create_poll() {
 
     var pid = firebase.database().ref().child('polls').push().key;
+	
+	var ques = document.getElementById('ques').value;
 
     var data = {
-        pollid: pid,
-        organizeid: organizeid
+		poll_id : pid,
+		ques: ques,
     }
 
     var updates = {};
-    updates['/polls/' + pollid] = data;
+	
+    updates['/polls/' + pid] = data;
     firebase.database().ref().update(updates);
 
-    alert('The poll is successfully created.');
+    alert("The poll is successfully created.");
     reload_page();
+}
+
+
+//update
+function check_blank_update(){
+
+  var question = document.getElementById('upques').value;
+
+  if(question == ""){
+      alert("Please Enter All data");
+  }else{
+      update_poll();
+  }
 }
 
 function update_poll() {
-    var pollid = document.getElementById('pollid').value;
-    var organizeid = document.getElementById('organizeid').value;
-    var ques = document.getElementById('ques').value;
+	
+	var poll_id = document.getElementById('uppollid').value;
+	
+    var ques = document.getElementById('upques').value;
 
     var data = {
-        pollid: pollid,
-        organizeid: organizeid,
-        ques: ques
+        poll_id: poll_id,
+        ques: ques,
     }
 
     var updates = {};
-    updates['/polls/' + pollid] = data;
+	
+    updates['/polls/' + poll_id] = data;
     firebase.database().ref().update(updates);
 
-    alert('The poll is successfully updated.');
+    alert("The poll is successfully updated.");
     reload_page();
 }
 
+
+//delete
 function delete_poll() {
-    var pollid = document.getElementById('pollid').value;
-    firebase.database().ref().child('/polls/' + pollid).remove();
+    var poll_dl = document.getElementById('dlpollid').value;
+	
+    firebase.database().ref().child('/polls/' + poll_dl).remove();
 
-    alert('The poll is successfully deleted.');
+    alert("The poll is successfully deleted.");
     reload_page();
 }
 
+
+//reloadPage
 function reload_page() {
     window.location.reload();
 }
+
+
+

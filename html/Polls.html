@@ -4,26 +4,51 @@
 <head>
     <title>Questions and Polls</title>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/Questions&Polls.css">
     <link rel="stylesheet" href="../css/Login.css">
+    <link rel="stylesheet" href="../css/TextArea.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/TextArea.css">
-    <script src="../organizerJS/pollFirebase.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
-
+    <script src="../js/common.js"></script>
 
     <script>
-        window.onload = function() {
+        window.addEventListener('load', function() {
             if (!isUserAnOrganizer()) {
-                alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
-            initializeFirebaseProject();
-            loadPolls();
-        }
+        });
     </script>
+    <!-- firebase -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+
+
+
+    <script src="../organizerJS/pollFirebase.js"></script>
     <script src="../organizerJS/angular.min.js"></script>
     <script src="../organizerJS/angular-route.min.js"></script>
     <script src="../organizerJS/angularJSChangeWindow.js"></script>
@@ -33,18 +58,6 @@
     <script src="../organizerJS/updatepoll.js"></script>
     <script src="../organizerJS/chartContainer.js"></script>
     <script src="../organizerJS/canvasjs.min.js"></script>
-
-
-    <!-- firebase -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <style>
         body,
@@ -84,7 +97,7 @@
     </style>
 </head>
 
-<body ng-controller="MainCtrl">
+<body>
 
     <!-- <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> -->
 
@@ -133,9 +146,9 @@
   
   <form class="modal-content animate">
     <div class="container">
-	<input type="text" placeholder="Type Poll Id" name="pollid" id="pollid" required>
+		<input type="text" placeholder="  Type Poll Id" name="shpollid" id="shpollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
        
-      <button type="submit" id="searchbtn" onclick="search_poll();">Search</button>
+      <button type="submit" id="searchbtn">Search</button>
       
     </div>
 
@@ -159,9 +172,10 @@
   <form class="modal-content animate">
     <div class="container">
 	
- <textarea id="ques" name="subject" placeholder="Type Your Question here.." style="height:100px" required></textarea>
+	<input type="text" placeholder="  Type Poll Id" name="uppollid" id="uppollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
+ <textarea id="upques" name="upques" placeholder="Type Your Question here.." style="height:100px" required></textarea>
 
-      <button type="submit" id="updatebtn" onclick="update_poll();">Update</button>
+      <button type="submit" id="updatebtn" onclick="check_blank_update()">Update</button>
       
     </div>
 
@@ -180,9 +194,9 @@
   
   <form class="modal-content animate">
     <div class="container">
-	<input type="text" placeholder="Type Poll Id" name="pollid" id="pollid" required>
+	<input type="text" placeholder="  Type Poll Id" name="dlpollid" id="dlpollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
 
-      <button type="submit" id="deletebtn" onclick="delete_poll();">Delete</button>
+      <button type="submit" id="deletebtn" onclick="delete_poll()">Delete</button>
       
     </div>
 
@@ -211,7 +225,7 @@
 
                                     <textarea id="ques" name="subject" placeholder="Type Your Question here.." style="height:100px" required></textarea>
 
-                                    <button type="submit" id="createbtn" onclick="add_poll();">Create</button>
+                                    <button type="submit" id="createbtn" onclick="check_blank_create()">Create</button>
 
                                 </div>
 
@@ -222,6 +236,20 @@
                         </div>
 
                     </div>
+
+
+                    <!-- read values -->
+                    <li class="w3-padding-16" style="margin-top:0px;">
+                        <h3>Your Poll Lists</h3>
+
+                        <table id="poll_table" align="center" border="1" width="100%">
+                            <tr>
+                                <td width="35%">#Poll_Id#</td>
+                                <td width="65%">Questions</td>
+                            </tr>
+                        </table>
+
+                    </li>
                 </ul>
             </div>
 
@@ -240,50 +268,43 @@
         </div>
     </div>
 
-    <h3>Created poll list</h3>
-    <table id="tblPollList">
-        <tr>
-            <td>#pollid</td>
-            <td>organizeid</td>
-            <td>ques</td>
-            <table>
 
-                <!-- Footer -->
-                <footer class="w3-center w3-black w3-padding-64">
-                    <h3>Contact details</h3>
-                    <p><i class="fa fa-phone fa-lg" aria-hidden="true"></i> 01234567890</p>
-                    <p><i class="fa fa-envelope-o" aria-hidden="true"></i> dialogevent@gmail.com</p>
-                    <p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
-                    <div class="w3-xlarge w3-section">
-                        <i class="fa fa-facebook-official w3-hover-opacity"></i>
-                        <i class="fa fa-instagram w3-hover-opacity"></i>
-                        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-                        <i class="fa fa-twitter w3-hover-opacity"></i>
-                        <i class="fa fa-linkedin w3-hover-opacity"></i>
-                    </div>
-                </footer>
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64">
+        <h3>Contact details</h3>
+        <p><i class="fa fa-phone fa-lg" aria-hidden="true"></i> 01234567890</p>
+        <p><i class="fa fa-envelope-o" aria-hidden="true"></i> dialogevent@gmail.com</p>
+        <p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+    </footer>
 
-                <script>
-                    // When the user scrolls down 20px from the top of the document, show the button
-                    window.onscroll = function() {
-                        scrollFunction()
-                    };
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction()
+        };
 
-                    function scrollFunction() {
-                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                            document.getElementById("myBtn").style.display = "block";
-                        } else {
-                            document.getElementById("myBtn").style.display = "none";
-                        }
-                    }
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
 
-                    // When the user clicks on the button, scroll to the top of the document
-                    function topFunction() {
-                        document.body.scrollTop = 0;
-                        document.documentElement.scrollTop = 0;
-                    }
-                </script>
-                <div ng-view></div>
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <div ng-view></div>
 </body>
 
-</html>
+</html>s

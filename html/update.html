@@ -6,12 +6,13 @@
     <title>Add an event</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/registerEvent.css">
+    <script src="../js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <script type="text/javascript">
         window.onload = function() {
 
             if (!isUserAnAdmin()) {
-                alert("You are unorthorized for this content");
+
                 window.location.href = "Login.html";
             }
 
@@ -47,9 +48,15 @@
 
     <div id="menubar">
 
-        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
-        <img src="../images/dialogLogo.png" width="144px" height="162px">
-
+        <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
+        <img src="../images/dialogLogo.png" width="154px;" height="206px">
+        <div id="admindetails_div">
+            <script>
+                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
+            </script>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+            <label id="label_admin">Admin</label>
+        </div>
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>

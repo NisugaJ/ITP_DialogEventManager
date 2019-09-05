@@ -11,6 +11,8 @@
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -36,9 +38,15 @@
 <body>
     <div id="menubar">
 
-        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
-        <img src="../images/dialogLogo.png" width="144px" height="162px">
-
+        <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
+        <img src="../images/dialogLogo.png" width="154px;" height="206px">
+        <div id="admindetails_div">
+            <script>
+                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
+            </script>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+            <label id="label_admin">Admin</label>
+        </div>
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>

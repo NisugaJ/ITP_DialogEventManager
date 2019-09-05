@@ -71,7 +71,7 @@ function saveEzCashPayment() {
     //wait 1 second
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > 2000) {
+        if ((new Date().getTime() - start) > 1000) {
             break;
         }
     }
@@ -161,7 +161,7 @@ function deletePaymentsBulk() {
     //wait 2 second
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > 4000) {
+        if ((new Date().getTime() - start) > 2000) {
             break;
         }
     }

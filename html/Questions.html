@@ -14,31 +14,43 @@
     <script src="../organizerJS/angular.min.js"></script>
     <script src="../organizerJS/angular-route.min.js"></script>
     <script src="../organizerJS/angularJSChangeWindow.js"></script>
-
-    <script src="../organizerJS/searchpoll.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../organizerJS/searchpoll.js"></script>
+
 
     <!-- firebase -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script>
         window.onload = function() {
             if (!isUserAnOrganizer()) {
-                alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
-            initializeFirebaseProject();
 
         }
     </script>
-    </script>
+
     <style>
         body,
         h1,
@@ -127,7 +139,7 @@
   
   <form class="modal-content animate">
     <div class="container">
-	<input type="text" placeholder="Type Poll Id" name="pollid" id="pollid" required>
+		<input type="text" placeholder="  Type Poll Id" name="pollid" id="pollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
        
       <button type="submit" id="searchbtn">Search</button>
       
