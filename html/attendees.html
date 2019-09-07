@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Event Attendees</title>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:ae3468f6a1d36c0e17d9d3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<table>
+    <tr>
+        <td> ID</td>
+        <td> <input type="text" name="ID" id="user_id"></td>
+    </tr>
+    <tr>
+        <td> Name</td>
+        <td> <input type="text" name="user_name" id="user_name"></td>
+    </tr>
+    <tr>
+        <td> Arrival Time</td>
+        <td> <input type="time" name="time" id="time"></td>
+    </tr>
+    <tr>
+        <td> Status</td>
+        <td> <input type="text" name="status" id="status"></td>
+    </tr>
+    <tr>
+        <td> Location</td>
+        <td> <input type="text" name="location" id="location"></td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <input type="button" value="Save" onclick="save_attendee();" />
+            <input type="button" value="Update" onclick="update_attendee();" />
+            <input type="button" value="Delete" onclick="delete_attendee();" />
+        </td>
+    </tr>
+</table>
+
+<h3>Attendees List</h3>
+
+<table id="table_attendee_list">
+    <tr>
+        <td>#ID</td>
+        <td>Name</td>
+        <td>Arrival Time</td>
+        <td>Status</td>
+        <td>Location</td>
+    </tr>
+
+</table>
+
+<script>
+    var tableAttendees = document.getElementById('table_attendee_list');
+    var databaseRef = firebase.database().ref('attendees/');
+
+    var ID = document.getElementById('user_id').value;
+    var user_name = document.getElementById('user_name').value;
+    var arrival_time = document.getElementById('time').value;
+    var status = document.getElementById('status').value;
+    var location = document.getElementById('location').value;
+
+
+    function save_attendee() {
+        var uid = firebase.database().ref().child('attendees').push().key;
+
+        var data = {
+            user_id: uid,
+            user_name: user_name,
+            arrival_time: arrival_time,
+            status: status,
+            location: location
+        }
+
+        var updates = {};
+        updates['/attendees/' + uid] = data;
+        firebase.database().ref().update(updates);
+
+        alert('The attendee added successfully');
+        reload_page();
+    }
+
+    function update_attendee() {
+
+        var data = {
+            user_id: uid,
+            user_name: user_name,
+            arrival_time: arrival_time,
+            status: status,
+            location: location
+        }
+        var updates = {};
+        updates['/attendees/' + uid] = data;
+        firebase.database().ref().update(updates);
+
+        alert('The attendee updated successfully');
+        reload_page();
+    }
+
+    function delete_attendee() {
+        firebase.database().ref().child('/attendees/' + user_id).remove();
+        alert('The attendee deleted successfully');
+        reload_page();
+    }
+
+    function reload_page() {
+        window.location.reload();
+    }
+</script>
+
+</html>
