@@ -70,19 +70,19 @@
             </tr>
             <tr>
                 <td> Name</td>
-                <td> <input type="text" name="user_name" id="user_name"></td>
+                <td> <input type="text" name="user_name" id="user_name" required></td>
             </tr>
             <tr>
                 <td> Arrival Time</td>
-                <td> <input type="time" name="time" id="time"></td>
+                <td> <input type="time" name="time" id="time" required></td>
             </tr>
             <tr>
                 <td> Status</td>
-                <td> <input type="text" name="status" id="status"></td>
+                <td> <input type="text" name="status" id="status" required></td>
             </tr>
             <tr>
                 <td> Location</td>
-                <td> <input type="text" name="location" id="location"></td>
+                <td> <input type="text" name="location" id="location" required></td>
             </tr>
 
             <tr>
@@ -114,7 +114,28 @@
             var tableAttendees = document.getElementById('table_attendee_list');
             var databaseRef = firebase.database().ref('attendees/');
 
-            var ID = document.getElementById('user_id').value;
+            //var ID = document.getElementById('user_id').value;
+            var rowIndex = 1;
+
+            databaseRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.value();
+
+                    var row = tableAttendees.insertRow(rowIndex);
+                    var cellId = row.insertCell(0);
+                    var cellName = row.insertCell(1);
+                    cellId.appendChild(document.createTextNode(childKey));
+                    cellName.appendChild(document.createTextNode(childData.user_name));
+                    cellId.appendChild(document.createTextNode(childData.arrival_time));
+                    cellId.appendChild(document.createTextNode(childData.status));
+                    cellId.appendChild(document.createTextNode(childData.location));
+
+                    rowIndex = rowIndex + 1;
+
+                });
+            });
+
 
             function save_attendee() {
                 var uid = firebase.database().ref().child('attendees').push().key;
@@ -165,6 +186,7 @@
             }
 
             function delete_attendee() {
+                var uid = firebase.database().ref().child('attendees').push().key;
                 firebase.database().ref().child('/attendees/' + user_id).remove();
                 alert('The attendee deleted successfully');
                 reload_page();
