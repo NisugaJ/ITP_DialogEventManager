@@ -3,7 +3,7 @@
 
 <head>
     <title>Add Event Attendees</title>
-    meta charset="utf-8">
+    <meta charset="utf-8">
     <title>Event Participation Report</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
@@ -60,6 +60,9 @@
               </button>
         </header>
         <br>
+        <h3>
+            <center>Event Attendees Form</center>
+        </h3>
         <table>
             <tr>
                 <td> ID</td>
@@ -90,8 +93,11 @@
                 </td>
             </tr>
         </table>
-
-        <h3>Attendees List</h3>
+        <br>
+        <br>
+        <h3>
+            <center>Attendees List</center>
+        </h3>
 
         <table id="table_attendee_list">
             <tr>
@@ -109,14 +115,15 @@
             var databaseRef = firebase.database().ref('attendees/');
 
             var ID = document.getElementById('user_id').value;
-            var user_name = document.getElementById('user_name').value;
-            var arrival_time = document.getElementById('time').value;
-            var status = document.getElementById('status').value;
-            var location = document.getElementById('location').value;
-
 
             function save_attendee() {
                 var uid = firebase.database().ref().child('attendees').push().key;
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+                var status = document.getElementById('status').value;
+                var location = document.getElementById('location').value;
+
+
 
                 var data = {
                     user_id: uid,
@@ -135,6 +142,12 @@
             }
 
             function update_attendee() {
+                var uid = firebase.database().ref().child('attendees').push().key;
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+                var status = document.getElementById('status').value;
+                var location = document.getElementById('location').value;
+
 
                 var data = {
                     user_id: uid,
