@@ -127,9 +127,9 @@
                     var cellName = row.insertCell(1);
                     cellId.appendChild(document.createTextNode(childKey));
                     cellName.appendChild(document.createTextNode(childData.user_name));
-                    cellId.appendChild(document.createTextNode(childData.arrival_time));
-                    cellId.appendChild(document.createTextNode(childData.status));
-                    cellId.appendChild(document.createTextNode(childData.location));
+                    cellTime.appendChild(document.createTextNode(childData.arrival_time));
+                    cellStatus.appendChild(document.createTextNode(childData.status));
+                    cellLocation.appendChild(document.createTextNode(childData.location));
 
                     rowIndex = rowIndex + 1;
 
