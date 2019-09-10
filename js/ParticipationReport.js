@@ -3,6 +3,7 @@ var currentEventID;
 
 //selects attendees of a given event
 function selectAttendees(eventID) {
+    sessionStorage.setItem("currentEventId", eventID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
     currentUserID = eventID;
     var table = document.getElementById('eventAttendees');
