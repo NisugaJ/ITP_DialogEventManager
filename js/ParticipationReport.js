@@ -5,7 +5,7 @@ var currentEventID;
 function selectAttendees(eventID) {
     var dbRef = firebase.database().ref(); // Reference to realtime db
     currentUserID = eventID;
-    var table = document.getElementById('attendees');
+    var table = document.getElementById('eventAttendees');
     var rowIndex = 1;
 
     var tableHeaderRowCount = 1;

@@ -3,22 +3,31 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Add an event</title>
+    <title>Event Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/insertOrganizerTB.css">
-    <script type="text/javascript" src="../js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
+    <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
+    <link rel="stylesheet" type="text/css" href="../css/pieChart.css">
+    <script src="../js/common.js"></script>
 
+    <script type="text/javascript">
+        window.onload = function() {
+
+            if (!isUserAnAdmin()) {
+
+                window.location.href = "Login.html";
+            }
+
+        }
+    </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
+      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
-        if (!isUserAnAdmin()) {
-            window.location.href = "Login.html";
-        }
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
@@ -33,12 +42,10 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <script src="../js/inserOrganizer.js"></script>
-
+    <script src="../js/eventExpenses.js"></script>
 </head>
 
 <body>
-
     <div id="menubar">
 
         <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
@@ -53,6 +60,7 @@
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
@@ -61,60 +69,58 @@
 "><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
             <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
             <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+
         </ul>
     </div>
-
     <div id="actions">
-
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
             <button id="logOut">
-          Sign Out
+        	Sign Out
         </button>
         </header>
-
+        <h4>
+            <p align="right">
+                <img src="../images/edit.png" width="25" height="25">Edit &nbsp;
+                <img src="../images/delete.png" width="25" height="25">Delete&nbsp;
+                <img src="../images/update.png" width="25" height="25">Update</td>
+            </p>
+        </h4>
+        <br><br>
         <nav>
             <h1 id="title">
-                <center>Add Organizers</center>
+                <center> Expenses</center>
             </h1>
+            <button type="button" name="addEvent" id="addEvent">
+                <a href="update.html">Add Expense</a>
+            </button>
         </nav>
+        <Select type="button" name="addEvent" id="addEvent">
+					    <option value="event123">SelectEvent</option>
+                        <option value="event123">Event123</option>
+                        <option value="event140">Event140</option>
+                        <option value="event180">Event180</option>
+                        <option value="event203">Event203</option>
+		  <a href="registerEvent.html">Add Expense</a></select>
+        </button>
+        <br>
+        <table id="event_expenses_table">
+            <tr>
+                <td>Item</td>
+                <td>Amount(Rs)</td>
+                <td>Time</td>
+                <td>Status</td>
+                <td></td>
+                <td></td>
+            </tr>
 
-        <form class="addEvent" method="post">
-
-            <h4>Organizer_ID (This is only required for Update Organizers Details)</h4>
-            <input type="text" name="title" class="inputs" id="id"><br>
-
-            <h4>Name</h4>
-            <input type="text" name="Name" class="inputs" id="Name"><br>
-
-            <h4>Position</h4>
-            <input type="text" name="Position" class="inputs" id="Position"><br>
-
-            <h4>Ratings</h4>
-            <textarea name="Ratings" rows="8" cols="80" class="inputs" id="Ratings"></textarea><br>
-
-            <h4>Execution_level</h4>
-            <input type="number" name="Execution_level" class="inputs" id="Execution_level"><br>
-
-            <h4>Gmail</h4>
-            <input type="text" name="Gmail" class="inputs" id="Gmail"><br>
-
-            <h4>password</h4>
-            <input type="text" name="Password" class="inputs" id="password"><br>
-
-
-            <br>
-
-            <input type="submit" name="create" value="Create" class="submit" onclick="save_event()">
-            <button type="button" name="button" class="button" onclick="update_event()">Update</button>
-            <a href="organizerTable.html"><button type="button" name="button" class="button">Cancel</button></a>
-
-
-        </form>
+        </table>
+        <br><br>
+        <button type="button" name="pieChart" id="pieChart">
+          <a href="pieChart.html">Create PieChart</a>
+        </button>
     </div>
-
-    </section>
 </body>
 
 </html>

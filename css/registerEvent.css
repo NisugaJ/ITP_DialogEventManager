@@ -4,14 +4,6 @@
     font-family: sans-serif;
 }
 
-#actions {
-    float: right;
-    padding-bottom: 5px;
-    width: 80%;
-    height: 100%;
-    background-color: #ebebe0;
-}
-
 .addEvent {
     font-size: 22px;
     line-height: 1.9em;
@@ -72,11 +64,4 @@
 
 .list {
     margin-bottom: 10px;
-}
-
-#admindetails_div {
-    margin-top: 40px;
-    margin-right: 20px;
-    float: right;
-    width: 80%;
 }

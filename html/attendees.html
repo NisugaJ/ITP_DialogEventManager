@@ -17,20 +17,10 @@
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
-        window.onload = function() {
-            // Your web app's Firebase configuration
-            var firebaseConfig = {
-                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-                authDomain: "dialog-internal-event-manager.firebaseapp.com",
-                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-                projectId: "dialog-internal-event-manager",
-                storageBucket: "dialog-internal-event-manager.appspot.com",
-                messagingSenderId: "168700423082",
-                appId: "1:168700423082:web:ecc1385d6e962236"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        }
+        // window.onload = function() {
+
+
+        // }
     </script>
 </head>
 
@@ -111,6 +101,18 @@
         </table>
 
         <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:ecc1385d6e962236"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
             var tableAttendees = document.getElementById('table_attendee_list');
             var databaseRef = firebase.database().ref('attendees/');
 
@@ -138,7 +140,7 @@
 
 
             function save_attendee() {
-                var uid = firebase.database().ref().child('attendees').push().key;
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
                 var user_name = document.getElementById('user_name').value;
                 var arrival_time = document.getElementById('time').value;
                 var status = document.getElementById('status').value;
@@ -155,7 +157,7 @@
                 }
 
                 var updates = {};
-                updates['/attendees/' + uid] = data;
+                updates['eventAttendees/    ' + uid] = data;
                 firebase.database().ref().update(updates);
 
                 alert('The attendee added successfully');
@@ -163,7 +165,7 @@
             }
 
             function update_attendee() {
-                var uid = firebase.database().ref().child('attendees').push().key;
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
                 var user_name = document.getElementById('user_name').value;
                 var arrival_time = document.getElementById('time').value;
                 var status = document.getElementById('status').value;
@@ -178,7 +180,7 @@
                     location: location
                 }
                 var updates = {};
-                updates['/attendees/' + uid] = data;
+                updates['eventAttendees/   ' + uid] = data;
                 firebase.database().ref().update(updates);
 
                 alert('The attendee updated successfully');
@@ -186,8 +188,8 @@
             }
 
             function delete_attendee() {
-                var uid = firebase.database().ref().child('attendees').push().key;
-                firebase.database().ref().child('/attendees/' + user_id).remove();
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
+                firebase.database().ref().child('eventAttendees/ ' + user_id).remove();
                 alert('The attendee deleted successfully');
                 reload_page();
             }
