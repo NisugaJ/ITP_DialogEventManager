@@ -137,6 +137,7 @@ function isUserLoggedIn() {
             console.log("user is  not logged in");
             if (window.location.pathname != '/ITP_DialogEventManager_WebApp/html/Login.html') {
                 console.log("user is not logged in " + window.location.pathname.toString());
+                alert("user is not logged in " + window.location.pathname.toString());
 
                 window.location.href = "Login.html";
             }
