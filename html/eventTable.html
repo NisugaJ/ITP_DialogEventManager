@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
+    <script type="text/javascript" src="../js/common.js"></script>
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -46,13 +47,15 @@
 <body>
     <div id="menubar">
 
-        <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
-        <img src="../images/dialogLogo.png" width="154px;" height="206px">
+        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+        <img id="logo" src="../images/dialogLogo.png" width="154px" height="206px">
+
         <div id="admindetails_div">
             <script>
                 var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
             </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
             <label id="label_admin">Admin</label>
         </div>
         <ul>

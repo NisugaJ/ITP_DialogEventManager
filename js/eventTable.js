@@ -11,8 +11,7 @@ function check_blank() {
 
     if (topic == null || stime == null || eTime == null || date == null || location == null) {
         alert("Please Enter All data");
-    } else {
-
+        return;
     }
 }
 
@@ -60,7 +59,7 @@ databaseRef.once('value', function(snapshot) {
 });
 
 function delete_event(id) {
-
+    alert("delete key", id);
     firebase.database().ref().child('/events/' + id).remove();
 
     alert("The user is deleted successfully");

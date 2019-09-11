@@ -102,8 +102,11 @@
 }
 
 #logo {
+    width: 154px;
+    height: 206px;
     float: left;
-    width: 100%;
+    margin-left: 10px;
+    margin-right: 200px;
 }
 
 .menuIcons {
@@ -125,6 +128,7 @@
 
 #label_adminName,
 #label_admin {
+    font-size: 12px;
     margin: 5px;
     margin-right: 0;
     float: right;
@@ -239,5 +243,3 @@
         opacity: 0;
     }
 }
-
-px;

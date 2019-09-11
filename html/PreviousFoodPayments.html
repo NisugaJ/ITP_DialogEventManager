@@ -79,7 +79,8 @@
                 <script>
                     var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
                 </script>
-                <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+                <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
                 <label id="label_admin">Admin</label>
             </div>
         </div>
@@ -121,8 +122,7 @@
                         <option  disabled selected class="list-group-item">Select an previous payment</option>
                     </select>
                     <br>
-                    <label id="selected_event" class="alert alert-info" style="font-size: 25px;font-weight: bold;">Event 132
-          </label>
+                    </label>
                     <table id="previous_payments_table">
                         <tr id="header_row">
                             <th>Phone Number</th>

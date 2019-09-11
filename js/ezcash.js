@@ -3,6 +3,8 @@ var currentEventID;
 
 //selects attendees of a given event
 function selectAttendees(eventID) {
+    var label_errorTag = document.getElementById('label_error').style.display = "none";
+
     console.log("Event ID is" + eventID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
     currentEventID = eventID;
@@ -48,6 +50,40 @@ function selectAttendees(eventID) {
 
 //saves ezcash paymnent details
 function saveEzCashPayment() {
+
+    var selectEventTag = document.getElementById('event_list');
+    var label_errorTag = document.getElementById('label_error');
+
+    label_errorTag.innerHTML = "Please select an Event !";
+
+    if (selectEventTag.selectedIndex <= 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "Please select an Event !";
+        return;
+    }
+
+    var input_amountTag = document.getElementById('input_amount');
+    if (input_amountTag.value > 2000) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "eZcash Amount for a member should not exceed Rs. 2000 ";
+        return;
+    } else if (input_amountTag.value < 50) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "eZcash Amount for a member should be atleast Rs. 50 ";
+        return;
+    } else {
+        label_errorTag.style.display = "none";
+    }
+
+    var attendeeTable_Tag = document.getElementById('eventAttendees');
+    var attendeesCount = attendeeTable_Tag.rows.length - 1;
+    if (attendeesCount == 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "Events without any attendee cannot get Food payments";
+        return;
+    }
+
+
     var dbRef = firebase.database().ref(); // Reference to realtime db
     var amount = document.getElementById('input_amount').value;
     console.log("Amount" + amount);
@@ -82,7 +118,6 @@ function saveEzCashPayment() {
 
 //selects paymnent details of a given event
 function selectEzcashPaymentByID(paymentID) {
-    document.getElementById('selected_event').innerHTML = sessionStorage.getItem('thisTitle');
     document.getElementById('deleteAll').value = paymentID;
     console.log("Payment ID is" + paymentID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
