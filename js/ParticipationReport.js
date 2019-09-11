@@ -27,7 +27,7 @@ function selectAttendees(eventID) {
                 console.log(attendeesShot.val());
                 var memberName = row.insertCell(0);
                 var memberPhone = row.insertCell(1);
-                var ezcashStat = row.insertCell(2).appendChild(document.createTextNode("ontime"));
+                var ezcashStat = row.insertCell(2).appendChild(document.createTextNode('ontime'));
                 //var selectCell = row.insertCell(3);
                 var timeStampCell = row.insertCell(3).appendChild(document.createTextNode(timeStamp));
                 var editCell = row.insertCell(4);
@@ -45,6 +45,14 @@ function selectAttendees(eventID) {
                 deleteCell.onclick = function() {
                     delete_attendee(userkey);
                 }
+                editCell.onclick = function() {
+                    update_attendee(userkey, user_name,
+                        arrival_time,
+                        status,
+                        location);
+                }
+
+
             });
         });
     });
