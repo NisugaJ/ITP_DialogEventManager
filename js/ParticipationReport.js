@@ -25,17 +25,19 @@ function selectAttendees(eventID) {
             var attendeesRef = dbRef.child('users').child(userkey);
             attendeesRef.once('value').then(function(attendeesShot) {
                 console.log(attendeesShot.val());
-                var memberName = row.insertCell(0);
-                var memberPhone = row.insertCell(1);
-                var ezcashStat = row.insertCell(2).appendChild(document.createTextNode('ontime'));
+                var memId = row.insertCell(0);
+                var memberName = row.insertCell(1);
+                var memberPhone = row.insertCell(2);
+                var ezcashStat = row.insertCell(3).appendChild(document.createTextNode('ontime'));
                 //var selectCell = row.insertCell(3);
-                var timeStampCell = row.insertCell(3).appendChild(document.createTextNode(timeStamp));
-                var editCell = row.insertCell(4);
-                var deleteCell = row.insertCell(5);
+                var timeStampCell = row.insertCell(4).appendChild(document.createTextNode(timeStamp));
+                var editCell = row.insertCell(5);
+                var deleteCell = row.insertCell(6);
 
 
                 var fName = attendeesShot.child('firstName').val() + " ";
                 var lName = attendeesShot.child('lastName').val();
+                memId.appendChild(document.createTextNode(userkey));
                 memberName.appendChild(document.createTextNode(fName + lName));
                 memberPhone.appendChild(document.createTextNode(attendeesShot.child('mobile').val()));
 
@@ -46,15 +48,23 @@ function selectAttendees(eventID) {
                     delete_attendee(userkey);
                 }
                 editCell.onclick = function() {
-                    update_attendee(userkey, user_name,
-                        arrival_time,
-                        status,
-                        location);
+                    check();
                 }
-
-
             });
         });
     });
     console.log(attendeesArr);
+}
+
+//get details from a selected row
+function check() {
+    var table = document.getElementById('eventAttendees');
+
+    for (var i = 1; i < table.rows.length; i++) {
+        table.rows[i].onclick = function() {
+            document.getElementById("user_name").value = this.cells[0].innerHTML;
+            document.getElementById("time").value = this.cells[4].innerHTML;
+            document.getElementById("status").value = this.cells[3].innerHTML;
+        };
+    }
 }
