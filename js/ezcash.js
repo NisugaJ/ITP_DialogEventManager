@@ -81,7 +81,6 @@ function saveEzCashPayment() {
         return;
     }
 
-
     var dbRef = firebase.database().ref(); // Reference to realtime db
     var amount = document.getElementById('input_amount').value;
     console.log("Amount" + amount);

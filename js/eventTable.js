@@ -11,7 +11,8 @@ function check_blank() {
 
     if (topic == null || stime == null || eTime == null || date == null || location == null) {
         alert("Please Enter All data");
-        return;
+    } else {
+
     }
 }
 
