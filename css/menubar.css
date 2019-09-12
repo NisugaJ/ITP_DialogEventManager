@@ -99,6 +99,7 @@
     margin-left: 10px;
     margin-top: 10px;
     margin-right: 100x;
+    margin-bottom: 20px;
 }
 
 #logo {
@@ -106,7 +107,7 @@
     height: 206px;
     float: left;
     margin-left: 10px;
-    margin-right: 200px;
+    /* margin-right: 100px; */
 }
 
 .menuIcons {
@@ -128,7 +129,7 @@
 
 #label_adminName,
 #label_admin {
-    font-size: 12px;
+    font-size: 15px;
     margin: 5px;
     margin-right: 0;
     float: right;
@@ -143,8 +144,8 @@
     margin-top: 5px;
     margin-right: 20px;
     float: right;
-    width: 80%;
-    height: 50px;
+    width: 48%;
+    height: 220px;
     float: right;
 }
 

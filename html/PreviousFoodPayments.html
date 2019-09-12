@@ -74,7 +74,9 @@
 <body>
     <div id="menubar">
         <div id="menubar_top">
-            <div id="logo"> <img src="../images/dialogLogo.png" width="308px" height="412px"></div>
+            <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+
+            <div id="logo"> <img src="../images/dialogLogo.png" width="154px" height="206px"></div>
             <div id="admindetails_div">
                 <script>
                     var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
@@ -84,7 +86,6 @@
                 <label id="label_admin">Admin</label>
             </div>
         </div>
-
         <div id="menulist">
             <ul>
                 <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>

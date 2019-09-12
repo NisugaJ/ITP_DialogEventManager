@@ -7,10 +7,10 @@ function selectAttendees(eventID) {
 
     console.log("Event ID is" + eventID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
-    currentEventID = eventID;
-    var table = document.getElementById('eventAttendees');
     var rowIndex = 1;
+    currentEventID = eventID;
 
+    var table = document.getElementById('eventAttendees');
     var tableHeaderRowCount = 1;
     var rowCount = table.rows.length;
     for (var i = tableHeaderRowCount; i < rowCount; i++) {
@@ -54,8 +54,6 @@ function saveEzCashPayment() {
     var selectEventTag = document.getElementById('event_list');
     var label_errorTag = document.getElementById('label_error');
 
-    label_errorTag.innerHTML = "Please select an Event !";
-
     if (selectEventTag.selectedIndex <= 0) {
         label_errorTag.style.display = "block";
         label_errorTag.innerHTML = "Please select an Event !";
@@ -88,6 +86,37 @@ function saveEzCashPayment() {
     var amount = document.getElementById('input_amount').value;
     console.log("Amount" + amount);
     var paymentKey = dbRef.child('ezCashFoodPayments').push().key;
+
+    //to pay only checked phone numbers
+    var table = document.getElementById('eventAttendees');
+    var tableHeaderRowCount = 1;
+    var rowCount = table.rows.length;
+    console.log(attendeesArr);
+
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        console.log("begin slpice")
+        if (table.rows[i].cells.item(3).getElementsByTagName('input')[0].checked != true) {
+            attendeesArr.splice(i - 1, 1);
+            console.log(attendeesArr);
+        }
+    }
+
+    if (attendeesArr.length == 0) {
+
+        for (var i = tableHeaderRowCount; i < rowCount; i++) {
+            console.log("begin add")
+            if (table.rows[i].cells.item(3).getElementsByTagName('input')[0].checked == true) {
+                attendeesArr.push(table.rows[i].cells.item(3).getElementsByTagName('input')[0].value);
+                console.log(attendeesArr);
+            }
+        }
+    }
+
+    if (attendeesArr.length == 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "No mobile numbers are set to this payment. Please check at least 1 mobile number from the event";
+        return;
+    }
 
     var data = {
         paymentKey: paymentKey,

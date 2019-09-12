@@ -59,10 +59,10 @@ databaseRef.once('value', function(snapshot) {
 });
 
 function delete_event(id) {
-    alert("delete key", id);
+    alert("Event " + id + " is deleting now");
+
     firebase.database().ref().child('/events/' + id).remove();
 
-    alert("The user is deleted successfully");
     reload_page();
 }
 
