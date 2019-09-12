@@ -22,26 +22,31 @@ databaseRef.once('value', function(snapshot) {
 
         cellId.appendChild(document.createTextNode(childKey));
 
-
         cellProgram.appendChild(document.createTextNode(childData.program));
         cellST.appendChild(document.createTextNode(childData.start_time));
         cellET.appendChild(document.createTextNode(childData.end_time));
 
-        delChildKey = "\"" + childKey.toString() + "\"";
         editCell.innerHTML = '<img src="../images/edit.png" width="25" height="25" onclick="edit_event()">';
         deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25" >';
+
+        deleteCell.onclick = function() {
+            delete_program(childKey);
+        }
+
+
 
         rowIndex = rowIndex + 1;
     });
 });
 
-function delete_program() {
+function delete_program(prgID) {
 
-    var prgID = document.getElementById('id').value;
+
 
     firebase.database().ref().child('/qweqwe/' + prgID).remove();
 
     alert("The user is deleted successfully");
+    reload_page();
 
 }
 

@@ -44,17 +44,30 @@ databaseRef.once('value', function(snapshot) {
         cellDescription.appendChild(document.createTextNode(childData.description));
         cellLocation.appendChild(document.createTextNode(childData.location));
 
-        editCell.innerHTML = '<img src="../images/edit.png" width="25" height="25" onclick="edit_event()">';
-        deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25" onclick="delete_event()">';
+        editCell.innerHTML = '<a href="../html/registerEvent.html"><img src="../images/edit.png" width="25" height="25"></a>';
+        deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25">';
+
+        deleteCell.onclick = function() {
+            delete_event(childKey);
+        }
+
+        editCell.onclick = function() {
+            check_blank_update(childKey, cellTItle, childData.date, childData.start_time, childData.end_time, childData.description, childData.location);
+        }
 
         rowIndex = rowIndex + 1;
     });
 });
 
-function delete_event() {
-    var event_id = document.getElementById('id').value;
+function delete_event(id) {
+    alert("Event " + id + " is deleting now");
 
-    firebase.database().ref().child('/events/' + event_id).remove();
+    firebase.database().ref().child('/events/' + id).remove();
 
-    alert("The user is deleted successfully");
+    reload_page();
+}
+
+
+function reload_page() {
+    window.location.reload();
 }

@@ -3,12 +3,14 @@ var currentEventID;
 
 //selects attendees of a given event
 function selectAttendees(eventID) {
+    var label_errorTag = document.getElementById('label_error').style.display = "none";
+
     console.log("Event ID is" + eventID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
-    currentEventID = eventID;
-    var table = document.getElementById('eventAttendees');
     var rowIndex = 1;
+    currentEventID = eventID;
 
+    var table = document.getElementById('eventAttendees');
     var tableHeaderRowCount = 1;
     var rowCount = table.rows.length;
     for (var i = tableHeaderRowCount; i < rowCount; i++) {
@@ -48,10 +50,72 @@ function selectAttendees(eventID) {
 
 //saves ezcash paymnent details
 function saveEzCashPayment() {
+
+    var selectEventTag = document.getElementById('event_list');
+    var label_errorTag = document.getElementById('label_error');
+
+    if (selectEventTag.selectedIndex <= 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "Please select an Event !";
+        return;
+    }
+
+    var input_amountTag = document.getElementById('input_amount');
+    if (input_amountTag.value > 2000) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "eZcash Amount for a member should not exceed Rs. 2000 ";
+        return;
+    } else if (input_amountTag.value < 50) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "eZcash Amount for a member should be atleast Rs. 50 ";
+        return;
+    } else {
+        label_errorTag.style.display = "none";
+    }
+
+    var attendeeTable_Tag = document.getElementById('eventAttendees');
+    var attendeesCount = attendeeTable_Tag.rows.length - 1;
+    if (attendeesCount == 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "Events without any attendee cannot get Food payments";
+        return;
+    }
+
     var dbRef = firebase.database().ref(); // Reference to realtime db
     var amount = document.getElementById('input_amount').value;
     console.log("Amount" + amount);
     var paymentKey = dbRef.child('ezCashFoodPayments').push().key;
+
+    //to pay only checked phone numbers
+    var table = document.getElementById('eventAttendees');
+    var tableHeaderRowCount = 1;
+    var rowCount = table.rows.length;
+    console.log(attendeesArr);
+
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        console.log("begin slpice")
+        if (table.rows[i].cells.item(3).getElementsByTagName('input')[0].checked != true) {
+            attendeesArr.splice(i - 1, 1);
+            console.log(attendeesArr);
+        }
+    }
+
+    if (attendeesArr.length == 0) {
+
+        for (var i = tableHeaderRowCount; i < rowCount; i++) {
+            console.log("begin add")
+            if (table.rows[i].cells.item(3).getElementsByTagName('input')[0].checked == true) {
+                attendeesArr.push(table.rows[i].cells.item(3).getElementsByTagName('input')[0].value);
+                console.log(attendeesArr);
+            }
+        }
+    }
+
+    if (attendeesArr.length == 0) {
+        label_errorTag.style.display = "block";
+        label_errorTag.innerHTML = "No mobile numbers are set to this payment. Please check at least 1 mobile number from the event";
+        return;
+    }
 
     var data = {
         paymentKey: paymentKey,
@@ -82,7 +146,6 @@ function saveEzCashPayment() {
 
 //selects paymnent details of a given event
 function selectEzcashPaymentByID(paymentID) {
-    document.getElementById('selected_event').innerHTML = sessionStorage.getItem('thisTitle');
     document.getElementById('deleteAll').value = paymentID;
     console.log("Payment ID is" + paymentID);
     var dbRef = firebase.database().ref(); // Reference to realtime db

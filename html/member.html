@@ -15,18 +15,7 @@
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
-    <script type="text/javascript" src="../js/common.js"></script>
 
-    <script type="text/javascript">
-        window.onload = function() {
-
-            if (!isUserAnAdmin()) {
-
-                window.location.href = "Login.html";
-            }
-
-        }
-    </script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -42,29 +31,42 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
+    <style>
+        .tbl_users_list tr:not(:first-child) {
+            cursor: pointer;
+            transition: all .25s ease-in-out;
+        }
+        
+        .tbl_users_list tr:not(:first-child):hover {
+            background-color: #aeb6bf
+        }
+    </style>
+
 </head>
 
 <body>
     <div id="menubar">
 
-        <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
-        <img src="../images/dialogLogo.png" width="154px;" height="206px">
+        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+        <img src="../images/dialogLogo.png" width="154px" height="206px">
         <div id="admindetails_div">
             <script>
                 var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
             </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
             <label id="label_admin">Admin</label>
         </div>
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
+            <li><a href="attendees.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
         </ul>
     </div>
     <div id="actions">
@@ -79,7 +81,7 @@
 
         <div class="row">
             <div class="col-right">
-                <h3 style="margin-left: 150px; margin-top: 10px">Ratings</h3>
+                <h3 style="margin-left: 150px">Ratings</h3>
 
                 <table>
                     <tr>
@@ -105,11 +107,20 @@
                                 <div><i class="fa fa-thumbs-up"> 10</i></div>
                                 <div><i class="fa fa-thumbs-down" style="margin-left:10px "> 5</i></div>
 
+
                             </div>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button" style="margin-left: 1px">Generate Individual Progress Report</button>
                         </td>
 
                     </tr>
 
+
                 </table>
 
 
@@ -117,33 +128,40 @@
 
 
 
-                <h3 style="margin-left: 150px; margin-top: 60px">Member Details</h3>
+                <h3 style="margin-left: 150px; margin-top: 40px">Member Details</h3>
                 <table>
                     <tr>
-                        <td>Member Name</td>
-                        <td><input type="text" name="mname" id="name"></td>
+                        <td>Member ID</td>
+                        <td><input type="text" name="mid" id="id" required></td>
                     </tr>
                     <tr>
-                        <td>Member ID</td>
-                        <td><input type="text" name="mid" id="id"></td>
+                        <td>First Name</td>
+                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        </td>
                     </tr>
                     <tr>
                         <td>Phone Number</td>
-                        <td><input type="text" name="pno" id="phone"></td>
+                        <td><input type="text" name="pno" id="phone" pattern="^\d{10}$" required></td>
                     </tr>
                     <tr>
                         <td>Email Address</td>
-                        <td><input type="text" name="eadd" id="email"></td>
+                        <td><input type="text" name="eadd" id="email" pattern="[^ @]*@[^ @]*" required></td>
                     </tr>
 
                 </table>
-                <div style="margin-left: 60px; margin-top: 5px">
-                    <button class="button">Clear</button>
+                <div style="margin-left: 60px; margin-top: 1px">
+                    <button class="button" style="margin-left: 30px" onclick="clear_user();">Clear</button>
+
                 </div><br>
                 <div style="margin-left: 60px">
-                    <button class="button" onclick="save_user();">Add Details</button>
-                    <button class="button" style="margin-left: 6px" onclick="delete_user();">Remove Details</button>
-                    <button class="button" style="margin-left: 6px" onclick="update_user();">Update Details</button>
+                    <button class="button" style="margin-left:30px" onclick="save_user();">Add Details</button>
+                    <button class="button" style="margin-left: 30px" onclick="delete_user();">Remove Details</button>
+                    <button class="button" style="margin-left: 90px" onclick="update_user();">Update Details</button>
 
                 </div>
             </div>
@@ -151,17 +169,18 @@
             <div class="col-left">
 
                 <div class="search-box">
-                    <input class="search-txt" type="text" name="" placeholder="search member">
-                    <a class="search-btn" href="#">
+                    <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
+                    <a class="search-btn" href="#" onclick="search_user();return false;">
                         <i class="fas fa-search"></i>
                     </a>
                 </div>
-
-                <div style="margin-left: 1px; margin-top: 200px">
-                    <table id="tbl_users_list" style="border: 1px solid black">
+                <br> <br>
+                <div style="margin-left: 1px; margin-top: 150px">
+                    <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
                         <tr>
                             <th style="border: 1px solid black">Member ID</th>
-                            <th style="border: 1px solid black">Member Name</th>
+                            <th style="border: 1px solid black">First Name</th>
+                            <th style="border: 1px solid black">Last Name</th>
                             <th style="border: 1px solid black">Phone Number</th>
                             <th style="border: 1px solid black">Email Address</th>
                         </tr>
@@ -194,15 +213,17 @@
 
                     var row = tblUsers.insertRow(rowIndex);
                     var cell_Id = row.insertCell(0);
-                    var cell_name = row.insertCell(1);
-                    var cell_phone = row.insertCell(2);
-                    var cell_email = row.insertCell(3);
+                    var cell_fname = row.insertCell(1);
+                    var cell_lname = row.insertCell(2);
+                    var cell_phone = row.insertCell(3);
+                    var cell_email = row.insertCell(4);
 
                     //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
 
                     cell_Id.appendChild(document.createTextNode(childKey));
-                    cell_name.appendChild(document.createTextNode(childData.firstName));
+                    cell_fname.appendChild(document.createTextNode(childData.firstName));
+                    cell_lname.appendChild(document.createTextNode(childData.lastName));
                     cell_phone.appendChild(document.createTextNode(childData.mobile));
                     cell_email.appendChild(document.createTextNode(childData.email));
 
@@ -213,15 +234,65 @@
             });
         });
 
+        function search_user() {
+
+            var rowIndex = 1;
+            var table = document.getElementById('tbl_users_list');
+            var rowCount = table.rows.length;
+            for (var i = rowIndex; i < rowCount; i++) {
+                table.deleteRow(rowIndex);
+            }
+
+            databaseRef.orderByChild('firstName').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    if (childKey >= 10000) {
+                        console.log("childKey", childKey);
+                        var childData = childSnapshot.val();
+
+                        var row = tblUsers.insertRow(rowIndex);
+                        var cell_Id = row.insertCell(0);
+                        var cell_fname = row.insertCell(1);
+                        var cell_lname = row.insertCell(2);
+                        var cell_phone = row.insertCell(3);
+                        var cell_email = row.insertCell(4);
+
+                        //document.getElementById("tbl_users_list").style.border = "1px solid black";
+
+
+                        cell_Id.appendChild(document.createTextNode(childKey));
+                        cell_fname.appendChild(document.createTextNode(childData.firstName));
+                        cell_lname.appendChild(document.createTextNode(childData.lastName));
+                        cell_phone.appendChild(document.createTextNode(childData.mobile));
+                        cell_email.appendChild(document.createTextNode(childData.email));
+
+                        rowIndex = rowIndex + 1;
+
+                    }
+
+                });
+            });
+        }
+
+        function clear_user() {
+            document.getElementById("id").value = "";
+            document.getElementById("fname").value = "";
+            document.getElementById("lname").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("email").value = "";
+        }
+
 
         function save_user() {
-            var user_name = document.getElementById('name').value;
             var user_id = document.getElementById('id').value;
+            var user_fname = document.getElementById('fname').value;
+            var user_lname = document.getElementById('lname').value;
             var user_phone = document.getElementById('phone').value;
             var user_email = document.getElementById('email').value;
 
             var data = {
-                firstName: user_name,
+                firstName: user_fname,
+                lastName: user_lname,
                 mobile: user_phone,
                 email: user_email
             }
@@ -236,13 +307,15 @@
         }
 
         function update_user() {
-            var user_name = document.getElementById('name').value;
             var user_id = document.getElementById('id').value;
+            var user_fname = document.getElementById('fname').value;
+            var user_lname = document.getElementById('lname').value;
             var user_phone = document.getElementById('phone').value;
             var user_email = document.getElementById('email').value;
 
             var data = {
-                firstName: user_name,
+                firstName: user_fname,
+                lastName: user_lname,
                 mobile: user_phone,
                 email: user_email
             }
@@ -263,11 +336,30 @@
 
             reload_page();
 
-
         }
 
         function reload_page() {
             window.location.reload();
+        }
+    </script>
+
+    <script>
+        setInterval(function() {
+            check();
+        }, 1000);
+
+        function check() {
+            var table = document.getElementById('tbl_users_list');
+
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function() {
+                    document.getElementById("id").value = this.cells[0].innerHTML;
+                    document.getElementById("fname").value = this.cells[1].innerHTML;
+                    document.getElementById("lname").value = this.cells[2].innerHTML;
+                    document.getElementById("phone").value = this.cells[3].innerHTML;
+                    document.getElementById("email").value = this.cells[4].innerHTML;
+                };
+            }
         }
     </script>
 

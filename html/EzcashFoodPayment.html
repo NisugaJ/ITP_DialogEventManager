@@ -42,7 +42,7 @@
                     opt.value = childKey;
                     sel.appendChild(opt);
                     console.log(eventTitle);
-                    // ...
+
                 });
             });
 
@@ -56,18 +56,19 @@
 <body>
     <div id="menubar">
         <div id="menubar_top">
-            <span id="dialog">Dialog Internal Events <br><br><h2> <b>Admin Panel</h2></b></span><br>
+            <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
 
             <div id="logo"> <img src="../images/dialogLogo.png" width="154px" height="206px"></div>
             <div id="admindetails_div">
                 <script>
                     var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
                 </script>
-                <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
+                <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
                 <label id="label_admin">Admin</label>
             </div>
-            <br>
         </div>
+
         <div id="menulist">
             <ul>
                 <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
@@ -77,8 +78,7 @@
                 <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
                 <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
                 <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-                <li><a href="attendees.html
-"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+                <li><a href="attendees.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
                 <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
                 <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
 
@@ -99,32 +99,34 @@
             <button type="button" name="View Previous Food Payments" id="addEvent">
         <a href="PreviousFoodPayments.html">View Previous Food Payments</a>
       </button>
+
         </div>
 
         <div id="container">
 
             <div id="wrapper">
                 <div id="content">
+                    <label id="label_error" class="alert alert-danger" style="display: none"> </label>
+
                     <div class="dropdown">
 
                         <select onchange="selectAttendees(this.value);" id="event_list" class="form-control form-control-me" style="background-color: #d1ecf1">
-              <option selected disabled>Select an ongoing Training </option>
+              <option  >Select an ongoing Training </option>
              
             </select>
 
                     </div><br>
                     <div id="amount">
                         <label id="label_enter_amount" class="alert alert-info">Specify amount for a member </label>
-                        <input type="number" placeholder="0.00" step="0.01" id="input_amount" class="form-control" />
+                        <input type="number" placeholder="0.00" step="0.01" id="input_amount" class="form-control" min="50" max="2000" />
                     </div>
-                    <table id="attendees">
+                    <table id="eventAttendees">
                         <tr id="header_row">
                             <th>Member Name</th>
                             <th>Phone Number</th>
                             <th>eZ Cash Status</th>
                             <th>Select / Unselect</th>
                         </tr>
-
 
                     </table>
                 </div>
