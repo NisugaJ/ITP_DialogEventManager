@@ -16,12 +16,14 @@
 [31m-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">[m
 [31m-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"[m
 [31m-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">[m
-[31m-  <link rel="stylesheet" type="text/css" href="../css/menubarEzCash.css">[m
+[31m-  <link rel="stylesheet" type="text/css" href="../css/menubar
+.css">[m
 [31m-  <link rel="stylesheet" type="text/css" href="../css/EzcashFoodPayment.css">[m
 [32m+[m[32m    <title>Ezcash Food Payment </title>[m
 [32m+[m[32m    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">[m
 [32m+[m[32m    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">[m
-[32m+[m[32m    <link rel="stylesheet" type="text/css" href="../css/menubarEzCash.css">[m
+[32m+[m[32m    <link rel="stylesheet" type="text/css" href="../css/menubar
+.css">[m
 [32m+[m[32m    <link rel="stylesheet" type="text/css" href="../css/EzcashFoodPayment.css">[m
  [m
  [m
@@ -30,7 +32,7 @@
  <body>[m
 [31m-  <div id="menubar">[m
 [31m-    <div id="menubar_top">[m
-[31m-      <div id="logo"> <img src="../images/dialogLogo.png" width="144px" height="162px"></div>[m
+[31m-      <div id="logo"> <img src="../images/dialogLogo.png" width="308px" height="412px"></div>[m
 [31m-      <div id="admindetails_div">[m
 [31m-        <label id="label_adminName">Nisuga Jayawardana</label>[m
 [31m-        <label id="label_admin">Admin</label>[m
@@ -39,19 +41,20 @@
 [31m-[m
 [31m-    <div id="menulist">[m
 [31m-      <ul>[m
-[31m-        <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
+[31m-        <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
 [31m-        <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>[m
 [31m-        <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>[m
 [31m-        <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
 [31m-        <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>[m
-[31m-        <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
+[31m-        <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [31m-        <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
-[31m-        <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
-[31m-        <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
+[31m-        <li><a href="attendees.html
+"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
+[31m-        <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
 [31m-      </ul>[m
 [32m+[m[32m    <div id="menubar">[m
 [32m+[m[32m        <div id="menubar_top">[m
-[32m+[m[32m            <div id="logo"> <img src="../images/dialogLogo.png" width="144px" height="162px"></div>[m
+[32m+[m[32m            <div id="logo"> <img src="../images/dialogLogo.png" width="308px" height="412px"></div>[m
 [32m+[m[32m            <div id="admindetails_div">[m
 [32m+[m[32m                <label id="label_adminName">Nisuga Jayawardana</label>[m
 [32m+[m[32m                <label id="label_admin">Admin</label>[m
@@ -59,15 +62,16 @@
 [32m+[m[32m        </div>[m
 [32m+[m[32m        <div id="menulist">[m
 [32m+[m[32m            <ul>[m
-[32m+[m[32m                <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
+[32m+[m[32m                <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>[m
 [32m+[m[32m                <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>[m
 [32m+[m[32m                <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>[m
 [32m+[m[32m                <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>[m
 [32m+[m[32m                <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>[m
-[32m+[m[32m                <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
+[32m+[m[32m                <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>[m
 [32m+[m[32m                <li><a href="Ezcash Food Payment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>[m
-[32m+[m[32m                <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
-[32m+[m[32m                <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
+[32m+[m[32m                <li><a href="attendees.html
+"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>[m
+[32m+[m[32m                <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>[m
 [32m+[m[32m            </ul>[m
 [32m+[m[32m        </div>[m
      </div>[m

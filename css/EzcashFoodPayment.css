@@ -235,6 +235,10 @@ p {
     border-radius: 5px;
 }
 
+#attendees {
+    height: 150px;
+}
+
 
 /*css for on/off switch*/
 

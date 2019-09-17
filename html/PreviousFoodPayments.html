@@ -7,22 +7,64 @@
     <title>Previous Food Payments </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/menubarEzCash.css">
+    <link rel="stylesheet" type="text/css" href="../css/menubar
+.css">
     <link rel="stylesheet" type="text/css" href="../css/previousFoodPayments.css">
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
 
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/ezcash.js"></script>
 
     <script type="text/javascript">
+        //
+
         window.onload = function() {
+            var thisTitle;
             initializeFirebaseProject();
             if (!isUserAnAdmin()) {
-                alert("You are unorthorized for this content");
+
                 window.location.href = "Login.html";
             }
 
+
+            //to get current events from db
+            var dbRef = firebase.database().ref(); // Reference to realtime db
+            var paymentsRef = dbRef.child('ezCashFoodPayments').orderByKey();
+
+            paymentsRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var evenWt = childSnapshot.val();
+                    console.log(childKey + evenWt);
+                    var eventID = childSnapshot.child("eventID").val();
+                    console.log(eventID);
+                    var paymentTimestamp = childSnapshot.child("timestamp").val();
+
+                    var eventTitleRef = dbRef.child('events').orderByKey().equalTo(eventID);
+                    eventTitleRef.once('value', function(eventSnap) {
+                        eventSnap.forEach(function(oneEventSnap) {
+                            thisTitle = oneEventSnap.child('event_topic').val();
+                            paymentTimestamp = thisTitle + " " + paymentTimestamp;
+                            console.log("thisTitle = " + paymentTimestamp);
+                        });
+
+                        // get reference to select element
+                        var selectedEventsDIV = document.getElementById('event_list');
+                        // create new option element
+                        var linkBtn = document.createElement('option');
+                        var optText = paymentTimestamp;
+                        console.log(paymentTimestamp);
+                        linkBtn.appendChild(document.createTextNode(optText));
+                        linkBtn.value = childKey;
+                        selectedEventsDIV.appendChild(linkBtn);
+                        console.log(thisTitle);
+                        // ...
+                    });
+
+                });
+            });
         }
     </script>
 
@@ -32,32 +74,37 @@
 <body>
     <div id="menubar">
         <div id="menubar_top">
-            <div id="logo"> <img src="../images/dialogLogo.png" width="144px" height="162px"></div>
+            <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+
+            <div id="logo"> <img src="../images/dialogLogo.png" width="154px" height="206px"></div>
             <div id="admindetails_div">
-                <label id="label_adminName">Nisuga Jayawardana</label>
+                <script>
+                    var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
+                </script>
+                <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
                 <label id="label_admin">Admin</label>
             </div>
         </div>
-
         <div id="menulist">
             <ul>
-                <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+                <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
                 <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-                <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+                <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
                 <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
                 <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-                <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+                <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
                 <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-                <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-                <li><a href="eventAgenda.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+                <li><a href="attendees.html
+"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+                <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+                <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+
             </ul>
         </div>
     </div>
     <div id="actions">
         <div id="header">
-            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-            <input type="text" name="search" placeholder="Search previous food payments" id="search">
-            <button type="submit" class="btn btn-primary">Search</button>
             <label hidden>as</label>
             <button id="logOut" onclick="signOutUser()">
         Sign Out
@@ -71,32 +118,19 @@
 
             <div id="wrapper">
                 <div id="content">
-                    <label style="font-size: 20px;">Searched List </label>
-                    <div class="list-previous-payments" id="searched_list">
-                        <a href="#" class="list-group-item">Event 134</a>
-                        <a href="#" class="list-group-item">Event 132</a>
-                        <a href="#" class="list-group-item">Event 15</a>
-                    </div>
+                    <label style="font-size: 20px;">Previous Payments List </label>
+                    <select class="form-control" id="event_list" onchange="selectEzcashPaymentByID(this.value);">
+                        <option  disabled selected class="list-group-item">Select an previous payment</option>
+                    </select>
                     <br>
-                    <label id="selected_event" class="alert alert-info" style="font-size: 25px;font-weight: bold;">Event 132
-          </label>
-                    <table>
+                    </label>
+                    <table id="previous_payments_table">
                         <tr id="header_row">
-                            <th>Member Name</th>
                             <th>Phone Number</th>
+                            <th>Amount</th>
                             <th>Payment Status</th>
-                            <th>Select / Unselect</th>
                         </tr>
-                        <tr>
-                            <td>Dianara Perera</td>
-                            <td>0784885454</td>
-                            <td>done</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td><img src="../images/edit.png" width="25" height="25">
-                                <img src="../images/delete.png" width="25" height="25"></td>
-                        </tr>
+
 
                     </table>
                 </div>
@@ -107,9 +141,9 @@
             <div id="extra">
 
                 <button id="paynow" type="submit" class="btn btn-primary btn-lg btn-block mybtn">Generate Report</button>
-                <button id="paynow" type="submit" class="btn btn-danger btn-lg btn-block mybtn">Delete All records of the
+                <button onclick="deletePaymentsBulk()" id="deleteAll" type="submit" class="btn btn-danger btn-lg btn-block mybtn">Delete All records of the selected
           event</button>
-                <button id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block mybtn">Go Back</button>
+                <button onclick="window.location.href='EzcashFoodPayment.html'" id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block mybtn">Go Back</button>
 
 
 
@@ -118,6 +152,8 @@
         <div id="footer">
 
         </div>
+        <div id="snackbar">Some text some message..</div>
+
     </div>
 
     </div>

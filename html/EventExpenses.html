@@ -7,15 +7,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
-    <script type="text/javascript" src="../js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
+    <link rel="stylesheet" type="text/css" href="../css/pieChart.css">
+    <script src="../js/common.js"></script>
 
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#config-web-app -->
     <script type="text/javascript">
         window.onload = function() {
 
@@ -26,6 +21,12 @@
 
         }
     </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#config-web-app -->
+
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -41,7 +42,7 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <script src="../js/eventTable.js"></script>
+    <script src="../js/eventExpenses.js"></script>
 </head>
 
 <body>
@@ -66,7 +67,8 @@
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
             <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
             <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
+            <li><a href="attendees.html
+"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
             <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
             <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
 
@@ -76,34 +78,50 @@
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
-            <button id="logOut" onclick="signOutUser()">
+            <button id="logOut">
         	Sign Out
         </button>
         </header>
+        <h4>
+            <p align="right">
+                <img src="../images/edit.png" width="25" height="25">Edit &nbsp;
+                <img src="../images/delete.png" width="25" height="25">Delete&nbsp;
+                <img src="../images/update.png" width="25" height="25">Update</td>
+            </p>
+        </h4>
+        <br><br>
         <nav>
             <h1 id="title">
-                <center>Events</center>
+                <center> Expenses</center>
             </h1>
+            <button type="button" name="addEvent" id="addEvent">
+                <a href="update.html">Add Expense</a>
+            </button>
         </nav>
-        <button type="button" name="addEvent" id="addEvent">
-          <a href="registerEvent.html">Add/Edit Event</a>
+        <Select type="button" name="addEvent" id="addEvent">
+					    <option value="event123">SelectEvent</option>
+                        <option value="event123">Event123</option>
+                        <option value="event140">Event140</option>
+                        <option value="event180">Event180</option>
+                        <option value="event203">Event203</option>
+		  <a href="registerEvent.html">Add Expense</a></select>
         </button>
         <br>
-        <br><br><br>
-
-        <table id="event_table">
+        <table id="event_expenses_table">
             <tr>
-                <td>ID</td>
-                <td>Title</td>
-                <td>Date</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Descritption</td>
-                <td>Location</td>
+                <td>Item</td>
+                <td>Amount(Rs)</td>
+                <td>Time</td>
+                <td>Status</td>
                 <td></td>
                 <td></td>
             </tr>
+
         </table>
+        <br><br>
+        <button type="button" name="pieChart" id="pieChart">
+          <a href="pieChart.html">Create PieChart</a>
+        </button>
     </div>
 </body>
 

@@ -19,8 +19,8 @@
 
 #title {
     float: left;
-    padding-left: 0px;
-    padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
     padding-top: 20px;
 }
 
@@ -66,6 +66,7 @@
     position: fixed;
     width: 20%;
     height: 100%;
+    overflow: auto;
 }
 
 #menubar ul {
@@ -92,9 +93,21 @@
 }
 
 #dialog {
-    margin-left: 5px;
-    margin-top: 50px;
-    margin-right: 5px;
+    float: left;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 100x;
+    margin-bottom: 20px;
+}
+
+#logo {
+    width: 154px;
+    height: 206px;
+    float: left;
+    margin-left: 10px;
+    /* margin-right: 100px; */
 }
 
 .menuIcons {
@@ -114,6 +127,32 @@
     position: fixed;
 }
 
+#label_adminName,
+#label_admin {
+    font-size: 15px;
+    margin: 5px;
+    margin-right: 0;
+    float: right;
+}
+
+#label_adminName {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+#admindetails_div {
+    margin-top: 5px;
+    margin-right: 20px;
+    float: right;
+    width: 48%;
+    height: 220px;
+    float: right;
+}
+
+#menulist {
+    margin-top: 180px;
+}
+
 
 /*snackbar*/
 
@@ -127,9 +166,9 @@
     /* Set a default minimum width */
     margin-left: -125px;
     /* Divide value of min-width by 2 */
-    background-color: #333;
+    background-color: rgb(255, 166, 188);
     /* Black background color */
-    color: #fff;
+    color: rgb(0, 0, 0);
     /* White text color */
     text-align: center;
     /* Centered text */

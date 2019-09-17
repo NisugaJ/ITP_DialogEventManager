@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>Add an event</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="../css/insertOrganizerTB.css">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
 
@@ -67,29 +69,27 @@
                 <center>Add Organizers</center>
             </h1>
         </nav>
-
+        <br> <br> <br>
         <form class="addEvent" method="post">
+            <label id="label_error" class="alert alert-danger" style="display: none"> </label>
 
             <h4>Organizer_ID (This is only required for Update Organizers Details)</h4>
             <input type="text" name="title" class="inputs" id="id"><br>
 
             <h4>Name</h4>
-            <input type="text" name="Name" class="inputs" id="Name"><br>
+            <input type="text" name="Name" class="inputs" id="Name" required><br>
 
             <h4>Position</h4>
-            <input type="text" name="Position" class="inputs" id="Position"><br>
+            <input type="text" name="Position" class="inputs" id="Position" required><br>
 
-            <h4>Ratings</h4>
-            <textarea name="Ratings" rows="8" cols="80" class="inputs" id="Ratings"></textarea><br>
+            <h4>Mobile Number</h4>
+            <input type="Number" min="1" max="10" name="Ratings" class="inputs" id="Ratings" required><br>
 
-            <h4>Execution_level</h4>
-            <input type="number" name="Execution_level" class="inputs" id="Execution_level"><br>
-
-            <h4>Gmail</h4>
-            <input type="text" name="Gmail" class="inputs" id="Gmail"><br>
+            <h4>Email</h4>
+            <input type="email" name="Gmail" class="inputs" id="Gmail" required><br>
 
             <h4>password</h4>
-            <input type="text" name="Password" class="inputs" id="password"><br>
+            <input type="password" name="Password" class="inputs" id="password" required><br>
 
 
             <br>
