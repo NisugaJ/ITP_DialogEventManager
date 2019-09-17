@@ -3,35 +3,40 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Add an event</title>
+    <title>Add an Organizer</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="../css/insertOrganizerTB.css">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <script src="../js/UpdateOrganizer.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-            authDomain: "dialog-internal-event-manager.firebaseapp.com",
-            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-            projectId: "dialog-internal-event-manager",
-            storageBucket: "dialog-internal-event-manager.appspot.com",
-            messagingSenderId: "168700423082",
-            appId: "1:168700423082:web:6ad2292be26320c9"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        window.onload = function() {
+            get_session();
+
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:6ad2292be26320c9"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        }
     </script>
 
-    <script src="../js/inserOrganizer.js"></script>
 
 </head>
 
@@ -39,7 +44,7 @@
 
     <div id="menubar">
 
-        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <span id="dialog">Dialog Events<br> Admin Panel</span><br>
         <img src="../images/dialogLogo.png" width="144px" height="162px">
 
         <ul>
@@ -66,7 +71,7 @@
 
         <nav>
             <h1 id="title">
-                <center>Add Organizers</center>
+                <center>Update Organizer</center>
             </h1>
         </nav>
         <br> <br> <br>
@@ -94,7 +99,7 @@
 
             <br>
 
-            <input type="submit" name="create" value="Create" class="submit" onclick="save_event()">
+            <button type="button" name="button" class="button" onclick="update_event()">Update</button>
             <a href="organizerTable.html"><button type="button" name="button" class="button">Cancel</button></a>
 
 
