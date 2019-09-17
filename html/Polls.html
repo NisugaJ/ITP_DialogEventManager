@@ -4,7 +4,6 @@
 <head>
     <title>Questions and Polls</title>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/Questions&Polls.css">
     <link rel="stylesheet" href="../css/Login.css">
@@ -13,13 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../js/common.js"></script>
 
-    <script>
-        window.addEventListener('load', function() {
-            if (!isUserAnOrganizer()) {
-                window.location.href = "Login.html";
-            }
-        });
-    </script>
     <!-- firebase -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
@@ -45,7 +37,16 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
+    <script>
+        window.onload = function() {
+            if (!isUserAnOrganizer()) {
+                alert("You are unorthorized for this content");
+                window.location.href = "Login.html";
+            }
+            initializeFirebaseProject();
 
+        }
+    </script>
 
 
     <script src="../organizerJS/pollFirebase.js"></script>
@@ -97,7 +98,7 @@
     </style>
 </head>
 
-<body>
+<body ng-controller="MainCtrl">
 
     <!-- <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> -->
 
@@ -307,4 +308,4 @@
     <div ng-view></div>
 </body>
 
-</html>s
+</html>

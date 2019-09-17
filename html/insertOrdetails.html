@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <title>Add an event</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="../css/insertOrganizerTB.css">
-    <script type="text/javascript" src="../js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -16,9 +17,6 @@
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
-        if (!isUserAnAdmin()) {
-            window.location.href = "Login.html";
-        }
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
@@ -41,28 +39,18 @@
 
     <div id="menubar">
 
-        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
-        <img id="logo" src="../images/dialogLogo.png" width="154px" height="206px">
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-        <div id="admindetails_div">
-            <script>
-                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
-            </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
-
-            <label id="label_admin">Admin</label>
-        </div>
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="attendees.html
-"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
 
@@ -81,29 +69,27 @@
                 <center>Add Organizers</center>
             </h1>
         </nav>
-
+        <br> <br> <br>
         <form class="addEvent" method="post">
+            <label id="label_error" class="alert alert-danger" style="display: none"> </label>
 
             <h4>Organizer_ID (This is only required for Update Organizers Details)</h4>
             <input type="text" name="title" class="inputs" id="id"><br>
 
             <h4>Name</h4>
-            <input type="text" name="Name" class="inputs" id="Name"><br>
+            <input type="text" name="Name" class="inputs" id="Name" required><br>
 
             <h4>Position</h4>
-            <input type="text" name="Position" class="inputs" id="Position"><br>
+            <input type="text" name="Position" class="inputs" id="Position" required><br>
 
-            <h4>Ratings</h4>
-            <textarea name="Ratings" rows="8" cols="80" class="inputs" id="Ratings"></textarea><br>
+            <h4>Mobile Number</h4>
+            <input type="Number" min="1" max="10" name="Ratings" class="inputs" id="Ratings" required><br>
 
-            <h4>Execution_level</h4>
-            <input type="number" name="Execution_level" class="inputs" id="Execution_level"><br>
-
-            <h4>Gmail</h4>
-            <input type="text" name="Gmail" class="inputs" id="Gmail"><br>
+            <h4>Email</h4>
+            <input type="email" name="Gmail" class="inputs" id="Gmail" required><br>
 
             <h4>password</h4>
-            <input type="text" name="Password" class="inputs" id="password"><br>
+            <input type="password" name="Password" class="inputs" id="password" required><br>
 
 
             <br>

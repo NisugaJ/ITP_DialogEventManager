@@ -11,8 +11,6 @@
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -38,36 +36,25 @@
 <body>
     <div id="menubar">
 
-        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
-        <img src="../images/dialogLogo.png" width="154px" height="206px">
-        <div id="admindetails_div">
-            <script>
-                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
-            </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-            <label id="label_admin">Admin</label>
-        </div>
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="attendees.html
-"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-
-            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
     <div id="actions">
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
-            <button id="logOut" onclick="signOutUser()">
+            <button id="logOut">
         	Sign Out
         </button>
         </header>
@@ -85,19 +72,17 @@
                 <td>Organizers_ID</td>
                 <td>Name</td>
                 <td>Position</td>
-                <td>Ratings</td>
-                <td>Execution Level</td>
-                <td>Gmail</td>
+                <td>Mobile Number</td>
+                <td>Email</td>
                 <td>Login PWD</td>
-                <td><span class="delete_id">ID</span>
-                    <input type="text" name="title" class="inputs" id="id"></td>
                 <td><button type="button" name="uporg" id="Update1">
                         <a href="insertOrdetails.html">Update</a>
-                      </button><button class="delete" onclick="delete_event()">Delete</button><br></td>
+                      </button><br></td>
             </tr>
         </table>
 
     </div>
+
 </body>
 
 </html>
