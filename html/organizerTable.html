@@ -65,14 +65,14 @@
     <div id="actions">
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-            <input type="text" name="search" id="search">
+            <input type="text" name="search" id="search" onkeyup="searchFromTableByName()">
             <button id="logOut">
         	Sign Out
         </button>
         </header>
         <nav>
             <h1 id="title">
-                <center>organizer Details</center>
+                <center>Organizer Details</center>
             </h1>
         </nav>
         <button type="button" name="addEvent" id="addEvent">
@@ -80,16 +80,14 @@
         </button>
         <br>
         <table id="organizer_table">
-            <tr>
-                <td>Organizers_ID</td>
+            <tr style="background-color: lightslategrey">
                 <td>Name</td>
                 <td>Position</td>
                 <td>Mobile Number</td>
                 <td>Email</td>
                 <td>Login PWD</td>
-                <td><button type="button" name="uporg" id="Update1">
-                        <a href="insertOrdetails.html">Update</a>
-                      </button><br></td>
+                <td></td>
+                <br><br>
             </tr>
         </table>
 
