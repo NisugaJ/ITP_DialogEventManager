@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar
 .css">
+    <!-- pdfmake.org js files-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+    <script src="../js/base64Encodings.js"></script>
+    <!--///////-->
     <link rel="stylesheet" type="text/css" href="../css/previousFoodPayments.css">
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
@@ -120,7 +125,7 @@
                 <div id="content">
                     <label style="font-size: 20px;">Previous Payments List </label>
                     <select class="form-control" id="event_list" onchange="selectEzcashPaymentByID(this.value);">
-                        <option  disabled selected class="list-group-item">Select an previous payment</option>
+                        <option value="" disabled selected class="list-group-item">Select an previous payment</option>
                     </select>
                     <br>
                     </label>
@@ -140,7 +145,7 @@
             </div>
             <div id="extra">
 
-                <button id="paynow" type="submit" class="btn btn-primary btn-lg btn-block mybtn">Generate Report</button>
+                <button id="paynow" type="submit" class="btn btn-primary btn-lg btn-block mybtn" onclick="makePDF()">Generate Report</button>
                 <button onclick="deletePaymentsBulk()" id="deleteAll" type="submit" class="btn btn-danger btn-lg btn-block mybtn">Delete All records of the selected
           event</button>
                 <button onclick="window.location.href='EzcashFoodPayment.html'" id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block mybtn">Go Back</button>
@@ -155,6 +160,52 @@
 
     </div>
     </div>
+    <script>
+        function makePDF() {
+            selectedPaymentTag = document.getElementById('event_list');
+            var currentPayment = selectedPaymentTag.options[selectedPaymentTag.selectedIndex];
+            if (currentPayment.value == "") {
+                alert("Please select an Event before generating an event specific Report");
+                return;
+            }
+            var dateTime = currentPayment.innerText.slice(currentPayment.innerText.length - 19);
+            var dateTimeARR = dateTime.split(" ");
+            console.log("currentPayment", currentPayment.innerText);
+            console.log("dateTimeARR", dateTimeARR);
+
+            var docDefinition = {
+                info: {
+                    title: "Previous Payments",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
+                content: [{
+                        columns: [{
+                            text: "Dialog Internal Event Manager 2019",
+                            fontSize: 30,
+                            bold: true,
+                            width: "*",
+                            align: "centre"
+                        }, {
+                            image: getDialoLogoBASE64(),
+                            width: 60,
+                            height: 60 * 1.3376623376623376623376623376623
+                        }],
+
+                    }, {
+                        text: "Payment Report",
+                        fontSize: 20
+                    },
+                    //current Payment
+                    " ",
+                    "Event  : " + currentPayment.innerText.slice(0, currentPayment.innerText.length - 19),
+                    "Date   : " + dateTimeARR[0],
+                    "Time   : " + dateTimeARR[1]
+                ]
+            };
+            pdfMake.createPdf(docDefinition).open();
+
+        }
+    </script>
 </body>
 
 </html>
