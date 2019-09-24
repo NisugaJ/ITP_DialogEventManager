@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Organizer Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../css/menubarEzCash.css">
+    <link rel="stylesheet" type="text/css" href="../css/menubar
+.css">
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
@@ -15,10 +16,12 @@
         window.onload = function() {
             initializeFirebaseProject();
             if (!isUserAnOrganizer()) {
-                document.body.style.visibility = "hidden";
-                alert("You are unorthorized for this content");
+
                 window.location.href = "Login.html";
             }
+
+            window.location.href = "Questions.html";
+
         }
     </script>
 </head>

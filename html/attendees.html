@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Event Attendees</title>
+    <meta charset="utf-8">
+    <title>Event Participation Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../js/common.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // window.onload = function() {
+
+
+        // }
+    </script>
+</head>
+
+<body>
+    <div id="menubar">
+
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
+        <ul>
+            <li><a href="ParticipationReport.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="attendees.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+        </ul>
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
+                Sign Out
+              </button>
+        </header>
+        <br>
+        <h3>
+            <center>Event Attendees Form</center>
+        </h3>
+        <table>
+            <tr>
+                <td> ID</td>
+                <td> <input type="text" name="ID" id="user_id"></td>
+            </tr>
+            <tr>
+                <td> Name</td>
+                <td> <input type="text" name="user_name" id="user_name" required></td>
+            </tr>
+            <tr>
+                <td> Arrival Time</td>
+                <td> <input type="time" name="time" id="time" required></td>
+            </tr>
+            <tr>
+                <td> Status</td>
+                <td> <input type="text" name="status" id="status" required></td>
+            </tr>
+            <tr>
+                <td> Location</td>
+                <td> <input type="text" name="location" id="location" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="Save" onclick="save_attendee();" />
+                    <input type="button" value="Update" onclick="update_attendee();" />
+                    <input type="button" value="Delete" onclick="delete_attendee();" />
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <h3>
+            <center>Attendees List</center>
+        </h3>
+
+        <table id="table_attendee_list">
+            <tr>
+                <td>#ID</td>
+                <td>Name</td>
+                <td>Arrival Time</td>
+                <td>Status</td>
+                <td>Location</td>
+            </tr>
+
+        </table>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:ecc1385d6e962236"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            var tableAttendees = document.getElementById('table_attendee_list');
+            var databaseRef = firebase.database().ref('attendees/');
+
+            //var ID = document.getElementById('user_id').value;
+            var rowIndex = 1;
+
+            databaseRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.value();
+
+                    var row = tableAttendees.insertRow(rowIndex);
+                    var cellId = row.insertCell(0);
+                    var cellName = row.insertCell(1);
+                    cellId.appendChild(document.createTextNode(childKey));
+                    cellName.appendChild(document.createTextNode(childData.user_name));
+                    cellTime.appendChild(document.createTextNode(childData.arrival_time));
+                    cellStatus.appendChild(document.createTextNode(childData.status));
+                    cellLocation.appendChild(document.createTextNode(childData.location));
+
+                    rowIndex = rowIndex + 1;
+
+                });
+            });
+
+
+            function save_attendee() {
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+                var status = document.getElementById('status').value;
+                var location = document.getElementById('location').value;
+
+
+
+                var data = {
+                    user_id: uid,
+                    user_name: user_name,
+                    arrival_time: arrival_time,
+                    status: status,
+                    location: location
+                }
+
+                var updates = {};
+                updates['eventAttendees/    ' + uid] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The attendee added successfully');
+                reload_page();
+            }
+
+            function update_attendee() {
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+                var status = document.getElementById('status').value;
+                var location = document.getElementById('location').value;
+
+
+                var data = {
+                    user_id: uid,
+                    user_name: user_name,
+                    arrival_time: arrival_time,
+                    status: status,
+                    location: location
+                }
+                var updates = {};
+                updates['eventAttendees/   ' + uid] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The attendee updated successfully');
+                reload_page();
+            }
+
+            function delete_attendee() {
+                var uid = firebase.database().ref().child('eventAttendees').push().key;
+                firebase.database().ref().child('eventAttendees/ ' + user_id).remove();
+                alert('The attendee deleted successfully');
+                reload_page();
+            }
+
+            function reload_page() {
+                window.location.reload();
+            }
+        </script>
+</body>
+
+</html>

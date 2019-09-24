@@ -3,24 +3,34 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin Dashboard</title>
+    <title>Organizers Details Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/registerEvent.css">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/organizerTable.css">
 
-    <script type="text/javascript">
-        window.onload = function() {
 
-            initializeFirebaseProject();
-            if (!isUserAnAdmin()) {
-                window.location.href = "Login.html";
-            }
-        }
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
     </script>
+
+    <script src="../js/organizerTable.js"></script>
 </head>
 
 <body>
@@ -38,6 +48,7 @@
 
             <label id="label_admin">Admin</label>
         </div>
+
         <ul>
             <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
@@ -53,20 +64,35 @@
     </div>
     <div id="actions">
         <header id="header">
-            <!-- <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-            <input type="text" name="search" id="search"> -->
-            <button id="logOut" onclick="signOutUser()">
-          Sign Out
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search" onkeyup="searchFromTableByName()">
+            <button id="logOut">
+        	Sign Out
         </button>
         </header>
         <nav>
-            <h1 id="title" class="alert alert-info">
-                Admin Dashboard
+            <h1 id="title">
+                <center>Organizer Details</center>
             </h1>
         </nav>
+        <button type="button" name="addEvent" id="addEvent">
+          <a href="insertOrdetails.html">Add Organizers</a>
+        </button>
+        <br>
+        <table id="organizer_table">
+            <tr style="background-color: lightslategrey">
+                <td>Name</td>
+                <td>Position</td>
+                <td>Mobile Number</td>
+                <td>Email</td>
+                <td>Login PWD</td>
+                <td></td>
+                <br><br>
+            </tr>
+        </table>
 
     </div>
-    </section>
+
 </body>
 
 </html>

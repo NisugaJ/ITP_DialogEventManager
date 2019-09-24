@@ -30,6 +30,11 @@ a {
     font-weight: bold;
 }
 
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 table {
     margin-top: 20px;
     margin-left: 50px;
@@ -42,7 +47,6 @@ th,
 td {
     padding: 10px;
     border: none;
-    border-collapse: collapse;
 }
 
 tr:nth-child(odd) {
@@ -64,6 +68,7 @@ tr:hover {
 #div_pageInfo {
     padding-left: 20px;
     height: max-content;
+    background-color: silver;
 }
 
 .flex-container {
@@ -233,6 +238,10 @@ p {
     align-content: center;
     margin: 10px;
     border-radius: 5px;
+}
+
+#attendees {
+    height: 150px;
 }
 
 
