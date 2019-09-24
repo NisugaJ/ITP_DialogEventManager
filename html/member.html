@@ -168,86 +168,49 @@
 
             <div class="col-left">
 
-                <div class="search-box">
-                    <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
-                    <a class="search-btn" href="#" onclick="search_user();return false;">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-                <br> <br>
-                <div style="margin-left: 1px; margin-top: 150px">
-                    <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
-                        <tr>
-                            <th style="border: 1px solid black">Member ID</th>
-                            <th style="border: 1px solid black">First Name</th>
-                            <th style="border: 1px solid black">Last Name</th>
-                            <th style="border: 1px solid black">Phone Number</th>
-                            <th style="border: 1px solid black">Email Address</th>
-                        </tr>
+                <div class="col-left">
 
-                    </table>
+                    <div class="search-box">
+                        <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
+                        <a class="search-btn" href="#" onclick="search_user();return false;">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </div>
+                    <br> <br>
+                    <div style="margin-left: 1px; margin-top: 150px">
+                        <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
+                            <tr>
+                                <th style="border: 1px solid black">Member ID</th>
+                                <th style="border: 1px solid black">First Name</th>
+                                <th style="border: 1px solid black">Last Name</th>
+                                <th style="border: 1px solid black">Phone Number</th>
+                                <th style="border: 1px solid black">Email Address</th>
+                            </tr>
+
+                        </table>
+                    </div>
+
+
                 </div>
+
+
 
 
             </div>
 
-
-
-
         </div>
 
-    </div>
+        <script>
+            var tblUsers = document.getElementById('tbl_users_list');
 
-    <script>
-        var tblUsers = document.getElementById('tbl_users_list');
-
-        var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
-
-        var rowIndex = 1;
-
-        databaseRef.once('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                var childKey = childSnapshot.key;
-                if (childKey >= 10000) {
-                    var childData = childSnapshot.val();
-
-                    var row = tblUsers.insertRow(rowIndex);
-                    var cell_Id = row.insertCell(0);
-                    var cell_fname = row.insertCell(1);
-                    var cell_lname = row.insertCell(2);
-                    var cell_phone = row.insertCell(3);
-                    var cell_email = row.insertCell(4);
-
-                    //document.getElementById("tbl_users_list").style.border = "1px solid black";
-
-
-                    cell_Id.appendChild(document.createTextNode(childKey));
-                    cell_fname.appendChild(document.createTextNode(childData.firstName));
-                    cell_lname.appendChild(document.createTextNode(childData.lastName));
-                    cell_phone.appendChild(document.createTextNode(childData.mobile));
-                    cell_email.appendChild(document.createTextNode(childData.email));
-
-                    rowIndex = rowIndex + 1;
-
-                }
-
-            });
-        });
-
-        function search_user() {
+            var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
 
             var rowIndex = 1;
-            var table = document.getElementById('tbl_users_list');
-            var rowCount = table.rows.length;
-            for (var i = rowIndex; i < rowCount; i++) {
-                table.deleteRow(rowIndex);
-            }
 
-            databaseRef.orderByChild('firstName').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
+            databaseRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var childKey = childSnapshot.key;
                     if (childKey >= 10000) {
-                        console.log("childKey", childKey);
                         var childData = childSnapshot.val();
 
                         var row = tblUsers.insertRow(rowIndex);
@@ -272,96 +235,135 @@
 
                 });
             });
-        }
 
-        function clear_user() {
-            document.getElementById("id").value = "";
-            document.getElementById("fname").value = "";
-            document.getElementById("lname").value = "";
-            document.getElementById("phone").value = "";
-            document.getElementById("email").value = "";
-        }
+            function search_user() {
+
+                var rowIndex = 1;
+                var table = document.getElementById('tbl_users_list');
+                var rowCount = table.rows.length;
+                for (var i = rowIndex; i < rowCount; i++) {
+                    table.deleteRow(rowIndex);
+                }
+
+                databaseRef.orderByChild('firstName').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var childKey = childSnapshot.key;
+                        if (childKey >= 10000) {
+                            console.log("childKey", childKey);
+                            var childData = childSnapshot.val();
+
+                            var row = tblUsers.insertRow(rowIndex);
+                            var cell_Id = row.insertCell(0);
+                            var cell_fname = row.insertCell(1);
+                            var cell_lname = row.insertCell(2);
+                            var cell_phone = row.insertCell(3);
+                            var cell_email = row.insertCell(4);
+
+                            //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
 
-        function save_user() {
-            var user_id = document.getElementById('id').value;
-            var user_fname = document.getElementById('fname').value;
-            var user_lname = document.getElementById('lname').value;
-            var user_phone = document.getElementById('phone').value;
-            var user_email = document.getElementById('email').value;
+                            cell_Id.appendChild(document.createTextNode(childKey));
+                            cell_fname.appendChild(document.createTextNode(childData.firstName));
+                            cell_lname.appendChild(document.createTextNode(childData.lastName));
+                            cell_phone.appendChild(document.createTextNode(childData.mobile));
+                            cell_email.appendChild(document.createTextNode(childData.email));
 
-            var data = {
-                firstName: user_fname,
-                lastName: user_lname,
-                mobile: user_phone,
-                email: user_email
+                            rowIndex = rowIndex + 1;
+
+                        }
+
+                    });
+                });
             }
 
-            var updates = {};
-            updates['/users/' + user_id] = data;
-            firebase.database().ref().update(updates);
-
-            alert('The user is created successfully');
-            reload_page();
-
-        }
-
-        function update_user() {
-            var user_id = document.getElementById('id').value;
-            var user_fname = document.getElementById('fname').value;
-            var user_lname = document.getElementById('lname').value;
-            var user_phone = document.getElementById('phone').value;
-            var user_email = document.getElementById('email').value;
-
-            var data = {
-                firstName: user_fname,
-                lastName: user_lname,
-                mobile: user_phone,
-                email: user_email
+            function clear_user() {
+                document.getElementById("id").value = "";
+                document.getElementById("fname").value = "";
+                document.getElementById("lname").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
             }
-            var updates = {};
-            updates['/users/' + user_id] = data;
-            firebase.database().ref().update(updates);
 
-            alert('The user is updated successfully!');
 
-            reload_page();
+            function save_user() {
+                var user_id = document.getElementById('id').value;
+                var user_fname = document.getElementById('fname').value;
+                var user_lname = document.getElementById('lname').value;
+                var user_phone = document.getElementById('phone').value;
+                var user_email = document.getElementById('email').value;
 
-        }
+                var data = {
+                    firstName: user_fname,
+                    lastName: user_lname,
+                    mobile: user_phone,
+                    email: user_email
+                }
 
-        function delete_user() {
-            var user_id = document.getElementById('id').value;
-            firebase.database().ref().child('/users/' + user_id).remove();
-            alert('The user is deleted successfully!');
+                var updates = {};
+                updates['/users/' + user_id] = data;
+                firebase.database().ref().update(updates);
 
-            reload_page();
+                alert('The user is created successfully');
+                reload_page();
 
-        }
-
-        function reload_page() {
-            window.location.reload();
-        }
-    </script>
-
-    <script>
-        setInterval(function() {
-            check();
-        }, 1000);
-
-        function check() {
-            var table = document.getElementById('tbl_users_list');
-
-            for (var i = 1; i < table.rows.length; i++) {
-                table.rows[i].onclick = function() {
-                    document.getElementById("id").value = this.cells[0].innerHTML;
-                    document.getElementById("fname").value = this.cells[1].innerHTML;
-                    document.getElementById("lname").value = this.cells[2].innerHTML;
-                    document.getElementById("phone").value = this.cells[3].innerHTML;
-                    document.getElementById("email").value = this.cells[4].innerHTML;
-                };
             }
-        }
-    </script>
+
+            function update_user() {
+                var user_id = document.getElementById('id').value;
+                var user_fname = document.getElementById('fname').value;
+                var user_lname = document.getElementById('lname').value;
+                var user_phone = document.getElementById('phone').value;
+                var user_email = document.getElementById('email').value;
+
+                var data = {
+                    firstName: user_fname,
+                    lastName: user_lname,
+                    mobile: user_phone,
+                    email: user_email
+                }
+                var updates = {};
+                updates['/users/' + user_id] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The user is updated successfully!');
+
+                reload_page();
+
+            }
+
+            function delete_user() {
+                var user_id = document.getElementById('id').value;
+                firebase.database().ref().child('/users/' + user_id).remove();
+                alert('The user is deleted successfully!');
+
+                reload_page();
+
+            }
+
+            function reload_page() {
+                window.location.reload();
+            }
+        </script>
+
+        <script>
+            setInterval(function() {
+                check();
+            }, 1000);
+
+            function check() {
+                var table = document.getElementById('tbl_users_list');
+
+                for (var i = 1; i < table.rows.length; i++) {
+                    table.rows[i].onclick = function() {
+                        document.getElementById("id").value = this.cells[0].innerHTML;
+                        document.getElementById("fname").value = this.cells[1].innerHTML;
+                        document.getElementById("lname").value = this.cells[2].innerHTML;
+                        document.getElementById("phone").value = this.cells[3].innerHTML;
+                        document.getElementById("email").value = this.cells[4].innerHTML;
+                    };
+                }
+            }
+        </script>
 
 </body>
 
