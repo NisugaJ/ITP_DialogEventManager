@@ -132,14 +132,7 @@
         <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
             <option selected disabled>Select an Event </option></select><br>
 
-        <div class="col-left">
-            <div class="search-box">
-                <input class="search-txt" type="text" id="textBoxSearch" name="" placeholder="Search">
-                <a class="search-btn" href="#" onclick="search_user();return false;">
-                    <i class="fas fa-search"></i>
-                </a>
-            </div>
-        </div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         <h3>
             <center>Event Attendees Form</center>
         </h3>
