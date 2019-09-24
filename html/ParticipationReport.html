@@ -17,6 +17,12 @@
             cursor: pointer;
             border-radius: 12px;
         }
+        
+        .col-left {
+            flex: 1.5;
+            /* additionally, equal width */
+            padding: 1em;
+        }
     </style>
     <meta charset="utf-8">
     <title>Event Participation Report</title>
@@ -131,8 +137,9 @@
         <br>
         <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
             <option selected disabled>Select an Event </option></select><br>
-
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <div class="col-left">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        </div>
         <h3>
             <center>Event Attendees Form</center>
         </h3>
