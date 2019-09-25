@@ -192,10 +192,14 @@
                 var timeInput = document.getElementById("time").value;
                 var statusInput = document.getElementById("status").value;
 
-                if (uidInput == "" && timeInput == "" && statusInput == "") {
+                if (uidInput == "" || timeInput == "" || statusInput == "") {
                     alert("Please complete the attendence form!");
                     return;
                 }
+                if (uidInput === parseInt(data, 10))
+                    alert("data is integer")
+                else
+                    alert("data is not an integer")
 
                 if (sessionStorage.getItem("currentEventId").toString() == "") {
                     alert("Please select an event");
