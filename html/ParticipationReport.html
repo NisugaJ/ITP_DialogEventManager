@@ -23,6 +23,10 @@
             /* additionally, equal width */
             padding: 1em;
         }
+        
+        .pull-right {
+            float: right;
+        }
     </style>
     <meta charset="utf-8">
     <title>Event Participation Report</title>
@@ -139,7 +143,7 @@
         <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
             <option selected disabled>Select an Event </option></select><br>
         <div class="col-left">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <input type="text" id="myInput" class="pull-right" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         </div>
         <h3>
             <center>Event Attendees Form</center>
@@ -196,10 +200,7 @@
                     alert("Please complete the attendence form!");
                     return;
                 }
-                if (uidInput === parseInt(data, 10))
-                    alert("data is integer")
-                else
-                    alert("data is not an integer")
+
 
                 if (sessionStorage.getItem("currentEventId").toString() == "") {
                     alert("Please select an event");
