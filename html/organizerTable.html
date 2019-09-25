@@ -31,6 +31,10 @@
     </script>
 
     <script src="../js/organizerTable.js"></script>
+    <script src="../js/base64Encodings.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -87,11 +91,27 @@
                 <td>Email</td>
                 <td>Login PWD</td>
                 <td></td>
-                <br><br>
+                <td></td>
             </tr>
         </table>
-
+        <button type="button" name="pdf" id="pdf" onclick="orgpdf()">report</button>
     </div>
+
+    <script>
+        function orgpdf() {
+            var MydocDefinition = {
+                info: {
+                    title: "Previous Payments",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
+
+                content: [
+                    "This my first Cliend-Side PDF"
+                ]
+            };
+            pdfMake.createPdf(MydocDefinition).download();
+        }
+    </script>
 
 </body>
 
