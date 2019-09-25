@@ -2,20 +2,6 @@ var databaseRef = firebase.database().ref('events/');
 
 var rowIndex = 1;
 
-function check_blank() {
-    var topic = document.getElementById('topic');
-    var stime = document.getElementById('start_time');
-    var eTime = document.getElementById('end_time');
-    var date = document.getElementById('date');
-    var location = document.getElementById('location');
-
-    if (topic == null || stime == null || eTime == null || date == null || location == null) {
-        alert("Please Enter All data");
-    } else {
-
-    }
-}
-
 databaseRef.once('value', function(snapshot) {
 
     var event = document.getElementById('event_table');
@@ -44,7 +30,7 @@ databaseRef.once('value', function(snapshot) {
         cellDescription.appendChild(document.createTextNode(childData.description));
         cellLocation.appendChild(document.createTextNode(childData.location));
 
-        editCell.innerHTML = '<a href="../html/registerEvent.html"><img src="../images/edit.png" width="25" height="25"></a>';
+        editCell.innerHTML = '<a href = "../html/registerEvent.html"><img src="../images/edit.png" width="25" height="25"></a>';
         deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25">';
 
         deleteCell.onclick = function() {
@@ -52,7 +38,7 @@ databaseRef.once('value', function(snapshot) {
         }
 
         editCell.onclick = function() {
-            check_blank_update(childKey, cellTItle, childData.date, childData.start_time, childData.end_time, childData.description, childData.location);
+            set_session(childKey, childData.event_topic, childData.date, childData.start_time, childData.end_time, childData.description, childData.location);
         }
 
         rowIndex = rowIndex + 1;
@@ -60,14 +46,21 @@ databaseRef.once('value', function(snapshot) {
 });
 
 function delete_event(id) {
-    alert("Event " + id + " is deleting now");
 
     firebase.database().ref().child('/events/' + id).remove();
 
+    alert("The user is deleted successfully");
     reload_page();
 }
 
-
 function reload_page() {
     window.location.reload();
+}
+
+function set_session(id, title, date, stime, etime, desc, loca) {
+
+    let event = [id, title, date, stime, etime, desc, loca];
+    let str = JSON.stringify(event);
+
+    sessionStorage.setItem("event", str);
 }
