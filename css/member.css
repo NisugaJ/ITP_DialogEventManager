@@ -1,43 +1,45 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-  }
-  
-  #addEvent,a{
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-  }
-  
-  .search-box {
-     position: absolute;
-     top:30%;
-     left:70%;
-     transform:translate(-50%,-50%);
-     background: #FFFFFF;
-     height:40px;
-     border-radius:40px;
-     padding:10px;
-  }
-  
-  .search-btn{
-    color:#000000;
-    float:right;
-    width:40px;
-    height:40px;
+}
+
+#addEvent,
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.search-box {
+    position: absolute;
+    top: 30%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.search-btn {
+    color: #000000;
+    float: right;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background:#999999;
-    display:flex;
+    background: #999999;
+    display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  
-  .search-txt{
-    border:none;
+}
+
+.search-txt {
+    border: none;
     background: none;
-    outline:none;
+    outline: none;
+
+
     float: left;
     padding: 0;
     color: black;
@@ -45,46 +47,54 @@
     transition: 0.4s;
     line-height: 40px;
     width: 240px;
-  }
-  
-  .row {
-    display: flex; /* equal height of the children */
-  }
-  
-  .col-right {
-    flex: 1; /* additionally, equal width */
-    
-    padding: 1em; 
-  }
-  
-  .col-left {
-    flex: 1.5; /* additionally, equal width */
-    
-    padding: 1em; 
-  }
-  table{
-    margin-left:50px;
+
+}
+
+.row {
+    display: flex;
+    /* equal height of the children */
+}
+
+.col-right {
+    flex: 1;
+    /* additionally, equal width */
+    padding: 1em;
+}
+
+.col-left {
+    flex: 1.5;
+    /* additionally, equal width */
+    padding: 1em;
+}
+
+table {
+    margin-left: 50px;
     width: 90%;
-  }
-  
-  table, th, td {
+}
+
+table,
+th,
+td {
+
     padding: 5px;
     border: 0px;
     margin-top: 30px;
     margin-left: 50px;
-    
-  }
-  th, td { 
-    text-align: left;  
-      
-  }
-  
-  .checked {
+
+}
+
+th,
+td {
+    text-align: left;
+}
+
+.checked {
     color: orange;
-  }
-  
-  .button {
-    background-color:orange;
+}
+
+.button {
+    background-color: orange;
+
     font-size: 12px;
     border: none;
     color: black;
@@ -94,5 +104,5 @@
     display: inline-block;
     margin: 4px 2px;
     cursor: pointer;
-  }
-  
+}
+

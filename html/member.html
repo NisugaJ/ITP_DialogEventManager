@@ -2,199 +2,370 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Member Details</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="../css/menubar.css">
-  <link rel="stylesheet" type="text/css" href="../css/member.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
+    <meta charset="utf-8">
+    <title>Member Details</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <style>
+        .tbl_users_list tr:not(:first-child) {
+            cursor: pointer;
+            transition: all .25s ease-in-out;
+        }
+        
+        .tbl_users_list tr:not(:first-child):hover {
+            background-color: #aeb6bf
+        }
+    </style>
+
 </head>
 
 <body>
-  <div id="menubar">
+    <div id="menubar">
 
-    <span id="dialog">Dialog Events <br> Admin Panel</span><br>
-    <img src="../images/dialogLogo.png" width="144px" height="162px">
+        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+        <img src="../images/dialogLogo.png" width="154px" height="206px">
+        <div id="admindetails_div">
+            <script>
+                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
+            </script>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
 
-    <ul>
-      <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-      <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-      <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
-      <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-      <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-      <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-      <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-      <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-    </ul>
-  </div>
-  <div id="actions">
-    <header id="header">
-      <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-      <input type="text" name="search" id="search">
-      <button id="logOut">
+            <label id="label_admin">Admin</label>
+        </div>
+        <ul>
+            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
+            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
+            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+        </ul>
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
         Sign Out
       </button>
-    </header>
-    <br>
+        </header>
+        <br>
 
-    <div class="row">
-      <div class="col-right">
-        <h3 style="margin-left: 150px; margin-top: 10px">Ratings</h3>
+        <div class="row">
+            <div class="col-right">
+                <h3 style="margin-left: 150px">Ratings</h3>
 
-        <table>
-          <tr>
-            <td>Attendance Rate</td>
-            <td><span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span></td>
-          </tr>
-          <tr>
-            <td>Collaboration Rate</td>
-            <td><span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span></td>
-          </tr>
-          <tr>
-            <td>Community Reputation</td>
-            <td>
-              <div class="row" >
-              <div><i class="fa fa-thumbs-up"> 10</i></div>
-              <div><i class="fa fa-thumbs-down" style="margin-left:10px "> 5</i></div>
-              
-              </div>
-            </td>
-            
-          </tr>
-
-        </table>
+                <table>
+                    <tr>
+                        <td>Attendance Rate</td>
+                        <td><span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Collaboration Rate</td>
+                        <td><span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Community Reputation</td>
+                        <td>
+                            <div class="row">
+                                <div><i class="fa fa-thumbs-up"> 10</i></div>
+                                <div><i class="fa fa-thumbs-down" style="margin-left:10px "> 5</i></div>
 
 
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button" style="margin-left: 1px">Generate Individual Progress Report</button>
+                        </td>
+
+                    </tr>
+
+
+                </table>
 
 
 
 
-        <h3 style="margin-left: 150px; margin-top: 60px">Member Details</h3>
-        <table>
-          <tr>
-            <td>Member Name</td>
-            <td><input type="text" name="mname"></td>
-          </tr>
-          <tr>
-            <td>Member ID</td>
-            <td><input type="text" name="mid"></td>
-          </tr>
-          <tr>
-            <td>Phone Number</td>
-            <td><input type="text" name="pno"></td>
-          </tr>
-          <tr>
-            <td>Email Address</td>
-            <td><input type="text" name="eadd"></td>
-          </tr>
 
-        </table>
-        <div style="margin-left: 60px; margin-top: 5px">
-          <button class="button">Clear</button>
-        </div><br>
-        <div style="margin-left: 60px">
-          <button class="button">Add Details</button>
-          <button class="button" style="margin-left: 6px">Remove Details</button>
-          <button class="button" style="margin-left: 6px">Update Details</button>
-          
-        </div>
-      </div>
 
-      <div class="col-left">
+                <h3 style="margin-left: 150px; margin-top: 40px">Member Details</h3>
+                <table>
+                    <tr>
+                        <td>Member ID</td>
+                        <td><input type="text" name="mid" id="id" required></td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><input type="text" name="pno" id="phone" pattern="^\d{10}$" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><input type="text" name="eadd" id="email" pattern="[^ @]*@[^ @]*" required></td>
+                    </tr>
 
-          <div class="search-box">
-              <input class="search-txt" type="text" name="" placeholder="search member">
-              <a class="search-btn" href="#">
-                <i class="fas fa-search"></i>
-              </a>
+                </table>
+                <div style="margin-left: 60px; margin-top: 1px">
+                    <button class="button" style="margin-left: 30px" onclick="clear_user();">Clear</button>
+
+                </div><br>
+                <div style="margin-left: 60px">
+                    <button class="button" style="margin-left:30px" onclick="save_user();">Add Details</button>
+                    <button class="button" style="margin-left: 30px" onclick="delete_user();">Remove Details</button>
+                    <button class="button" style="margin-left: 90px" onclick="update_user();">Update Details</button>
+
+                </div>
             </div>
 
-        <div style="margin-left: 1px; margin-top: 150px">
-        <table>
-          <tr>
-            <th style="border: 1px solid black">Member ID</th>
-            <th style="border: 1px solid black">Member Name</th>
-            <th style="border: 1px solid black">Phone Number</th>
-            <th style="border: 1px solid black">Email Address</th>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black">10000</td>
-            <td style="border: 1px solid black">Sujanthan Jayasinghe</td>
-            <td style="border: 1px solid black">0775165312</td>
-            <td style="border: 1px solid black">sujanthan.jayasinghe@gmail.com</td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black">10001</td>
-            <td style="border: 1px solid black">Dinara Peiris</td>
-            <td style="border: 1px solid black">0774567865</td>
-            <td style="border: 1px solid black">dinara.peiris@gmail.com</td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black">10002</td>
-            <td style="border: 1px solid black">Steffan Fernando</td>
-            <td style="border: 1px solid black">0777851544</td>
-            <td style="border: 1px solid black">steffan.fernando@gmail.com</td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black">10003</td>
-            <td style="border: 1px solid black">Rahulan Jayasekara</td>
-            <td style="border: 1px solid black">0778765165</td>
-            <td style="border: 1px solid black">rahulan.jayasekara@gmail.com</td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black">10004</td>
-            <td style="border: 1px solid black">Saranga Manamperi</td>
-            <td style="border: 1px solid black">0771985614</td>
-            <td style="border: 1px solid black">saranga.manamperi@gmail.com</td>
-          </tr>
-          <tr>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-              <td style="border: 1px solid black"></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-                <td style="border: 1px solid black"></td>
-              </tr>
-              <tr>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                  <td style="border: 1px solid black"></td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
-                    <td style="border: 1px solid black"></td>
-                  </tr>
+            <div class="col-left">
 
-        </table>
+                <div class="col-left">
+
+                    <div class="search-box">
+                        <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
+                        <a class="search-btn" href="#" onclick="search_user();return false;">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </div>
+                    <br> <br>
+                    <div style="margin-left: 1px; margin-top: 150px">
+                        <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
+                            <tr>
+                                <th style="border: 1px solid black">Member ID</th>
+                                <th style="border: 1px solid black">First Name</th>
+                                <th style="border: 1px solid black">Last Name</th>
+                                <th style="border: 1px solid black">Phone Number</th>
+                                <th style="border: 1px solid black">Email Address</th>
+                            </tr>
+
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
         </div>
 
+        <script>
+            var tblUsers = document.getElementById('tbl_users_list');
 
-      </div>
+            var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
+
+            var rowIndex = 1;
+
+            databaseRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    if (childKey >= 10000) {
+                        var childData = childSnapshot.val();
+
+                        var row = tblUsers.insertRow(rowIndex);
+                        var cell_Id = row.insertCell(0);
+                        var cell_fname = row.insertCell(1);
+                        var cell_lname = row.insertCell(2);
+                        var cell_phone = row.insertCell(3);
+                        var cell_email = row.insertCell(4);
+
+                        //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
 
+                        cell_Id.appendChild(document.createTextNode(childKey));
+                        cell_fname.appendChild(document.createTextNode(childData.firstName));
+                        cell_lname.appendChild(document.createTextNode(childData.lastName));
+                        cell_phone.appendChild(document.createTextNode(childData.mobile));
+                        cell_email.appendChild(document.createTextNode(childData.email));
+
+                        rowIndex = rowIndex + 1;
+
+                    }
+
+                });
+            });
+
+            function search_user() {
+
+                var rowIndex = 1;
+                var table = document.getElementById('tbl_users_list');
+                var rowCount = table.rows.length;
+                for (var i = rowIndex; i < rowCount; i++) {
+                    table.deleteRow(rowIndex);
+                }
+
+                databaseRef.orderByChild('firstName').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var childKey = childSnapshot.key;
+                        if (childKey >= 10000) {
+                            console.log("childKey", childKey);
+                            var childData = childSnapshot.val();
+
+                            var row = tblUsers.insertRow(rowIndex);
+                            var cell_Id = row.insertCell(0);
+                            var cell_fname = row.insertCell(1);
+                            var cell_lname = row.insertCell(2);
+                            var cell_phone = row.insertCell(3);
+                            var cell_email = row.insertCell(4);
+
+                            //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
 
-    </div>
+                            cell_Id.appendChild(document.createTextNode(childKey));
+                            cell_fname.appendChild(document.createTextNode(childData.firstName));
+                            cell_lname.appendChild(document.createTextNode(childData.lastName));
+                            cell_phone.appendChild(document.createTextNode(childData.mobile));
+                            cell_email.appendChild(document.createTextNode(childData.email));
+
+                            rowIndex = rowIndex + 1;
+
+                        }
+
+                    });
+                });
+            }
+
+            function clear_user() {
+                document.getElementById("id").value = "";
+                document.getElementById("fname").value = "";
+                document.getElementById("lname").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
+            }
 
 
-  </div>
+            function save_user() {
+                var user_id = document.getElementById('id').value;
+                var user_fname = document.getElementById('fname').value;
+                var user_lname = document.getElementById('lname').value;
+                var user_phone = document.getElementById('phone').value;
+                var user_email = document.getElementById('email').value;
+
+                var data = {
+                    firstName: user_fname,
+                    lastName: user_lname,
+                    mobile: user_phone,
+                    email: user_email
+                }
+
+                var updates = {};
+                updates['/users/' + user_id] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The user is created successfully');
+                reload_page();
+
+            }
+
+            function update_user() {
+                var user_id = document.getElementById('id').value;
+                var user_fname = document.getElementById('fname').value;
+                var user_lname = document.getElementById('lname').value;
+                var user_phone = document.getElementById('phone').value;
+                var user_email = document.getElementById('email').value;
+
+                var data = {
+                    firstName: user_fname,
+                    lastName: user_lname,
+                    mobile: user_phone,
+                    email: user_email
+                }
+                var updates = {};
+                updates['/users/' + user_id] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The user is updated successfully!');
+
+                reload_page();
+
+            }
+
+            function delete_user() {
+                var user_id = document.getElementById('id').value;
+                firebase.database().ref().child('/users/' + user_id).remove();
+                alert('The user is deleted successfully!');
+
+                reload_page();
+
+            }
+
+            function reload_page() {
+                window.location.reload();
+            }
+        </script>
+
+        <script>
+            setInterval(function() {
+                check();
+            }, 1000);
+
+            function check() {
+                var table = document.getElementById('tbl_users_list');
+
+                for (var i = 1; i < table.rows.length; i++) {
+                    table.rows[i].onclick = function() {
+                        document.getElementById("id").value = this.cells[0].innerHTML;
+                        document.getElementById("fname").value = this.cells[1].innerHTML;
+                        document.getElementById("lname").value = this.cells[2].innerHTML;
+                        document.getElementById("phone").value = this.cells[3].innerHTML;
+                        document.getElementById("email").value = this.cells[4].innerHTML;
+                    };
+                }
+            }
+        </script>
+
 
 </body>
 

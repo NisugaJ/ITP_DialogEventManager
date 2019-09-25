@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Add an Organizer</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../css/insertOrganizerTB.css">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <script src="../js/UpdateOrganizer.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        window.onload = function() {
+            get_session();
+
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:6ad2292be26320c9"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+    <div id="menubar">
+
+        <span id="dialog">Dialog Events<br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+        </ul>
+    </div>
+
+    <div id="actions">
+
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
+          Sign Out
+        </button>
+        </header>
+
+        <nav>
+            <h1 id="title">
+                <center>Update Organizer</center>
+            </h1>
+        </nav>
+        <br> <br> <br>
+        <form class="addEvent" method="post">
+            <label id="label_error" class="alert alert-danger" style="display: none"> </label>
+
+            <h4>Organizer_ID</h4>
+            <input type="text" name="title" class="inputs" id="id" style="display: none;"><br>
+
+            <h4>Name</h4>
+            <input type="text" name="Name" class="inputs" id="Name" required><br>
+
+            <h4>Position</h4>
+            <input type="text" name="Position" class="inputs" id="Position" required><br>
+
+            <h4>Mobile Number</h4>
+            <input type="Number" min="1" max="10" name="Ratings" class="inputs" id="Ratings" required><br>
+
+            <h4>Email</h4>
+            <input type="email" name="Gmail" class="inputs" id="Gmail" required><br>
+
+            <h4>password</h4>
+            <input type="password" name="Password" class="inputs" id="password" required><br>
+
+
+            <br>
+
+            <button type="button" name="button" class="button" onclick="update_event()">Update</button>
+            <a href="organizerTable.html"><button type="button" name="button" class="button">Cancel</button></a>
+
+
+        </form>
+    </div>
+
+    </section>
+</body>
+
+</html>

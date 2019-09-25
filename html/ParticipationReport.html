@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        
+        .col-left {
+            flex: 1.5;
+            /* additionally, equal width */
+            padding: 1em;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>Event Participation Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            if (!isUserAnAdmin()) {
+
+                window.location.href = "Login.html";
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script type="text/javascript" src="../js/ezcash.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+
+    <script type="text/javascript" src="../js/ParticipationReport.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        window.onload = function() {
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+                authDomain: "dialog-internal-event-manager.firebaseapp.com",
+                databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+                projectId: "dialog-internal-event-manager",
+                storageBucket: "dialog-internal-event-manager.appspot.com",
+                messagingSenderId: "168700423082",
+                appId: "1:168700423082:web:ecc1385d6e962236"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+
+
+
+            //to get current events from db
+            var dbRef = firebase.database().ref(); // Reference to realtime db
+            var eventRef = dbRef.child('events').orderByKey();
+
+            eventRef.once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var evenWt = childSnapshot.val();
+                    console.log(childKey + event);
+                    var eventTitle = childSnapshot.child("event_topic").val();
+                    // get reference to select element
+                    var sel = document.getElementById('event_list');
+                    // create new option element
+                    var opt = document.createElement('option');
+                    opt.appendChild(document.createTextNode(eventTitle));
+                    opt.value = childKey;
+                    sel.appendChild(opt);
+                    console.log(eventTitle);
+                    // ...
+                });
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="menubar">
+
+        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+        <img id="logo" src="../images/dialogLogo.png" width="154px" height="206px">
+
+        <div id="admindetails_div">
+            <script>
+                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
+            </script>
+            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+
+            <label id="label_admin">Admin</label>
+        </div>
+        <ul>
+            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
+            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
+            <li><a href="ParticipationReport.html"><i class="fas fa-home menuIcons"></i> Event Attendees</a></li>
+
+            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+
+        </ul>
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut" onclick="signOutUser()">
+
+      </button>
+        </header>
+        <br>
+        <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
+            <option selected disabled>Select an Event </option></select><br>
+        <div class="col-left">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        </div>
+        <h3>
+            <center>Event Attendees Form</center>
+        </h3>
+        <table>
+
+            <tr>
+                <td>Member ID</td>
+                <td> <input type="text" name="user_name" id="user_name" pattern="^\d{10}$" required></td>
+            </tr>
+            <tr>
+                <td> Arrival Time</td>
+                <td> <input type="time" name="time" id="time" required></td>
+            </tr>
+            <tr>
+                <td> Status</td>
+                <td> <input type="text" name="status" id="status" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required></td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2">
+                    <input type="button" class="button" value="Save Attendees" onclick="save_attendee();" />
+                    <input type="button" class="button" value="Update Attendee" onclick="save_attendee();" />
+                    <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <br>
+        <!--<h3>
+            <center>Attendees List</center>
+        </h3>
+
+        <table id="table_attendee_list">
+            <tr>
+                <td>#ID</td>
+                <td>Name</td>
+                <td>Arrival Time</td>
+                <td>Status</td>
+                <td>Location</td>
+            </tr>
+
+        </table>-->
+        <script>
+            function save_attendee() {
+                var uidInput = document.getElementById("user_name").value;
+                var timeInput = document.getElementById("time").value;
+                var statusInput = document.getElementById("status").value;
+
+                if (uidInput == "" && timeInput == "" && statusInput == "") {
+                    alert("Please complete the attendence form!");
+                    return;
+                }
+
+                if (sessionStorage.getItem("currentEventId").toString() == "") {
+                    alert("Please select an event");
+                    return;
+                } else {
+                    var currentEventId = sessionStorage.getItem("currentEventId").toString();
+                    alert(currentEventId);
+                }
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+
+                var AttendenceRef = firebase.database().ref().child('eventAttendees').child(currentEventId).child(user_name).set(arrival_time);
+                // var data = {
+                //     user_name: arrival_time,
+                // }
+
+                //var updates = {};
+                // updates['/eventAttendees/' + currentEventId] = data;
+                // firebase.database().ref().update(updates);
+
+                alert(AttendenceRef + 'The attendee added successfully');
+                reload_page();
+            }
+
+            function update_attendee() {
+                //var uid = firebase.database().ref().child('eventAttendees').push().key;
+                var user_name = document.getElementById('user_name').value;
+                var arrival_time = document.getElementById('time').value;
+                var status = document.getElementById('status').value;
+                var location = document.getElementById('location').value;
+
+
+                var data = {
+                    user_id: uid,
+                    user_name: user_name,
+                    arrival_time: arrival_time,
+                    status: status,
+                    location: location
+                }
+                var updates = {};
+                updates['/eventAttendees/   ' + uid] = data;
+                firebase.database().ref().update(updates);
+
+                alert('The attendee updated successfully');
+                reload_page();
+            }
+
+            function delete_attendee(attendee) {
+                if (attendee != null) {
+                    var user_name = firebase.database().ref().child('eventAttendees').push().key;
+                    firebase.database().ref().child('eventAttendees').child(sessionStorage.getItem("currentEventId") + '/' +
+                        attendee).remove();
+                    alert('The attendee deleted successfully');
+                }
+                reload_page();
+            }
+
+            function reload_page() {
+                window.location.reload();
+            }
+        </script>
+        <div class="row">
+            <div class="col-right">
+                <h3 style="margin-left: 150px; margin-top: 10px"> Participation Report</h3>
+
+
+                <div style="margin-left: 1px; margin-top: 150px">
+                    <table id="eventAttendees">
+                        <tr>
+                            <th style="border: 1px solid black">Member ID</th>
+                            <th style="border: 1px solid black">Member Name</th>
+                            <th style="border: 1px solid black">Mobile</th>
+                            <th style="border: 1px solid black">Arrival Status</th>
+                            <th style="border: 1px solid black">Arrival Time</th>
+
+
+                        </tr>
+                    </table>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    </div>
+    </div>
+
+    <script>
+        function makepdf() {
+            var MydocDefinition = {
+                info: {
+                    title: "Previous Payments",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
+
+                content: [
+                    "This my first Cliend-Side PDF"
+                ]
+            };
+            pdfMake.createPdf(MydocDefinition).download();
+        }
+    </script>
+
+</body>
+
+</html>
