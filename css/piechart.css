@@ -1,0 +1,27 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#piechart {
+    margin-right: 100px;
+    margin-top: 20px;
+    margin-bottom: 420px;
+    padding: 15px;
+    background-color: lightblue;
+    border-radius: 5px;
+    float: left;
+    font-size: 16px;
+}
+
+#piechart:hover {
+    box-shadow: 5px 5px 5px;
+}
+
+#piechart,
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}

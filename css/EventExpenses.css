@@ -1,0 +1,41 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+
+table{
+  margin-left:50px;
+  width: 90%;
+}
+
+table, th, td {
+  padding: 10px;
+  border: none;
+  border-collapse: collapse;
+}
+
+tr:nth-child(odd){
+  background-color: #dddddd;
+}
+#pieChart{
+  margin-right:100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: lightblue;
+  border-radius: 5px;
+  float: right;
+  font-size: 16px;
+}
+
+#pieChart:hover{
+  box-shadow: 5px 5px 5px;
+}
+#pieChart,a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
