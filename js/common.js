@@ -179,8 +179,33 @@ function showSnackBar(msg) {
 
 function getDateAndTime() {
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var month = (today.getMonth() + 1).toString();
+    var day = today.getDate().toString();
+    var hr = today.getHours().toString();;
+    var min = today.getMinutes().toString();
+    var sec = today.getSeconds().toString();
+
+    if (month.length == 1) {
+        month = "0" + month;
+    }
+    if (day.length == 1) {
+        day = "0" + day;
+    }
+    if (month.length == 1) {
+        month = "0" + month;
+    }
+    if (hr.length == 1) {
+        hr = "0" + hr;
+    }
+    if (min.length == 1) {
+        min = "0" + min;
+    }
+    if (sec.length == 1) {
+        sec = "0" + sec;
+    }
+
+    var date = today.getFullYear() + '-' + month + '-' + day;
+    var time = hr + ":" + min + ":" + sec;
     var dateTime = date + ' ' + time;
     return dateTime;
 }
