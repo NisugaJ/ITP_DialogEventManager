@@ -39,6 +39,7 @@
             }
         }
     </script>
+    <script src="../js/base64Encodings.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -163,7 +164,7 @@
                 <td colspan="2">
                     <input type="button" class="button" value="Save Attendees" onclick="save_attendee();" />
                     <input type="button" class="button" value="Update Attendee" onclick="save_attendee();" />
-                    <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />
+                    <!-- <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />-->
                     <input type="button" class="button" value="Clear" onclick="clear_user()" />
                 </td>
             </tr>
@@ -288,20 +289,6 @@
     </div>
 
     <script>
-        function makepdf() {
-            var MydocDefinition = {
-                info: {
-                    title: "Previous Payments",
-                    author: 'Dialog Internal Event Manager 2019',
-                },
-
-                content: [
-                    "This my first Cliend-Side PDF"
-                ]
-            };
-            pdfMake.createPdf(MydocDefinition).download();
-        }
-
         function clear_user() {
             document.getElementById("user_name").value = "";
             document.getElementById("time").value = "";

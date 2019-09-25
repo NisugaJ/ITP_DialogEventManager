@@ -33,6 +33,7 @@ function selectAttendees(eventID) {
                 var timeStampCell = row.insertCell(4).appendChild(document.createTextNode(timeStamp));
                 var editCell = row.insertCell(5);
                 var deleteCell = row.insertCell(6);
+                var reportCell = row.insertCell(7);
 
 
                 var fName = attendeesShot.child('firstName').val() + " ";
@@ -41,14 +42,18 @@ function selectAttendees(eventID) {
                 memberName.appendChild(document.createTextNode(fName + lName));
                 memberPhone.appendChild(document.createTextNode(attendeesShot.child('mobile').val()));
 
-                editCell.innerHTML = '<img src="../images/edit.png" width="25" height="25" onclick="edit_event()">';
-                deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25" onclick="delete_event()">';
+                editCell.innerHTML = '<img src="../images/edit.png" width="25" height="25">';
+                deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25">';
+                reportCell.innerHTML = '<img src="../images/report.png" width="25" height="25">';
 
                 deleteCell.onclick = function() {
                     delete_attendee(userkey);
                 }
                 editCell.onclick = function() {
                     check();
+                }
+                reportCell.onclick = function() {
+                    mypdf(userkey, (fName + lName), attendeesShot.child('mobile').val(), "ontime", timeStamp);
                 }
             });
         });
@@ -91,4 +96,47 @@ function myFunction() {
             }
         }
     }
+}
+
+function mypdf(id, name, mobile, status, time) {
+    var docDefinition = {
+        info: {
+            title: "Event Report",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                }, {
+                    image: getDialoLogoBASE64(),
+                    width: 60,
+                    height: 60 * 1.3376623376623376623376623376623
+                }],
+            },
+            {
+                text: "Event Report",
+                fontSize: 25,
+                margin: 20,
+                bold: true,
+            },
+            {
+                layout: 'lightHorizontalLines',
+                margin: 50,
+                table: {
+                    taxt: "Event Report",
+                    body: [
+                        [{ text: 'Member ID          ', bold: true, margin: 5, fontSize: 20 }, { text: id, margin: 5, fontSize: 20 }],
+                        [{ text: 'Member Name       ', bold: true, margin: 5, fontSize: 20 }, { text: name, margin: 5, fontSize: 20 }],
+                        [{ text: 'Mobile        ', bold: true, margin: 5, fontSize: 20 }, { text: mobile, margin: 5, fontSize: 20 }],
+                        [{ text: 'Arrival Status  ', bold: true, margin: 5, fontSize: 20 }, { text: status, margin: 5, fontSize: 20 }],
+                        [{ text: 'Arrival Time   ', bold: true, margin: 5, fontSize: 20 }, { text: time, margin: 5, fontSize: 20 }],
+                    ]
+                }
+            }
+        ]
+    };
+    pdfMake.createPdf(docDefinition).open();
 }
