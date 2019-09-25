@@ -35,7 +35,7 @@ function get_session() {
     let OrganizerNew = JSON.parse(original);
     console.log(OrganizerNew);
 
-    //document.getElementById('id').value = OrganizerNew[0];
+    document.getElementById('id').value = OrganizerNew[0];
     document.getElementById('Name').value = OrganizerNew[1];
     document.getElementById('Position').value = OrganizerNew[2];
     document.getElementById('Ratings').value = OrganizerNew[3];

@@ -21,6 +21,7 @@ databaseRef.once('value', function(snapshot) {
 
             var editCell = row.insertCell(5);
             var deleteCell = row.insertCell(6);
+            var reportCell = row.insertCell(7);
 
             //cellId.appendChild(document.createTextNode(childKey));
             cellname.appendChild(document.createTextNode(childData.Name));
@@ -29,8 +30,11 @@ databaseRef.once('value', function(snapshot) {
             cellgmail.appendChild(document.createTextNode(childData.gmail));
             cellpassword.appendChild(document.createTextNode(childData.password));
 
+            //image png
+
             editCell.innerHTML = '<a href = "../html/UpdateOrganizerNew.html"><img src="../images/edit.png" width="25" height="25">';
             deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25">';
+            reportCell.innerHTML = '<img src = "../images/report.png" width="25" height="25">';
 
             //call the Delete function 
             deleteCell.onclick = function() {
@@ -40,6 +44,11 @@ databaseRef.once('value', function(snapshot) {
             //call the update function
             editCell.onclick = function() {
                 setSessionForUpdate(childKey, childData.Name, childData.position, childData.Ratings, childData.gmail, childData.password);
+            }
+
+            //Generate Report function
+            reportCell.onclick = function() {
+                org_report(childKey, childData.Name, childData.position, childData.Ratings, childData.gmail, childData.password);
             }
 
             rowIndex = rowIndex + 1;
@@ -111,4 +120,50 @@ function searchFromTableByName() {
     }
 
 
+}
+
+//Genarate Report
+
+function org_report(id, name, Position, ratings, Gmail, Password) {
+    var docDefinition = {
+        info: {
+            title: "Event Report",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                }, {
+                    image: getDialoLogoBASE64(),
+                    width: 60,
+                    height: 60 * 1.3376623376623376623376623376623
+                }],
+            },
+            {
+                text: "Event Report",
+                fontSize: 25,
+                margin: 20,
+                bold: true,
+            },
+            {
+                layout: 'lightHorizontalLines',
+                margin: 50,
+                table: {
+                    taxt: "Event Report",
+                    body: [
+                        [{ text: 'Organizer ID          ', bold: true, margin: 5, fontSize: 20 }, { text: id, margin: 5, fontSize: 20 }],
+                        [{ text: 'Organizer Name          ', bold: true, margin: 5, fontSize: 20 }, { text: name, margin: 5, fontSize: 20 }],
+                        [{ text: 'Position       ', bold: true, margin: 5, fontSize: 20 }, { text: Position, margin: 5, fontSize: 20 }],
+                        [{ text: 'Mobile Number        ', bold: true, margin: 5, fontSize: 20 }, { text: ratings, margin: 5, fontSize: 20 }],
+                        [{ text: 'Email  ', bold: true, margin: 5, fontSize: 20 }, { text: Gmail, margin: 5, fontSize: 20 }],
+                        [{ text: 'Login PWD    ', bold: true, margin: 5, fontSize: 20 }, { text: Password, margin: 5, fontSize: 20 }]
+                    ]
+                }
+            }
+        ]
+    };
+    pdfMake.createPdf(docDefinition).open();
 }
