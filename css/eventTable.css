@@ -1,68 +1,40 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
+*{
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
 }
 
-#addEvent {
-    margin-right: 100px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: lightblue;
-    border-radius: 5px;
-    float: right;
-    font-size: 16px;
+#addEvent{
+  margin-right:100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: lightblue;
+  border-radius: 5px;
+  float: right;
+  font-size: 16px;
 }
 
-#addEvent:hover {
-    box-shadow: 5px 5px 5px;
+#addEvent:hover{
+  box-shadow: 5px 5px 5px;
 }
-
-#addEvent,
-a {
+#addEvent,a{
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
 
-table {
-    margin-left: 50px;
-    width: 90%;
+table{
+  margin-left:50px;
+  width: 90%;
 }
 
-table,
-th,
-td {
-    padding: 10px;
-    border: none;
-    border-collapse: collapse;
+table, th, td {
+  padding: 10px;
+  border: none;
+  border-collapse: collapse;
 }
 
-tr:nth-child(odd) {
-    background-color: #dddddd;
-}
-
-.delete {
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    background-color: red;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 20px;
-}
-
-.delete:hover {
-    box-shadow: 5px 5px 5px;
-}
-
-#id {
-    margin: 10px;
-    height: 30px;
-}
-
-.delete_id {
-    font-size: 24px;
-    margin: 10px;
+tr:nth-child(odd){
+  background-color: #dddddd;
 }
