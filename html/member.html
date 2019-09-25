@@ -2,10 +2,10 @@
 <html lang="en" dir="ltr">
 
 <head>
-
     <meta charset="utf-8">
     <title>Member Details</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,6 +13,12 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js"
+        integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js"
+        integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+    <script src="../js/base64Encodings.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -32,29 +38,24 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <style>
-        .tbl_users_list tr:not(:first-child) {
-            cursor: pointer;
-            transition: all .25s ease-in-out;
-        }
-        
-        .tbl_users_list tr:not(:first-child):hover {
-            background-color: #aeb6bf
-        }
-    </style>
+    
 
 </head>
 
 <body>
     <div id="menubar">
 
-        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
+        <span id="dialog">
+            <h2> <b>Dialog Internal Events </b></h2>
+            <h4>Admin Panel</h4>
+        </span><br>
         <img src="../images/dialogLogo.png" width="154px" height="206px">
         <div id="admindetails_div">
             <script>
                 var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
             </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
+            <label id="label_adminName">
+                <script>document.write(userName.toString())</script></label><br><br>
 
             <label id="label_admin">Admin</label>
         </div>
@@ -63,7 +64,8 @@
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
             <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a>
+            </li>
             <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
             <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
             <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
@@ -75,8 +77,8 @@
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
             <button id="logOut">
-        Sign Out
-      </button>
+                Sign Out
+            </button>
         </header>
         <br>
 
@@ -87,36 +89,17 @@
                 <table>
                     <tr>
                         <td>Attendance Rate</td>
-                        <td><span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span></td>
+                        <td>4/5</td>
                     </tr>
                     <tr>
                         <td>Collaboration Rate</td>
-                        <td><span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span></td>
+                        <td>3/5</td>
                     </tr>
-                    <tr>
-                        <td>Community Reputation</td>
-                        <td>
-                            <div class="row">
-                                <div><i class="fa fa-thumbs-up"> 10</i></div>
-                                <div><i class="fa fa-thumbs-down" style="margin-left:10px "> 5</i></div>
 
-
-                            </div>
-
-                        </td>
-
-                    </tr>
                     <tr>
                         <td>
-                            <button class="button" style="margin-left: 1px">Generate Individual Progress Report</button>
+                            <button class="button" style="margin-left: 1px" name="pdf" id="pdf"
+                                onclick="makepdf()">Generate Individual Progress Report</button>
                         </td>
 
                     </tr>
@@ -132,17 +115,28 @@
                 <h3 style="margin-left: 150px; margin-top: 40px">Member Details</h3>
                 <table>
                     <tr>
+                        <td>Event Title</td>
+                        <td><select onchange="selectAttendees(this.value);" id="event_list"
+                                class="form-control form-control-me" style="background-color: #d1ecf1">
+                                <option>Select the event </option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Member ID</td>
                         <td><input type="text" name="mid" id="id" required></td>
                     </tr>
                     <tr>
                         <td>First Name</td>
-                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}"
+                                title="Use Only Alphabets" required>
                         </td>
                     </tr>
                     <tr>
                         <td>Last Name</td>
-                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
+                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}"
+                                title="Use Only Alphabets" required>
                         </td>
                     </tr>
                     <tr>
@@ -169,61 +163,117 @@
 
             <div class="col-left">
 
-                <div class="col-left">
-
-                    <div class="search-box">
-                        <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
-                        <a class="search-btn" href="#" onclick="search_user();return false;">
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </div>
-                    <br> <br>
-                    <div style="margin-left: 1px; margin-top: 150px">
-                        <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
-                            <tr>
-                                <th style="border: 1px solid black">Member ID</th>
-                                <th style="border: 1px solid black">First Name</th>
-                                <th style="border: 1px solid black">Last Name</th>
-                                <th style="border: 1px solid black">Phone Number</th>
-                                <th style="border: 1px solid black">Email Address</th>
-                            </tr>
-
-                        </table>
-                    </div>
-
-
+                <div class="search-box">
+                    <input class="search-txt" type="text" id="search_text_box" name="" placeholder="search member">
+                    <a class="search-btn" href="#" onclick="search_user();return false;">
+                        <i class="fas fa-search"></i>
+                    </a>
                 </div>
+                <br> <br>
+                <div style="margin-left: 1px; margin-top: 150px">
+                    <table class="tbl_users_list" id="tbl_users_list" style="border: 1px solid black">
+                        <tr>
+                            <th style="border: 1px solid black">Event Title</th>
+                            <th style="border: 1px solid black">Member ID</th>
+                            <th style="border: 1px solid black">First Name</th>
+                            <th style="border: 1px solid black">Last Name</th>
+                            <th style="border: 1px solid black">Phone Number</th>
+                            <th style="border: 1px solid black">Email Address</th>
+                        </tr>
 
-
+                    </table>
+                </div>
 
 
             </div>
 
+
+
+
         </div>
 
-        <script>
-            var tblUsers = document.getElementById('tbl_users_list');
+    </div>
 
-            var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
+    <script>
+        var tblUsers = document.getElementById('tbl_users_list');
+
+        var databaseRef = firebase.database().ref('users/'); //access users table inside Firebase
+
+        var rowIndex = 1;
+
+        databaseRef.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                var childKey = childSnapshot.key;
+                if (childKey >= 10000) {
+                    var childData = childSnapshot.val();
+
+                    var row = tblUsers.insertRow(rowIndex);
+                    var cell_event = row.insertCell(0);
+                    var cell_Id = row.insertCell(1);
+                    var cell_fname = row.insertCell(2);
+                    var cell_lname = row.insertCell(3);
+                    var cell_phone = row.insertCell(4);
+                    var cell_email = row.insertCell(5);
+                    var editCell   = row.insertCell(6);
+                    var reportCell = row.insertCell(7);
+
+                    editCell.innerHTML   = '<img src = "../images/edit.png" width="25" height="25">';
+                    reportCell.innerHTML = '<img src = "../images/report.png" width="25" height="25">';
+
+                    
+                    //document.getElementById("tbl_users_list").style.border = "1px solid black";
+
+                    cell_event.appendChild(document.createTextNode(childData.eventTitle));
+                    cell_Id.appendChild(document.createTextNode(childKey));
+                    cell_fname.appendChild(document.createTextNode(childData.firstName));
+                    cell_lname.appendChild(document.createTextNode(childData.lastName));
+                    cell_phone.appendChild(document.createTextNode(childData.mobile));
+                    cell_email.appendChild(document.createTextNode(childData.email));
+
+                    editCell.onclick=function(){
+                        check();
+                    }
+
+                    reportCell.onclick=function(){
+                        current_report(childKey,childData.eventTitle,childData.firstName,childData.lastName,childData.mobile,childData.email);
+                    }
+
+                    rowIndex = rowIndex + 1;
+
+                }
+
+            });
+        });
+
+        //search
+        
+        function search_user() {
 
             var rowIndex = 1;
+            var table = document.getElementById('tbl_users_list');
+            var rowCount = table.rows.length;
+            for (var i = rowIndex; i < rowCount; i++) {
+                table.deleteRow(rowIndex);
+            }
 
-            databaseRef.once('value', function(snapshot) {
-                snapshot.forEach(function(childSnapshot) {
+            databaseRef.orderByChild('eventTitle').equalTo(document.getElementById("search_text_box").value).on("value", function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
                     var childKey = childSnapshot.key;
                     if (childKey >= 10000) {
+                        console.log("childKey", childKey);
                         var childData = childSnapshot.val();
 
                         var row = tblUsers.insertRow(rowIndex);
-                        var cell_Id = row.insertCell(0);
-                        var cell_fname = row.insertCell(1);
-                        var cell_lname = row.insertCell(2);
-                        var cell_phone = row.insertCell(3);
-                        var cell_email = row.insertCell(4);
+                        var cell_event = row.insertCell(0);
+                        var cell_Id = row.insertCell(1);
+                        var cell_fname = row.insertCell(2);
+                        var cell_lname = row.insertCell(3);
+                        var cell_phone = row.insertCell(4);
+                        var cell_email = row.insertCell(5);
 
                         //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
-
+                        cell_event.appendChild(document.createTextNode(childData.eventTitle));
                         cell_Id.appendChild(document.createTextNode(childKey));
                         cell_fname.appendChild(document.createTextNode(childData.firstName));
                         cell_lname.appendChild(document.createTextNode(childData.lastName));
@@ -236,136 +286,189 @@
 
                 });
             });
+        }
 
-            function search_user() {
+        function clear_user() {
+            document.getElementById("event_list").value = "";
+            document.getElementById("id").value = "";
+            document.getElementById("fname").value = "";
+            document.getElementById("lname").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("email").value = "";
+        }
 
-                var rowIndex = 1;
-                var table = document.getElementById('tbl_users_list');
-                var rowCount = table.rows.length;
-                for (var i = rowIndex; i < rowCount; i++) {
-                    table.deleteRow(rowIndex);
+
+        function save_user() {
+            var user_event = document.getElementById("event_list").value;
+            var user_id = document.getElementById('id').value;
+            var user_fname = document.getElementById('fname').value;
+            var user_lname = document.getElementById('lname').value;
+            var user_phone = document.getElementById('phone').value;
+            var user_email = document.getElementById('email').value;
+
+            var data = {
+                eventTitle: user_event,
+                firstName: user_fname,
+                lastName: user_lname,
+                mobile: user_phone,
+                email: user_email
+            }
+
+            var updates = {};
+            updates['/users/' + user_id] = data;
+            firebase.database().ref().update(updates);
+
+            alert('The user is created successfully');
+            reload_page();
+
+        }
+
+        function update_user() {
+            var user_event = document.getElementById("event_list").value;
+            var user_id = document.getElementById('id').value;
+            var user_fname = document.getElementById('fname').value;
+            var user_lname = document.getElementById('lname').value;
+            var user_phone = document.getElementById('phone').value;
+            var user_email = document.getElementById('email').value;
+
+            var data = {
+                eventTitle: user_event,
+                firstName: user_fname,
+                lastName: user_lname,
+                mobile: user_phone,
+                email: user_email
+            }
+            var updates = {};
+            updates['/users/' + user_id] = data;
+            firebase.database().ref().update(updates);
+
+            alert('The user is updated successfully!');
+
+            reload_page();
+
+        }
+
+        function delete_user() {
+            var user_id = document.getElementById('id').value;
+            firebase.database().ref().child('/users/' + user_id).remove();
+            alert('The user is deleted successfully!');
+
+            reload_page();
+
+        }
+
+        function reload_page() {
+            window.location.reload();
+        }
+    </script>
+
+    <script>
+        setInterval(function () {
+            check();
+        }, 1000);
+
+        function check() {
+            var table = document.getElementById('tbl_users_list');
+
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+                    document.getElementById("event_list").value = this.cells[0].innerHTML;
+                    document.getElementById("id").value = this.cells[1].innerHTML;
+                    document.getElementById("fname").value = this.cells[2].innerHTML;
+                    document.getElementById("lname").value = this.cells[3].innerHTML;
+                    document.getElementById("phone").value = this.cells[4].innerHTML;
+                    document.getElementById("email").value = this.cells[5].innerHTML;
+                };
+            }
+        }
+        //to get current events from db
+        var dbRef = firebase.database().ref(); // Reference to realtime db
+        var eventRef = dbRef.child('events').orderByKey();
+
+        eventRef.once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                var childKey = childSnapshot.key;
+                var evenWt = childSnapshot.val();
+                console.log(childKey + event);
+                var eventTitle = childSnapshot.child("event_topic").val();
+                // get reference to select element
+                var sel = document.getElementById('event_list');
+                // create new option element
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode(eventTitle));
+                opt.value = evenWt.event_topic;
+                sel.appendChild(opt);
+                console.log(eventTitle);
+
+            });
+        });
+    </script>
+
+
+    <script>
+        function current_report(id, title, fname, lname, phone, email) {
+    var docDefinition = {
+        info: {
+            title: "Event Report",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                // }, {
+                //     image: getDialoLogoBASE64(),
+                //     width: 60,
+                //     height: 60 * 1.3376623376623376623376623376623
+                // 
                 }
-
-                databaseRef.orderByChild('firstName').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                        var childKey = childSnapshot.key;
-                        if (childKey >= 10000) {
-                            console.log("childKey", childKey);
-                            var childData = childSnapshot.val();
-
-                            var row = tblUsers.insertRow(rowIndex);
-                            var cell_Id = row.insertCell(0);
-                            var cell_fname = row.insertCell(1);
-                            var cell_lname = row.insertCell(2);
-                            var cell_phone = row.insertCell(3);
-                            var cell_email = row.insertCell(4);
-
-                            //document.getElementById("tbl_users_list").style.border = "1px solid black";
-
-
-                            cell_Id.appendChild(document.createTextNode(childKey));
-                            cell_fname.appendChild(document.createTextNode(childData.firstName));
-                            cell_lname.appendChild(document.createTextNode(childData.lastName));
-                            cell_phone.appendChild(document.createTextNode(childData.mobile));
-                            cell_email.appendChild(document.createTextNode(childData.email));
-
-                            rowIndex = rowIndex + 1;
-
-                        }
-
-                    });
-                });
-            }
-
-            function clear_user() {
-                document.getElementById("id").value = "";
-                document.getElementById("fname").value = "";
-                document.getElementById("lname").value = "";
-                document.getElementById("phone").value = "";
-                document.getElementById("email").value = "";
-            }
-
-
-            function save_user() {
-                var user_id = document.getElementById('id').value;
-                var user_fname = document.getElementById('fname').value;
-                var user_lname = document.getElementById('lname').value;
-                var user_phone = document.getElementById('phone').value;
-                var user_email = document.getElementById('email').value;
-
-                var data = {
-                    firstName: user_fname,
-                    lastName: user_lname,
-                    mobile: user_phone,
-                    email: user_email
-                }
-
-                var updates = {};
-                updates['/users/' + user_id] = data;
-                firebase.database().ref().update(updates);
-
-                alert('The user is created successfully');
-                reload_page();
-
-            }
-
-            function update_user() {
-                var user_id = document.getElementById('id').value;
-                var user_fname = document.getElementById('fname').value;
-                var user_lname = document.getElementById('lname').value;
-                var user_phone = document.getElementById('phone').value;
-                var user_email = document.getElementById('email').value;
-
-                var data = {
-                    firstName: user_fname,
-                    lastName: user_lname,
-                    mobile: user_phone,
-                    email: user_email
-                }
-                var updates = {};
-                updates['/users/' + user_id] = data;
-                firebase.database().ref().update(updates);
-
-                alert('The user is updated successfully!');
-
-                reload_page();
-
-            }
-
-            function delete_user() {
-                var user_id = document.getElementById('id').value;
-                firebase.database().ref().child('/users/' + user_id).remove();
-                alert('The user is deleted successfully!');
-
-                reload_page();
-
-            }
-
-            function reload_page() {
-                window.location.reload();
-            }
-        </script>
-
-        <script>
-            setInterval(function() {
-                check();
-            }, 1000);
-
-            function check() {
-                var table = document.getElementById('tbl_users_list');
-
-                for (var i = 1; i < table.rows.length; i++) {
-                    table.rows[i].onclick = function() {
-                        document.getElementById("id").value = this.cells[0].innerHTML;
-                        document.getElementById("fname").value = this.cells[1].innerHTML;
-                        document.getElementById("lname").value = this.cells[2].innerHTML;
-                        document.getElementById("phone").value = this.cells[3].innerHTML;
-                        document.getElementById("email").value = this.cells[4].innerHTML;
-                    };
+                ],
+            },
+            {
+                text: "Event Report",
+                fontSize: 25,
+                margin: 20,
+                bold: true,
+            },
+            {
+                layout: 'lightHorizontalLines',
+                margin: 50,
+                table: {
+                    taxt: "Event Report",
+                    body: [
+                        [{ text: 'Event Title          ', bold: true, margin: 5, fontSize: 20 }, { text: id, margin: 5, fontSize: 20 }],
+                        [{ text: 'Member ID            ', bold: true, margin: 5, fontSize: 20 }, { text: title, margin: 5, fontSize: 20 }],
+                        [{ text: 'First Name           ', bold: true, margin: 5, fontSize: 20 }, { text: fname, margin: 5, fontSize: 20 }],
+                        [{ text: 'Last Name            ', bold: true, margin: 5, fontSize: 20 }, { text: lname, margin: 5, fontSize: 20 }],
+                        [{ text: 'Phone Number         ', bold: true, margin: 5, fontSize: 20 }, { text: phone, margin: 5, fontSize: 20 }],
+                        [{ text: 'Email Address        ', bold: true, margin: 5, fontSize: 20 }, { text: email, margin: 5, fontSize: 20 }]
+                        
+                    ]
                 }
             }
-        </script>
+        ]
+    };
+    pdfMake.createPdf(docDefinition).open();
+}
+    </script>
 
+<script>
+    function makepdf() {
+        var MydocDefinition = {
+            info: {
+                title: "Previous Payments",
+                author: 'Dialog Internal Event Manager 2019',
+            },
+
+            content: [
+                "This my first Cliend-Side PDF"
+            ]
+        };
+        pdfMake.createPdf(MydocDefinition).download();
+    }
+</script>
 
 </body>
 
