@@ -146,6 +146,14 @@ function saveEzCashPayment() {
 
 //selects paymnent details of a given event
 function selectEzcashPaymentByID(paymentID) {
+    //deactivates the active buttons in event-list div
+    content = document.getElementById("event_list").children;
+    for (i = 0; i < content.length; i++) {
+        content[i].className = "list-group-item";
+    } //
+
+    //makes the selected button as active
+    document.getElementById(paymentID).className = "list-group-item active";
     document.getElementById('deleteAll').value = paymentID;
     console.log("Payment ID is" + paymentID);
     var dbRef = firebase.database().ref(); // Reference to realtime db
@@ -229,4 +237,10 @@ function deletePaymentsBulk() {
         }
     }
     window.location.reload();
+}
+
+//to search payments by event name
+function searchPaymentByEventName(search_val) {
+
+
 }
