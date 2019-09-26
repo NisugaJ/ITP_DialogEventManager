@@ -181,7 +181,7 @@ function makepdf() {
             {
                 layout: 'lightHorizontalLines',
                 marginTop: 20,
-                marginLeft: 100,
+                marginLeft: 10,
                 fontSize: 13,
 
                 table: {
