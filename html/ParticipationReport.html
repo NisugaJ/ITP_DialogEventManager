@@ -23,6 +23,19 @@
             /* additionally, equal width */
             padding: 1em;
         }
+        
+        .pull-right {
+            float: right;
+            width: 20%;
+            position: relative;
+            display: flex;
+            border: 3px solid #00B4CC;
+            padding: 10px;
+            height: 20px;
+            border-radius: 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
     </style>
     <meta charset="utf-8">
     <title>Event Participation Report</title>
@@ -39,6 +52,7 @@
             }
         }
     </script>
+    <script src="../js/base64Encodings.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -47,7 +61,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/ParticipationReport.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -138,7 +152,7 @@
         <select onchange="selectAttendees(this.value);" id="event_list" class="search-txt" style="background-color: #d1ecf1">
             <option selected disabled>Select an Event </option></select><br>
         <div class="col-left">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <input type="text" id="myInput" class="pull-right" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         </div>
         <h3>
             <center>Event Attendees Form</center>
@@ -158,12 +172,15 @@
                 <td> <input type="text" name="status" id="status" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required></td>
             </tr>
 
-
+            <br>
+            <br>
             <tr>
                 <td colspan="2">
                     <input type="button" class="button" value="Save Attendees" onclick="save_attendee();" />
                     <input type="button" class="button" value="Update Attendee" onclick="save_attendee();" />
-                    <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />
+                    <!-- <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />-->
+                    <input type="button" class="button" value="Clear" onclick="clear_user()" />
+                    <input type="button" class="button" value="Generate Report" onclick="makepdf()" />
                 </td>
             </tr>
         </table>
@@ -190,10 +207,11 @@
                 var timeInput = document.getElementById("time").value;
                 var statusInput = document.getElementById("status").value;
 
-                if (uidInput == "" && timeInput == "" && statusInput == "") {
+                if (uidInput == "" || timeInput == "" || statusInput == "") {
                     alert("Please complete the attendence form!");
                     return;
                 }
+
 
                 if (sessionStorage.getItem("currentEventId").toString() == "") {
                     alert("Please select an event");
@@ -257,17 +275,23 @@
         </script>
         <div class="row">
             <div class="col-right">
-                <h3 style="margin-left: 150px; margin-top: 10px"> Participation Report</h3>
 
 
-                <div style="margin-left: 1px; margin-top: 150px">
+
+                <div style="margin-left: 1px; margin-top: 20px">
                     <table id="eventAttendees">
+                        <caption>
+                            <h3> Participation Report</h3>
+                        </caption>
                         <tr>
                             <th style="border: 1px solid black">Member ID</th>
                             <th style="border: 1px solid black">Member Name</th>
                             <th style="border: 1px solid black">Mobile</th>
                             <th style="border: 1px solid black">Arrival Status</th>
                             <th style="border: 1px solid black">Arrival Time</th>
+                            <th style="border: 1px solid black" bgcolor="lightgreen"></th>
+                            <th style=" border: 1px solid black " bgcolor="red "></th>
+                            <th style="border: 1px solid black " bgcolor="yellow "></th>
 
 
                         </tr>
@@ -287,18 +311,12 @@
     </div>
 
     <script>
-        function makepdf() {
-            var MydocDefinition = {
-                info: {
-                    title: "Previous Payments",
-                    author: 'Dialog Internal Event Manager 2019',
-                },
+        function clear_user() {
+            document.getElementById("user_name").value = " ";
+            document.getElementById("time").value = " ";
+            document.getElementById("status").value = " ";
 
-                content: [
-                    "This my first Cliend-Side PDF"
-                ]
-            };
-            pdfMake.createPdf(MydocDefinition).download();
+
         }
     </script>
 
