@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Add a program</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -9,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
 
@@ -17,92 +16,86 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
 
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-            authDomain: "dialog-internal-event-manager.firebaseapp.com",
-            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-            projectId: "dialog-internal-event-manager",
-            storageBucket: "dialog-internal-event-manager.appspot.com",
-            messagingSenderId: "168700423082",
-            appId: "1:168700423082:web:6ad2292be26320c9"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
-
+<script> var firebaseConfig = {
+        apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+        authDomain: "dialog-internal-event-manager.firebaseapp.com",
+        databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+        projectId: "dialog-internal-event-manager",
+        storageBucket: "dialog-internal-event-manager.appspot.com",
+        messagingSenderId: "168700423082",
+        appId: "1:168700423082:web:6ad2292be26320c9"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+	
+	//window.onload = function() {}
+	</script>
+    
     <script src="../js/registerPrograms.js"></script>
 
-</head>
-
-<body>
+  </head>
+  <body>
 
     <div id="menubar">
 
-        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
-        <img id="logo" src="../images/dialogLogo.png" width="154px" height="206px">
+    <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+    <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-        <div id="admindetails_div">
-            <script>
-                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
-            </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br>
-            <label id="label_admin">Admin</label>
-        </div>
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
-            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
+          <li><a href = "dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+          <li><a href = "eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+          <li><a href = "admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+          <li><a href = "organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+          <li><a href = "member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+          <li><a href = "eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+          <li><a href = "report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+          <li><a href = "programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
 
     <div id="actions">
 
-        <header id="header">
-            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-            <input type="text" name="search" id="search">
-            <button id="logOut">
+       <header id="header">
+        <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+        <input type="text" name="search" id="search">
+        <button id="logOut">
           Sign Out
         </button>
-        </header>
+      </header>
 
-        <nav>
-            <h1 id="title">
-                <center>Add a Program</center>
-            </h1>
-        </nav>
+        <nav><h1 id="title"><center>Add a Program</center></h1></nav>
 
-        <form class="addEvent" method="post">
+          <form class="addEvent" method="post">
+			
+		<select onchange="selectAttendees(this.value);" id="event_list" class="form-control form-control-me" style="background-color: #d1ecf1">
+              <option  >Select an ongoing Training </option>
+             
+            </select>
+		  
+		  <h4>Program ID</h4>
+          <input type="text" name="Programid" class="inputs"  id="pid" onclick = "get_session();" /><br>
 
-            <h4>Program ID</h4>
-            <input type="text" name="Programid" class="inputs" id="pid"><br>
+          <h4>Program</h4>
+          <input type="text" name="Program" class="inputs"  id="pr" required / ><br>
 
-            <h4>Program</h4>
-            <input type="text" name="Program" class="inputs" id="pr"><br>
+          <h4>Start Time</h4>
+          <input type="time" name="startTime" class="inputs" id="start_time" required /><br>
 
-            <h4>Start Time</h4>
-            <input type="time" name="startTime" class="inputs" id="start_time"><br>
+          <h4>End Time</h4>
+          <input type="time" name="endTime" class="inputs" id="end_time" required /><br>
+		  
+		  
 
-            <h4>End Time</h4>
-            <input type="time" name="endTime" class="inputs" id="end_time"><br>
+          
+          <br>
 
-
-            <br>
-
-            <input type="submit" name="create" value="Create" class="submit" onclick="save_event()">
-            <input type="submit" name="update" value="update" class="submit" onclick="update_event()">
-            <button type="button" name="button" class="button" onclick="reload_page()">Cancel</button>
+          <input type="submit" name="create" value="Create" class="submit" onclick="save_event()" onclick="remove_Item()">
+		  <input type="submit" name="update" value="update" class="submit" onclick="update_event()">
+          <button type="button" name="button" class="button" onclick="reload_page()">Cancel</button>
 
         </form>
     </div>
 
     </section>
-</body>
-
+  </body>
 </html>

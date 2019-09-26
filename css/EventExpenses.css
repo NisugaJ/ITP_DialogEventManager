@@ -8,6 +8,7 @@
 table{
   margin-left:50px;
   width: 90%;
+  margin-top: 100px;
 }
 
 table, th, td {
@@ -84,4 +85,36 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.reportf{
+  margin-right:100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: lightblue;
+  border-radius: 5px;
+  float: right;
+  font-size: 16px;
+}
 
+.reportf:hover{
+  box-shadow: 5px 5px 5px;
+}
+.reportf,a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.pull-right{
+   float: right;
+   width: 20%;
+   position: relative;
+   display: flex;
+   border: 3px solid #00B4CC;
+   padding: 5px;
+   height: 15px;
+   border-radius: 5px;
+   outline: none;
+   color: #9DBFAF;
+   margin-right: 15px;
+}
