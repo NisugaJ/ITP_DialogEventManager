@@ -10,19 +10,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/TextArea.css">
+	<link rel="stylesheet" href="../css/poll_table.css">
 
-    <script src="../organizerJS/angular.min.js"></script>
-    <script src="../organizerJS/angular-route.min.js"></script>
-    <script src="../organizerJS/angularJSChangeWindow.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../organizerJS/searchpoll.js"></script>
-
-    <!-- firebase -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+	
+	<!-- firebase -->
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -45,8 +40,10 @@
     <script>
         window.onload = function() {
             if (!isUserAnOrganizer()) {
+                alert("You are unorthorized for this content");
                 window.location.href = "Login.html";
             }
+            initializeFirebaseProject();
 
         }
     </script>
@@ -87,6 +84,16 @@
             margin-right: 20px;
         }
     </style>
+	
+	<script src="../organizerJS/QuestionFirebase.js"></script>
+    <script src="../organizerJS/angular.min.js"></script>
+    <script src="../organizerJS/angular-route.min.js"></script>
+    <script src="../organizerJS/angularJSChangeWindow.js"></script>
+	<script src="../js/common.js"></script>
+    <script src="../organizerJS/searchpoll.js"></script>
+   
+
+	
 </head>
 
 <body ng-controller="MainCtrl">
@@ -159,8 +166,17 @@
                     <!--text area-->
                     <li class="w3-padding-16">
                         <div class="col-75">
-                            <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
+							<table id="QueationForm" align="center" width="100%">
+                           
+							<!--<td width="35%" >Poll_Id</td>-->
+							<td width="88%">Questions</td>
+							<td style="font-size:10px" width="3%">Like</td>
+							<td style="font-size:10px" width="3%">Dislike</td>
+							<td style="font-size:10px" width="3%">Reply</td>
+							<td style="font-size:10px" width="3%">Delete</td>
 
+						</tr>
+					</table>		
                         </div>
                     </li>
                 </ul>
@@ -175,8 +191,8 @@
                     <li class="w3-padding-52bottom">
                         <div class="col-75">
                             <form>
-                                <textarea id="subject" name="subject" placeholder="Write something.." style="height:150px"></textarea>
-                                <input type="submit" value="Publish">
+                                <div id="subject"><textarea id="quesPub" name="subject" placeholder="Write something.." style="height:150px"></textarea></div>
+                                <input type="submit" value="Publish" onclick="check_blank_create()">
                             </form>
                         </div>
                     </li>

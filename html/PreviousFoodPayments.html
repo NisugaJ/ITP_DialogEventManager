@@ -132,11 +132,7 @@
                 <div id="content">
 
 
-                    <form class="form-inline mt-2 mt-md-0" style="display: flex;">
-                        <input style="float: left" class="form-control mr-sm-4" type="text" placeholder="Search by event name" aria-label="Search" autocomplete="off">
-                        <button style="flex-grow: 1; " class="btn btn-outline-dark my-2 my-sm-4" type="submit">Search</button>
-                        <button style="width: 100%;" type="button" class="btn btn-outline-primary">Load All Payments</button>
-                    </form> <br>
+
 
                     <!-- <select class="form-control" id="event_list" onchange="selectEzcashPaymentByID(this.value);">
                         <option value="" disabled selected class="list-group-item">Select an previous payment</option>
@@ -160,6 +156,10 @@
           event</button>
                 <button onclick="window.location.href='EzcashFoodPayment.html'" id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block mybtn">Go Back</button>
                 <br>
+                <form class="form-inline mt-2 mt-md-0" style="display: flex;">
+                    <input style="float: left" class="form-control mr-sm-4" type="text" placeholder="Search by phone number" aria-label="Search" autocomplete="off">
+                    <a style="flex-grow: 1; " id="searchMobile" class="btn btn-outline-dark my-2 my-sm-4" onkeyup="searchFromTableByMobile();">Search</a>
+                </form>
                 <table id="previous_payments_table">
                     <tr id="header_row">
                         <th>Phone Number</th>
@@ -174,7 +174,7 @@
         <div id="footer">
 
         </div>
-        <div id="snackbar">Some text some message..</div>
+        <div id="snackbar"></div>
 
     </div>
 

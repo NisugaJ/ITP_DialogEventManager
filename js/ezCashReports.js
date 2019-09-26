@@ -25,19 +25,27 @@ function makePDF() {
     console.log("dateTimeARR", dateTimeARR);
 
 
-    //reading payment details of the selected payment from the dynamic table
-    var paymentTableData = new Array();
+    //reading payment details of the selected payment from the  table
+    var paymentTableData = [];
 
     $('#previous_payments_table tr').each(function(row, tr) {
-        paymentTableData[row] = {
-            "Phone Number": $(tr).find('td:eq(0)').text(),
-            "Amount": $(tr).find('td:eq(1)').text(),
-            "Payment Status": $(tr).find('td:eq(2)').text()
-        }
+        paymentTableData[row] = [
+            $(tr).find('td:eq(0)').text(),
+            $(tr).find('td:eq(1)').text(),
+            $(tr).find('td:eq(2)').text()
+        ]
     });
-    paymentTableData.shift(); // first row is the table header - so remove
+
+    paymentTableData[0] = ['Phone Number', 'Amount', 'Payment Status'];
+    // paymentTableData.shift(); // first row is the table header - so remove
     console.log(paymentTableData);
 
+    // var rows = [];
+    // //rows.push(['Nr.', 'Name', 'Beschreibung']);
+
+    // for (var i of paymentTableData.length) {
+    //     rows.push(['#.' + i, 'xx', 'ww']);
+    // }
     //defining PDF outcome
     var docDefinition = {
         info: {
@@ -68,14 +76,12 @@ function makePDF() {
 
             {
                 layout: 'lightHorizontalLines',
-                margin: 50,
-                table: {
-                    taxt: "Event Report",
-                    body: [
-                        [{ text: 'Phone Number      ', bold: true, margin: 5, fontSize: 15 }, { text: "Amount", bold: true, margin: 5, fontSize: 15 }, { bold: true, text: "Payment Status ", margin: 5, fontSize: 15 }],
+                marginTop: 20,
+                marginLeft: 100,
+                fontSize: 13,
 
-                        [{ text: '078520            ', margin: 5, fontSize: 12 }, { text: "254", margin: 5, fontSize: 12 }, { text: "Paid", margin: 5, fontSize: 12 }],
-                    ]
+                table: {
+                    body: paymentTableData
                 }
             }
         ]
@@ -84,3 +90,9 @@ function makePDF() {
     pdfMake.createPdf(docDefinition).open();
 
 }
+
+
+
+// [{ text: 'Phone Number      ', bold: true, margin: 5, fontSize: 15 }, { text: "Amount", bold: true, margin: 5, fontSize: 15 }, { bold: true, text: "Payment Status ", margin: 5, fontSize: 15 }],
+
+// [{ text: '078520            ', margin: 5, fontSize: 12 }, { text: "254", margin: 5, fontSize: 12 }, { text: "Paid", margin: 5, fontSize: 12 }],

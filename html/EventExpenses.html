@@ -1,114 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Event Expenses Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
-	<link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
-  <!-- <script src="../js/base64Encodings.js"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" type="text/css" href="../css/EventExpenses.css">
+    <!-- <script src="../js/base64Encodings.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
-  <!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#config-web-app -->
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-      authDomain: "dialog-internal-event-manager.firebaseapp.com",
-      databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-      projectId: "dialog-internal-event-manager",
-      storageBucket: "dialog-internal-event-manager.appspot.com",
-      messagingSenderId: "168700423082",
-      appId: "1:168700423082:web:6ad2292be26320c9"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
-  <script src="../js/eventExpenses.js"></script>
-  </head>
-  <body>
+    <script src="../js/eventExpenses.js"></script>
+</head>
+
+<body>
     <div id="menubar">
 
-    	<span id="dialog">Dialog Events <br> Admin Panel</span><br>
-		<img src="../images/dialogLogo.png" width="144px" height="162px">
-		 
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
         <ul>
-          <li><a href = "dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-          <li><a href = "eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-          <li><a href = "admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
-          <li><a href = "organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-          <li><a href = "member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-          <li><a href = "eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-          <li><a href = "report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-          <li><a href = "calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
-      </div>
-      <div id="actions">
-      <header id="header">
-      	<nav><i class="fas fa-search" id="searchIcon"></i></nav>
-        <input type="text" name="search" id="search">
-        <button id="logOut">
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search">
+            <button id="logOut">
         	Sign Out
         </button>
-      </header><h4>
-       
-			<br><br>
-        <nav><h1 id="title"><center> Event Expenses</center></h1></nav>
-        
-        <br>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-        <table id ="event_expenses_table">
-          <tr>
-            <th>EventName</th>
-            <th>Expense</th>
-            <th>Amount(Rs)</th>
-			      <th>Status</th>
-            <th></th>
-            <th></th>
-          </tr>
-          
-        </table>
-		<br><br>
-		 <button type="button" name="update" id="update" onclick="remove_Item()">
+        </header>
+        <h4>
+
+            <br><br>
+            <nav>
+                <h1 id="title">
+                    <center> Event Expenses</center>
+                </h1>
+            </nav>
+
+            <br>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <table id="event_expenses_table">
+                <tr>
+                    <th>EventName</th>
+                    <th>Expense</th>
+                    <th>Amount(Rs)</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+            </table>
+            <br><br>
+            <button type="button" name="update" id="update" onclick="remove_Item()">
           <a href="update.html">Create</a>
           </button>
-          <br><br>
-          <button type="button" name="report" id="report">
+            <br><br>
+            <button type="button" name="report" id="report">
           <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />
         </button>
-      </div>
-      <script>
-      function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("event_expenses_table");
-  tr = table.getElementsByTagName("tr");
+    </div>
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("event_expenses_table");
+            tr = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-      </script>
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 
 
-  </body>
+</body>
+
 </html>
