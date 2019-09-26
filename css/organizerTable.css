@@ -9,7 +9,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: lawngreen;
+    background-color: #282639;
     border-radius: 5px;
     float: right;
     font-size: 16px;
@@ -35,7 +35,7 @@ table,
 th,
 td {
     padding: 10px;
-    border: none;
+    border: 1px solid black;
     border-collapse: collapse;
 }
 
@@ -92,7 +92,7 @@ tr:nth-child(odd) {
     color: white;
     font-weight: bold;
     padding: 10px;
-    background-color: rgb(26, 248, 45);
+    background-color: #282639;
     border-radius: 5px;
     font-size: 16px;
     margin: 20px;
@@ -102,11 +102,11 @@ tr:nth-child(odd) {
 #Update1 {
     background-color: white;
     color: black;
-    border: 2px solid #08f81c;
+    border: 2px solid #282639;
 }
 
 #Update1:hover {
-    background-color: #7cf436;
+    background-color: #282639;
     color: white;
 }
 
@@ -122,7 +122,7 @@ tr:nth-child(odd) {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: lawngreen;
+    background-color: #282639;
     border-radius: 5px;
     float: right;
     font-size: 16px;
@@ -135,6 +135,6 @@ tr:nth-child(odd) {
 #pdf,
 a {
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: bold;
 }
