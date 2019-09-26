@@ -248,6 +248,33 @@
             });
         });
 
+
+
+
+
+
+        function save_user() {
+        var etitle = document.getElementById("event_list").value;
+        var id = document.getElementById('id').value;
+        var fname = document.getElementById('fname').value;
+        var lname = document.getElementById('lname').value;
+        var phone = document.getElementById('phone').value;
+        var email = document.getElementById('email').value;
+        
+
+    if (etitle == "" || id == "" || fname == "" || lname == "" || phone == "" || email == "" ) {
+        alert("Please Enter All data");
+    } else {
+        save_userr();
+    }
+}
+
+
+
+
+
+
+
         //search
         
         function search_user() {
@@ -301,7 +328,8 @@
         }
 
 
-        function save_user() {
+        function save_userr() {
+            
             var user_event = document.getElementById("event_list").value;
             var user_id = document.getElementById('id').value;
             var user_fname = document.getElementById('fname').value;
