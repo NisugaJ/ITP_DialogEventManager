@@ -172,7 +172,8 @@
                 <td> <input type="text" name="status" id="status" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required></td>
             </tr>
 
-
+            <br>
+            <br>
             <tr>
                 <td colspan="2">
                     <input type="button" class="button" value="Save Attendees" onclick="save_attendee();" />
@@ -274,11 +275,14 @@
         </script>
         <div class="row">
             <div class="col-right">
-                <h3 style="margin-left: 150px; margin-top: 10px"> Participation Report</h3>
 
 
-                <div style="margin-left: 1px; margin-top: 150px">
+
+                <div style="margin-left: 1px; margin-top: 20px">
                     <table id="eventAttendees">
+                        <caption>
+                            <h3> Participation Report</h3>
+                        </caption>
                         <tr>
                             <th style="border: 1px solid black">Member ID</th>
                             <th style="border: 1px solid black">Member Name</th>
