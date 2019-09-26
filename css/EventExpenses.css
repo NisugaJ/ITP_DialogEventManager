@@ -8,6 +8,7 @@
 table{
   margin-left:50px;
   width: 90%;
+  margin-top: 100px;
 }
 
 table, th, td {
@@ -102,4 +103,18 @@ body{
     text-decoration: none;
     color: black;
     font-weight: bold;
+}
+
+.pull-right{
+   float: right;
+   width: 20%;
+   position: relative;
+   display: flex;
+   border: 3px solid #00B4CC;
+   padding: 5px;
+   height: 15px;
+   border-radius: 5px;
+   outline: none;
+   color: #9DBFAF;
+   margin-right: 15px;
 }
