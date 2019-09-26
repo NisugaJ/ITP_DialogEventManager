@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
@@ -19,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js"
         integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
     <script src="../js/base64Encodings.js"></script>
+
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -116,7 +118,7 @@
                 <table>
                     <tr>
                         <td>Event Title</td>
-                        <td><select onchange="selectAttendees(this.value);" id="event_list"
+                        <td><select  id="event_list"
                                 class="form-control form-control-me" style="background-color: #d1ecf1">
                                 <option>Select the event </option>
 
@@ -157,6 +159,7 @@
                     <button class="button" style="margin-left:30px" onclick="save_user();">Add Details</button>
                     <button class="button" style="margin-left: 30px" onclick="delete_user();">Remove Details</button>
                     <button class="button" style="margin-left: 90px" onclick="update_user();">Update Details</button>
+                    <button class="button" style="margin-left: 90px" name="pdf" id="pdf" onclick="report()">Overall Report</button>
 
                 </div>
             </div>
@@ -453,6 +456,77 @@
     pdfMake.createPdf(docDefinition).open();
 }
     </script>
+
+
+
+
+
+
+<script>
+    function report() {
+
+        var membersTableData = [];
+
+    $('#tbl_users_list tr').each(function(row, tr) {
+        membersTableData[row] = [
+            $(tr).find('td:eq(1)').text(),
+            $(tr).find('td:eq(0)').text(),
+            $(tr).find('td:eq(2)').text(),
+            $(tr).find('td:eq(3)').text(),
+            $(tr).find('td:eq(4)').text(),
+            $(tr).find('td:eq(5)').text()
+        ]
+    });
+
+    membersTableData[0] = ['Member ID', 'Event Title', 'First Name','Last Name','Phone Number','Email Address'];
+
+var docDefinition = {
+        info: {
+            title: "Member Details",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                //}, {
+                //    image: getDialoLogoBASE64(),
+                //    width: 60,
+                //    height: 60 * 1.3376623376623376623376623376623
+
+                }
+                ],
+
+            }, 
+            {
+                text: "Members Report",
+                fontSize: 20
+            },
+            
+            {
+                layout: 'lightHorizontalLines',
+                marginTop: 20,
+                fontSize: 10,
+
+                table: {
+                    body: membersTableData
+                }
+            }
+        ]
+    };
+
+    pdfMake.createPdf(docDefinition).open();
+    }
+</script>
+
+
+
+
+
+
+
 
 <script>
     function makepdf() {
