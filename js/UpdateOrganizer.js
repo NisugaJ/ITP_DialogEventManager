@@ -8,23 +8,29 @@ function update_event() {
     var Gmail = document.getElementById('Gmail').value;
     var password = document.getElementById('password').value;
 
-    var data = {
-        Organizer_ID: org_id,
-        Name: name,
-        position: position,
-        Ratings: ratings,
-        gmail: Gmail,
-        password: password,
+    //Phone number validation
+    var reges = ratings;
+
+    if (reges.length == 10) {
+        var oid = firebase.database().ref().child('users').push().key;
+
+        var data = {
+            Organizer_ID: org_id,
+            Name: name,
+            position: position,
+            Ratings: ratings,
+            gmail: Gmail,
+            password: password,
+        }
+        var updates = {};
+
+        updates['/users/' + org_id] = data;
+        firebase.database().ref().update(updates);
+
+        alert("organizer is updated successfully");
+
+        remove_Item();
     }
-    var updates = {};
-
-    updates['/users/' + org_id] = data;
-    firebase.database().ref().update(updates);
-
-    alert("organizer is updated successfully");
-
-    remove_Item();
-
 }
 
 //Ritview the data in updateForm
