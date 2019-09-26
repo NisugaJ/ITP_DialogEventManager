@@ -61,7 +61,7 @@
         </button>
       </header>
 
-        <nav><h1 id="title"><center>Event Expenses</center></h1></nav>
+        <nav><h1 id="title">Event Expenses</h1></nav>
 
           <form class="addEvent" method="post">
               <select onchange="selectAttendees(this.value);" id="event_list"
@@ -89,7 +89,7 @@
       
 
           <input type="submit" name="create" value="Create" class="submit" onclick="checkBlank_save()">
-          <button type="button" name="button" class="button" onclick="checkBlank_update()">Update</button>
+          <button type="button" name="button" class="button" onclick="checkBlank_save()">Update</button>
           <a href="eventExpenses.html"><button type="button" name="button" class="button">Cancel</button></a>
 
         </form>

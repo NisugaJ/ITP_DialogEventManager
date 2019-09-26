@@ -11,6 +11,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>    
 
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
 
@@ -61,14 +63,14 @@
       </header><h4>
        
 			<br><br>
-        <nav><h1 id="title"><center> Event Expenses</center></h1></nav>
+        <nav><h1 id="title"> Event Expenses</h1></nav>
         
         <br>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
         <table id ="event_expenses_table">
           <tr>
             <th>EventName</th>
-            <th>Expense</th>
+            <th>Expenses</th>
             <th>Amount(Rs)</th>
 			      <th>Status</th>
             <th></th>
@@ -80,10 +82,12 @@
 		 <button type="button" name="update" id="update" onclick="remove_Item()">
           <a href="update.html">Create</a>
           </button>
+<input type="button" class="reportf" value="Report" onclick="makepdf();"/>
+        
+            
+
           <br><br>
-          <button type="button" name="report" id="report">
-          <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />
-        </button>
+        
       </div>
       <script>
       function myFunction() {
