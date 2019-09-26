@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar
 .css">
+    <!--load jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- pdfmake.org js files-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
@@ -21,6 +23,7 @@
 
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/ezcash.js"></script>
+    <script type="text/javascript" src="../js/ezCashReports.js"></script>
 
     <script type="text/javascript">
         //
@@ -129,11 +132,7 @@
                 <div id="content">
 
 
-                    <form class="form-inline mt-2 mt-md-0" style="display: flex;">
-                        <input style="float: left" class="form-control mr-sm-4" type="text" placeholder="Search by event name" aria-label="Search" autocomplete="off">
-                        <button style="flex-grow: 1; " class="btn btn-outline-dark my-2 my-sm-4" type="submit">Search</button>
-                        <button style="width: 100%;" type="button" class="btn btn-outline-primary">Load All Payments</button>
-                    </form> <br>
+
 
                     <!-- <select class="form-control" id="event_list" onchange="selectEzcashPaymentByID(this.value);">
                         <option value="" disabled selected class="list-group-item">Select an previous payment</option>
@@ -157,6 +156,10 @@
           event</button>
                 <button onclick="window.location.href='EzcashFoodPayment.html'" id="cancel" type="reset" class="btn btn-secondary btn-lg btn-block mybtn">Go Back</button>
                 <br>
+                <form class="form-inline mt-2 mt-md-0" style="display: flex;">
+                    <input style="float: left" class="form-control mr-sm-4" type="text" placeholder="Search by phone number" aria-label="Search" autocomplete="off">
+                    <a style="flex-grow: 1; " id="searchMobile" class="btn btn-outline-dark my-2 my-sm-4" onkeyup="searchFromTableByMobile();">Search</a>
+                </form>
                 <table id="previous_payments_table">
                     <tr id="header_row">
                         <th>Phone Number</th>
@@ -171,66 +174,13 @@
         <div id="footer">
 
         </div>
-        <div id="snackbar">Some text some message..</div>
+        <div id="snackbar"></div>
 
     </div>
 
     </div>
     </div>
     <script>
-        function makePDF() {
-            var currentPayment = "";
-            //deactivates the active buttons in event-list div
-            content = document.getElementById("event_list").children;
-            for (i = 0; i < content.length; i++) {
-                if ("list-group-item active" == content[i].className.toString()) {
-                    currentPayment = content[i].innerHTML.toString();
-                    alert(currentPayment + currentPayment.length);
-                }
-            } //
-            // selectedPaymentTag = document.getElementById('event_list');
-            // var currentPayment = selectedPaymentTag.options[selectedPaymentTag.selectedIndex];
-            if (currentPayment == "") {
-                alert("Please select an Event before generating an event specific Report");
-                return;
-            }
-            var dateTime = currentPayment.slice(currentPayment.length - 19);
-            var dateTimeARR = dateTime.split(" ");
-            console.log("currentPayment", currentPayment.innerText);
-            console.log("dateTimeARR", dateTimeARR);
-
-            var docDefinition = {
-                info: {
-                    title: "Previous Payments",
-                    author: 'Dialog Internal Event Manager 2019',
-                },
-                content: [{
-                        columns: [{
-                            text: "Dialog Internal Event Manager 2019",
-                            fontSize: 30,
-                            bold: true,
-                            width: "*",
-                        }, {
-                            image: getDialoLogoBASE64(),
-                            width: 60,
-                            height: 60 * 1.3376623376623376623376623376623
-                        }],
-
-                    }, {
-                        text: "Payment Report",
-                        fontSize: 20
-                    },
-                    //current Payment
-                    " ",
-                    "Event  : " + currentPayment.slice(0, currentPayment.length - 19),
-                    "Date   : " + dateTimeARR[0],
-                    "Time   : " + dateTimeARR[1]
-                ]
-            };
-
-            pdfMake.createPdf(docDefinition).open();
-
-        }
     </script>
 </body>
 

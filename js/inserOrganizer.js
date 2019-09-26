@@ -15,8 +15,6 @@ function save_event() {
 
     var oid = firebase.database().ref().child('users').push().key;
 
-
-
     var data = {
         Organizer_ID: oid,
         Name: name,
