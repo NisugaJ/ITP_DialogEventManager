@@ -52,7 +52,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/ParticipationReport.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -170,6 +170,7 @@
                     <input type="button" class="button" value="Update Attendee" onclick="save_attendee();" />
                     <!-- <input type="button" class="button" value="Generate Report" name="pdf" id="pdf" onclick="makepdf()" />-->
                     <input type="button" class="button" value="Clear" onclick="clear_user()" />
+                    <input type="button" class="button" value="Generate Report" onclick="makepdf()" />
                 </td>
             </tr>
         </table>

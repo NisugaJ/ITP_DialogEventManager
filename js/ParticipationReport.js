@@ -140,3 +140,56 @@ function mypdf(id, name, mobile, status, time) {
     };
     pdfMake.createPdf(docDefinition).open();
 }
+
+function makepdf() {
+    var attendeesTableData = [];
+
+    $('#eventAttendees tr').each(function(row, tr) {
+        attendeesTableData[row] = [
+            $(tr).find('td:eq(0)').text(),
+            $(tr).find('td:eq(1)').text(),
+            $(tr).find('td:eq(2)').text(),
+            $(tr).find('td:eq(3)').text(),
+            $(tr).find('td:eq(4)').text(),
+        ]
+    });
+
+    attendeesTableData[0] = ['Member Id', 'Member Name', 'Mobile', 'Arrival Status', 'Arrival Time'];
+    var docDefinition = {
+        info: {
+            title: "Event Attendees",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                }, {
+                    image: getDialoLogoBASE64(),
+                    width: 60,
+                    height: 60 * 1.3376623376623376623376623376623
+                }],
+
+            }, {
+                text: "Event Attendees Report",
+                fontSize: 20
+            },
+
+
+            {
+                layout: 'lightHorizontalLines',
+                marginTop: 20,
+                marginLeft: 100,
+                fontSize: 13,
+
+                table: {
+                    body: attendeesTableData
+                }
+            }
+        ]
+    };
+    pdfMake.createPdf(docDefinition).open();
+
+}
