@@ -201,6 +201,61 @@ function selectEzcashPaymentByID(paymentID) {
 
 }
 
+//selects paymnent details of a given event for PDF
+function selectEzcashPaymentByID_PDF(paymentID) {
+    //deactivates the active buttons in event-list div
+    content = document.getElementById("event_list").children;
+    for (i = 0; i < content.length; i++) {
+        content[i].className = "list-group-item";
+    } //
+
+
+    console.log("Payment ID is" + paymentID);
+    var dbRef = firebase.database().ref(); // Reference to realtime db
+    var table = document.getElementById('previous_payments_table');
+    var rowIndex = 1;
+
+    var tableHeaderRowCount = 1;
+    var rowCount = table.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        table.deleteRow(tableHeaderRowCount);
+    }
+
+    var emailRef = dbRef.child('ezCashFoodPayments').orderByKey().equalTo(paymentID);
+    emailRef.once('value').then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            var payKey = childSnapshot.key;
+            console.log(payKey);
+            var mobile_array = childSnapshot.child('mobiles').val();
+            var cashAmount = childSnapshot.child('cashAmount').val();
+            console.log(mobile_array);
+
+            for (let index = 0; index < mobile_array.length; index++) {
+                if (mobile_array[index] != null) {
+                    var row = table.insertRow(rowIndex);
+                    var memberPhone = row.insertCell(0);
+                    var amount = row.insertCell(1);
+                    row.insertCell(2).appendChild(document.createTextNode("Paid"));
+                    var deleteCell = row.insertCell(3);
+
+                    memberPhone.appendChild(document.createTextNode(mobile_array[index]));
+                    amount.appendChild(document.createTextNode(cashAmount));
+                    deleteCell.innerHTML = '<img src="../images/delete.png" width="25" height="25" >';
+                    mob_number = mobile_array[index];
+                    deleteCell.onclick = function() {
+                        removeMobileFromPayment(payKey, index);
+                    }
+
+                    rowIndex = rowIndex + 1;
+
+                }
+            }
+            console.log("userkey -->> " + payKey);
+        });
+    });
+
+}
+
 //to delete a mobile number from a prevoius EzCash payment
 function removeMobileFromPayment(paymentKey, index) {
     var dbRef = firebase.database().ref(); // Reference to realtime db
@@ -288,3 +343,34 @@ $(document).ready(function() {
     });
 
 });
+
+
+
+
+function makeFullPaymentReport() {
+
+    var event_listDiv = document.getElementById("event_list");
+    var event_list_len = document.getElementById("event_list").childNodes.length;
+    var event_list_arr = document.getElementById("event_list").childNodes;
+
+    console.log(event_list_arr);
+
+    for (let index = 0; index < event_list_len; index++) {
+        var payID = event_list_arr[index].id;
+        selectEzcashPaymentByID_PDF(payID);
+
+        $('#previous_payments_table tr').each(function(row, tr) {
+            paymentTableData[row] = [
+                $(tr).find('td:eq(0)').text(),
+                $(tr).find('td:eq(1)').text(),
+                $(tr).find('td:eq(2)').text()
+            ]
+        });
+
+        paymentTableData[0] = ['Phone Number', 'Amount', 'Payment Status'];
+        console.log(paymentTableData);
+
+
+    }
+
+}

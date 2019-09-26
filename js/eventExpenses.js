@@ -1,4 +1,4 @@
-var databaseRef = firebase.database().ref('eventExpenses/');
+var databaseRef = firebase.database().ref('/eventExpenses/');
 
 var rowIndex = 1;
 
@@ -166,3 +166,57 @@ function current_report(ename, expense, amount, status) {
   };
   pdfMake.createPdf(docDefinition).open();
 }
+function makepdf(){
+ //reading payment details of the selected payment from the  table
+    var expensesTableData = [];
+
+    $('#event_expenses_table tr').each(function(row, tr) {
+      expensesTableData[row] = [
+            $(tr).find('td:eq(0)').text(),
+            $(tr).find('td:eq(1)').text(),
+            $(tr).find('td:eq(2)').text(),
+            $(tr).find('td:eq(3)').text()
+        ]
+    });
+
+    expensesTableData[0] = [' EventName', 'Expenses', ' Amount(Rs)','Status'];
+ var docDefinition = {
+        info: {
+            title: "EventExpense Payments",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                }, 
+                //{
+                  //  image: getDialoLogoBASE64(),
+                    //width: 60,
+                    //height: 60 * 1.3376623376623376623376623376623
+               // }
+              ],
+
+            }, {
+                text: "Expenses Report",
+                fontSize: 20
+            },
+           
+
+            {
+                layout: 'lightHorizontalLines',
+                marginTop: 20,
+                marginLeft: 1,
+                fontSize: 13,
+
+                table: {
+                    body: expensesTableData
+                }
+            }
+        ]
+    };
+
+    pdfMake.createPdf(docDefinition).open();
+  }
