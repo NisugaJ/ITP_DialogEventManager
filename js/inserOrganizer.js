@@ -1,5 +1,7 @@
 var databaseRef = firebase.database().ref('users/');
 
+//Insert Organizerses
+
 function save_event() {
     var name = document.getElementById('Name').value;
     var position = document.getElementById('Position').value;
@@ -12,59 +14,62 @@ function save_event() {
     if (name == "" || position == "" || ratings == "" || Gmail == "" || password == "") {
         alert("Please Enter All data");
         return;
-    }
+    } else {
+        //Phone number Validation
+        var reges = ratings;
 
-    //phone number validation
-    function phonenumber(inputtxt) {
-        var ratings = /^\d{10}$/;
-        if ((inputtxt.value.match(ratings)) {
-                return true;
-            } else {
-                alert("message");
-                return false;
+        if (reges.length == 10) {
+            var oid = firebase.database().ref().child('users').push().key;
+
+            var data = {
+                Organizer_ID: oid,
+                Name: name,
+                position: position,
+                Ratings: ratings,
+                gmail: Gmail,
+                password: password,
             }
+
+
+            var updates = {};
+
+            updates['/users/' + oid] = data;
+            firebase.database().ref().update(updates);
+
+            alert("Data insert is successfully");
+
+        } else {
+            alert("Invalid number; must be ten digits")
+            ratings.focus();
         }
-        var oid = firebase.database().ref().child('users').push().key;
-
-        var data = {
-            Organizer_ID: oid,
-            Name: name,
-            position: position,
-            Ratings: ratings,
-            gmail: Gmail,
-            password: password,
-        }
-
-        var updates = {};
-
-        updates['/users/' + oid] = data;
-        firebase.database().ref().update(updates);
-
-        alert("Data insert is successfully");
     }
 
-    function update_event() {
+}
 
-        var org_id = document.getElementById('id').value;
+//update organizer details
 
-        var name = document.getElementById('Name').value;
-        var position = document.getElementById('Position').value;
-        var ratings = document.getElementById('Ratings').value;
-        var Gmail = document.getElementById('Gmail').value;
-        var password = document.getElementById('password').value;
+function update_event() {
 
-        var data = {
-            Organizer_ID: org_id,
-            Name: name,
-            position: position,
-            Ratings: ratings,
-            gmail: Gmail,
-            password: password,
-        }
-        var updates = {};
+    var org_id = document.getElementById('id').value;
 
-        updates['/users/' + org_id] = data;
-        firebase.database().ref().update(updates);
+    var name = document.getElementById('Name').value;
+    var position = document.getElementById('Position').value;
+    var ratings = document.getElementById('Ratings').value;
+    var Gmail = document.getElementById('Gmail').value;
+    var password = document.getElementById('password').value;
 
-        alert("organizer is updated successfully");
+    var data = {
+        Organizer_ID: org_id,
+        Name: name,
+        position: position,
+        Ratings: ratings,
+        gmail: Gmail,
+        password: password,
     }
+    var updates = {};
+
+    updates['/users/' + org_id] = data;
+    firebase.database().ref().update(updates);
+
+    alert("organizer is updated successfully");
+}
