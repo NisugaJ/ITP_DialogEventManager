@@ -1,34 +1,34 @@
 var databaseRef = firebase.database().ref('events/');
 
-function check_blank_save(){
-  var topic = document.getElementById('topic').value;
-  var stime = document.getElementById('start_time').value;
-  var eTime = document.getElementById('end_time').value;
-  var date = document.getElementById('date').value;
-  var location = document.getElementById('location').value;
+function check_blank_save() {
+    var topic = document.getElementById('topic').value;
+    var stime = document.getElementById('start_time').value;
+    var eTime = document.getElementById('end_time').value;
+    var date = document.getElementById('date').value;
+    var location = document.getElementById('location').value;
 
-  if(topic == "" || stime == "" || eTime == "" || date == "" || location == ""){
-      alert("Please Enter All data");
-  }else{
-      save_event();
-  }
+    if (topic == "" || stime == "" || eTime == "" || date == "" || location == "") {
+        alert("Please Enter All data");
+    } else {
+        save_event();
+    }
 }
 
-function check_blank_update(){
-  var topic = document.getElementById('topic').value;
-  var stime = document.getElementById('start_time').value;
-  var eTime = document.getElementById('end_time').value;
-  var date = document.getElementById('date').value;
-  var location = document.getElementById('location').value;
+function check_blank_update() {
+    var topic = document.getElementById('topic').value;
+    var stime = document.getElementById('start_time').value;
+    var eTime = document.getElementById('end_time').value;
+    var date = document.getElementById('date').value;
+    var location = document.getElementById('location').value;
 
-  if(topic == "" || stime == "" || eTime == "" || date == "" || location == ""){
-      alert("Please Enter All data");
-  }else{
-      update_event();
-  }
+    if (topic == "" || stime == "" || eTime == "" || date == "" || location == "") {
+        alert("Please Enter All data");
+    } else {
+        update_event();
+    }
 }
 
-function save_event(){
+function save_event() {
 
     var eid = firebase.database().ref().child('events').push().key;
 
@@ -40,70 +40,69 @@ function save_event(){
     var location = document.getElementById('location').value;
 
     var data = {
-      event_id : eid,
-      event_topic: event_topic,
-      date: date,
-      start_time: start_time,
-      end_time: end_time,
-      description: description,
-      location: location,
+        event_id: eid,
+        event_topic: event_topic,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        description: description,
+        location: location,
     }
-  
+
     var updates = {};
-  
+
     updates['/events/' + eid] = data;
     firebase.database().ref().update(updates);
-  
+
     alert("Event is created successfully");
 }
 
-function update_event(){
+function update_event() {
 
-  var id = document.getElementById('id').innerHTML;
+    var id = document.getElementById('id').innerHTML;
 
-  var event_topic = document.getElementById('topic').value;
-  var date = document.getElementById('date').value;
-  var start_time = document.getElementById('start_time').value;
-  var end_time = document.getElementById('end_time').value;
-  var description = document.getElementById('description').value;
-  var location = document.getElementById('location').value;
+    var event_topic = document.getElementById('topic').value;
+    var date = document.getElementById('date').value;
+    var start_time = document.getElementById('start_time').value;
+    var end_time = document.getElementById('end_time').value;
+    var description = document.getElementById('description').value;
+    var location = document.getElementById('location').value;
 
-  var data = {
-          event_id : id,
-          event_topic: event_topic,
-          date: date,
-          start_time: start_time,
-          end_time: end_time,
-          description: description,
-          location: location,
-  }
+    var data = {
+        event_id: id,
+        event_topic: event_topic,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        description: description,
+        location: location,
+    }
 
-  var updates = {};
-    
-  updates['/events/' + id] = data;
-  firebase.database().ref().update(updates);
-    
-  alert("User is updated successfully");
+    var updates = {};
 
-  remove_Item();
+    updates['/events/' + id] = data;
+    firebase.database().ref().update(updates);
+
+    alert("User is updated successfully");
+    remove_Item();
 }
 
-function get_session(){
+function get_session() {
 
-  let original = sessionStorage.getItem("event");
-  let event = JSON.parse(original);
+    let original = sessionStorage.getItem("event");
+    let event = JSON.parse(original);
 
-  document.getElementById('id').innerHTML = event[0];
-  document.getElementById('topic').value = event[1];
-  document.getElementById('date').value = event[2];
-  document.getElementById('start_time').value = event[3];
-  document.getElementById('end_time').value = event[4];
-  document.getElementById('description').value = event[5];
-  document.getElementById('location').value = event[6];
+    document.getElementById('id').innerHTML = event[0];
+    document.getElementById('topic').value = event[1];
+    document.getElementById('date').value = event[2];
+    document.getElementById('start_time').value = event[3];
+    document.getElementById('end_time').value = event[4];
+    document.getElementById('description').value = event[5];
+    document.getElementById('location').value = event[6];
 }
 
-function remove_Item(){
-  sessionStorage.removeItem("event");
+function remove_Item() {
+    sessionStorage.removeItem("event");
 }
 
 

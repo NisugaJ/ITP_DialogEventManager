@@ -38,6 +38,8 @@ a {
     border: none;
     background: none;
     outline: none;
+
+
     float: left;
     padding: 0;
     color: black;
@@ -45,6 +47,7 @@ a {
     transition: 0.4s;
     line-height: 40px;
     width: 240px;
+
 }
 
 .row {
@@ -72,10 +75,12 @@ table {
 table,
 th,
 td {
+
     padding: 5px;
     border: 0px;
     margin-top: 30px;
     margin-left: 50px;
+
 }
 
 th,
@@ -89,6 +94,7 @@ td {
 
 .button {
     background-color: orange;
+
     font-size: 12px;
     border: none;
     color: black;
@@ -99,3 +105,4 @@ td {
     margin: 4px 2px;
     cursor: pointer;
 }
+

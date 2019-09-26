@@ -1,0 +1,77 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+#actions{
+  float: right;
+  padding-bottom: 5px;
+  width: 80%;
+  height: 100%;
+  background-color: #ebebe0;
+}
+
+.addEvent{
+  font-size: 22px;
+  line-height: 1.9em;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.status{
+  font-size: 22;
+  width: 90%;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.inputs{
+	font-size: 16px;
+  width: 90%;
+  padding: 5px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.organizers,.members{
+  font-size: 16px;
+  width: 80%;
+  height: 50px;
+  margin-bottom: 15px;
+}
+.submit{
+    background-color: lightblue;
+}
+
+.button,.submit{
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  width: 100px;
+  height: 50px;
+  font-size: 16px;
+}
+
+.submit:hover,.button:hover{
+  box-shadow: 5px 5px 5px;
+}
+
+.addOrganizer{
+	border-radius: 5px;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 10px;
+}
+.addOrganizer:hover{
+	box-shadow: 5px 5px 5px;
+}
+
+.list{
+	margin-bottom: 20px;
+}

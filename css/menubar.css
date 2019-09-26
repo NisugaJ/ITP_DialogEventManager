@@ -37,7 +37,7 @@
     border-radius: 5px;
     font-size: 16px;
     opacity: 0.4;
-    width: 30%;
+    width: 80%;
     margin-top: 10px;
 }
 
@@ -194,7 +194,7 @@
     visibility: visible;
     /* Show the snackbar */
     /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-    However, delay the fade out process for 2.5 seconds */
+  However, delay the fade out process for 2.5 seconds */
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }

@@ -7,19 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/Questions&Polls.css">
     <link rel="stylesheet" href="../css/Login.css">
-    <link rel="stylesheet" href="../css/TextArea.css">
+	<link rel="stylesheet" href="../css/TextArea.css">
+	<link rel="stylesheet" href="../css/poll_table.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../js/common.js"></script>
-
-    <!-- firebase -->
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+	
+	<!-- firebase -->
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-auth.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+	
+	<script src = "../js/base64Encodings.js"></script>
+	
+	<!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
@@ -47,9 +52,9 @@
 
         }
     </script>
+	
 
-
-    <script src="../organizerJS/pollFirebase.js"></script>
+	<script src="../organizerJS/pollFirebase.js"></script>
     <script src="../organizerJS/angular.min.js"></script>
     <script src="../organizerJS/angular-route.min.js"></script>
     <script src="../organizerJS/angularJSChangeWindow.js"></script>
@@ -129,6 +134,7 @@
     <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="buttons">
         <h3><a class="w3-button w3-light-purple" style="padding:8.22px 25px" href="Questions.html" target="_top">Questions</a>
             <a class="w3-button w3-light-purple" style="padding:8.22px 53.55px" href="Polls.html" target="_top">Polls</a>
+			<a class="w3-button w3-light-purple" style="padding:8.22px 42.55px" name="pdf" id="pdf" onclick="makepdf()" target="_top">Reports</a>
         </h3>
 
         <!-- For PollsList Section -->
@@ -147,9 +153,9 @@
   
   <form class="modal-content animate">
     <div class="container">
-		<input type="text" placeholder="  Type Poll Id" name="shpollid" id="shpollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
+		<input type="text" placeholder="  Search by Question" name="shpollid" id="shpollid" onkeyup="searchFromTableName()" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
        
-      <button type="submit" id="searchbtn">Search</button>
+      <!--<button type="submit" id="searchbtn">Search</button>-->
       
     </div>
 
@@ -237,20 +243,22 @@
                         </div>
 
                     </div>
-
-
-                    <!-- read values -->
-                    <li class="w3-padding-16" style="margin-top:0px;">
-                        <h3>Your Poll Lists</h3>
-
-                        <table id="poll_table" align="center" border="1" width="100%">
-                            <tr>
-                                <td width="35%">#Poll_Id#</td>
-                                <td width="65%">Questions</td>
-                            </tr>
-                        </table>
-
-                    </li>
+					
+							
+			<!-- read values -->
+					<li class="w3-padding-16" style="margin-top:0px;">	
+					<h3>Your Poll Lists</h3>
+					
+					<table id="poll_table" align="center" width="100%">
+						<tr>
+							<td width="30%" >Poll_Id</td>
+							<td width="61%">Questions</td>
+							<td style="font-size:10px" width="3%">Update</td>
+							<td style="font-size:10px" width="3%">Delete</td>
+							<td style="font-size:10px" width="3%">Genarate Reports</td>
+						</tr>
+					</table>				
+				</li>
                 </ul>
             </div>
 
@@ -270,42 +278,42 @@
     </div>
 
 
-    <!-- Footer -->
-    <footer class="w3-center w3-black w3-padding-64">
-        <h3>Contact details</h3>
-        <p><i class="fa fa-phone fa-lg" aria-hidden="true"></i> 01234567890</p>
-        <p><i class="fa fa-envelope-o" aria-hidden="true"></i> dialogevent@gmail.com</p>
-        <p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
-        <div class="w3-xlarge w3-section">
-            <i class="fa fa-facebook-official w3-hover-opacity"></i>
-            <i class="fa fa-instagram w3-hover-opacity"></i>
-            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-            <i class="fa fa-twitter w3-hover-opacity"></i>
-            <i class="fa fa-linkedin w3-hover-opacity"></i>
-        </div>
-    </footer>
+                <!-- Footer -->
+                <footer class="w3-center w3-black w3-padding-64">
+                    <h3>Contact details</h3>
+                    <p><i class="fa fa-phone fa-lg" aria-hidden="true"></i> 01234567890</p>
+                    <p><i class="fa fa-envelope-o" aria-hidden="true"></i> dialogevent@gmail.com</p>
+                    <p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
+                    <div class="w3-xlarge w3-section">
+                        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                        <i class="fa fa-instagram w3-hover-opacity"></i>
+                        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                        <i class="fa fa-twitter w3-hover-opacity"></i>
+                        <i class="fa fa-linkedin w3-hover-opacity"></i>
+                    </div>
+                </footer>
 
-    <script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {
-            scrollFunction()
-        };
+                <script>
+                    // When the user scrolls down 20px from the top of the document, show the button
+                    /*window.onscroll = function() {
+                        scrollFunction()
+                    };
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("myBtn").style.display = "block";
-            } else {
-                document.getElementById("myBtn").style.display = "none";
-            }
-        }
+                    function scrollFunction() {
+                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                            document.getElementById("myBtn").style.display = "block";
+                        } else {
+                            document.getElementById("myBtn").style.display = "none";
+                        }
+                    }
 
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-    <div ng-view></div>
+                    // When the user clicks on the button, scroll to the top of the document
+                    function topFunction() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    } */
+                </script>
+                <div ng-view></div>
 </body>
 
 </html>

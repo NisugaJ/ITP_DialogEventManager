@@ -239,8 +239,25 @@ function deletePaymentsBulk() {
     window.location.reload();
 }
 
-//to search payments by event name
-function searchPaymentByEventName(search_val) {
 
+//search from paymnets table by mobile
+function searchFromTableByMobile() {
+    var input, table, tr, td, i, txtValue;
+    input = document.getElementById("searchMobile").toString();
 
+    table = document.getElementById("previous_payments_table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(input) > -1) {
+                tr[i].style.display = "";
+                td.style.backgroundColor = "lightslategrey"
+                break;
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }
