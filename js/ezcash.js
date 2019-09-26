@@ -240,24 +240,51 @@ function deletePaymentsBulk() {
 }
 
 
-//search from paymnets table by mobile
-function searchFromTableByMobile() {
-    var input, table, tr, td, i, txtValue;
-    input = document.getElementById("searchMobile").toString();
+// //search from paymnets table by mobile
+// function searchFromTableByMobile() {
+//     var input, table, tr, td, i, txtValue;
+//     input = document.getElementById("searchMobile").toString();
+//     console.log(input);
+//     table = document.getElementById("previous_payments_table");
+//     tr = table.getElementsByTagName("tr");
+//     for (i = 0; i < tr.length; i++) {
+//         td = tr[i].getElementsByTagName("td")[0];
+//         if (td) {
+//             txtValue = td.textContent || td.innerText;
+//             if (txtValue.toUpperCase().indexOf(input) > -1) {
+//                 tr[i].style.display = "";
+//                 td.style.backgroundColor = "lightslategrey"
+//                 break;
+//             } else {
+//                 tr[i].style.display = "none";
+//             }
+//         }
+//     }
+// }
 
-    table = document.getElementById("previous_payments_table");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(input) > -1) {
-                tr[i].style.display = "";
-                td.style.backgroundColor = "lightslategrey"
-                break;
-            } else {
-                tr[i].style.display = "none";
-            }
+//to search from a paymnent list
+$(document).ready(function() {
+
+    // Search all columns
+    $('#searchMobile').keyup(function() {
+        // Search Text
+        var search = $(this).val();
+
+        // Hide all table tbody rows
+        $('#previous_payments_table tbody tr').hide();
+
+        // Count total search result
+        var len = $('#previous_payments_table tbody tr:not(.notfound) td:contains("' + search + '")').length;
+
+        if (len > 0) {
+            // Searching text in columns and show match row
+            $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function() {
+                $(this).closest('tr').show();
+            });
+        } else {
+            $('.notfound').show();
         }
-    }
-}
+
+    });
+
+});

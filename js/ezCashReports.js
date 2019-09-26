@@ -37,15 +37,8 @@ function makePDF() {
     });
 
     paymentTableData[0] = ['Phone Number', 'Amount', 'Payment Status'];
-    // paymentTableData.shift(); // first row is the table header - so remove
     console.log(paymentTableData);
 
-    // var rows = [];
-    // //rows.push(['Nr.', 'Name', 'Beschreibung']);
-
-    // for (var i of paymentTableData.length) {
-    //     rows.push(['#.' + i, 'xx', 'ww']);
-    // }
     //defining PDF outcome
     var docDefinition = {
         info: {
@@ -90,9 +83,3 @@ function makePDF() {
     pdfMake.createPdf(docDefinition).open();
 
 }
-
-
-
-// [{ text: 'Phone Number      ', bold: true, margin: 5, fontSize: 15 }, { text: "Amount", bold: true, margin: 5, fontSize: 15 }, { bold: true, text: "Payment Status ", margin: 5, fontSize: 15 }],
-
-// [{ text: '078520            ', margin: 5, fontSize: 12 }, { text: "254", margin: 5, fontSize: 12 }, { text: "Paid", margin: 5, fontSize: 12 }],

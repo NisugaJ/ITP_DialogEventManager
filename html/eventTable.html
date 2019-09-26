@@ -7,104 +7,104 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/eventTable.css">
-    <script type="text/javascript" src="../js/common.js"></script>
-
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#config-web-app -->
-    <script type="text/javascript">
-        window.onload = function() {
-
-            if (!isUserAnAdmin()) {
-
-                window.location.href = "Login.html";
-            }
-
-        }
-    </script>
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-            authDomain: "dialog-internal-event-manager.firebaseapp.com",
-            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-            projectId: "dialog-internal-event-manager",
-            storageBucket: "dialog-internal-event-manager.appspot.com",
-            messagingSenderId: "168700423082",
-            appId: "1:168700423082:web:6ad2292be26320c9"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <script src="../js/eventTable.js"></script>
 </head>
 
 <body>
     <div id="menubar">
 
-        <span id="dialog"><h2> <b>Dialog Internal Events </b></h2><h4>Admin Panel</h4></span><br>
-        <img id="logo" src="../images/dialogLogo.png" width="154px" height="206px">
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
 
-        <div id="admindetails_div">
-            <script>
-                var userName = sessionStorage.getItem("userFirstName") + " " + sessionStorage.getItem("userLastName");
-            </script>
-            <label id="label_adminName"><script>document.write(userName.toString() )</script></label><br><br>
-
-            <label id="label_admin">Admin</label>
-        </div>
         <ul>
-            <li><a href="adminDashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
             <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-            <!-- <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li> -->
-            <li><a href="organizerTable.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
             <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-            <li><a href="EventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-            <li><a href="EzcashFoodPayment.html"><i class="fas fa-utensils menuIcons"></i>Ezcash Food Payment </a></li>
-            <li><a href="ParticipationReport.html"><i class="fas fa-file-alt menuIcons"></i> Event Attendees</a></li>
-            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-            <li><a href="EventCalendar.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calendar</a></li>
-
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
         </ul>
     </div>
     <div id="actions">
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
-            <input type="text" name="search" id="search">
-            <button id="logOut" onclick="signOutUser()">
+            <input type="text" name="search" id="search" placeholder="search" onkeyup="searchFromTableByName();" autocomplete="">
+            <button id="logOut">
         	Sign Out
         </button>
         </header>
         <nav>
-            <h1 id="title">
-                <center>Events</center>
-            </h1>
+            <h1 id="title">Event Table</h1>
         </nav>
-        <button type="button" name="addEvent" id="addEvent">
-          <a href="registerEvent.html">Add/Edit Event</a>
-        </button>
-        <br>
-        <br><br><br>
 
-        <table id="event_table">
+        <button onclick="full_report()" id="full_report">Full Report</button>
+
+        <a href="registerEvent.html" id="addEvent">Add Event</a>
+
+        <br><br><br><br>
+
+        <table id="event_table" style="margin: 5px" border="1px">
+            <caption>
+                <h2>All events</h2>
+            </caption>
             <tr>
-                <td>ID</td>
-                <td>Title</td>
-                <td>Date</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Descritption</td>
-                <td>Location</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <h3>Title</h3>
+                </td>
+                <td>
+                    <h3>Date</h3>
+                </td>
+                <td>
+                    <h3>Start Time</h3>
+                </td>
+                <td>
+                    <h3>End Time</h3>
+                </td>
+                <td>
+                    <h3>Descritption</h3>
+                </td>
+                <td>
+                    <h3>Location</h3>
+                </td>
+                <td>
+                    <h3>Organizer</h3>
+                </td>
+                <td bgcolor="lightgreen"></td>
+                <td bgcolor="red"></td>
+                <td bgcolor="yellow"></td>
             </tr>
         </table>
     </div>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+        authDomain: "dialog-internal-event-manager.firebaseapp.com",
+        databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+        projectId: "dialog-internal-event-manager",
+        storageBucket: "dialog-internal-event-manager.appspot.com",
+        messagingSenderId: "168700423082",
+        appId: "1:168700423082:web:6ad2292be26320c9"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+
+<script src="../js/eventTable.js"></script>
+
+<script src="../js/base64Encodings.js"></script>
+<!--load jquery-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 </html>
