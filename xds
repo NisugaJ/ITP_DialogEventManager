@@ -79,11 +79,11 @@
 [31m-  <div id="actions">[m
 [31m-    <div id="header">[m
 [31m-      <label hidden>as</label>[m
-[31m-      <button id="logOut">[m
+[31m-      <button id="logOut" onclick="signOutUser()">[m
 [32m+[m[32m    <div id="actions">[m
 [32m+[m[32m        <div id="header">[m
 [32m+[m[32m            <label hidden>as</label>[m
-[32m+[m[32m            <button id="logOut">[m
+[32m+[m[32m            <button id="logOut" onclick="signOutUser()">[m
          Sign Out[m
        </button>[m
 [31m-    </div>[m

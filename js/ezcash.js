@@ -51,6 +51,7 @@ function selectAttendees(eventID) {
 //saves ezcash paymnent details
 function saveEzCashPayment() {
 
+    //validation first
     var selectEventTag = document.getElementById('event_list');
     var label_errorTag = document.getElementById('label_error');
 
@@ -81,6 +82,7 @@ function saveEzCashPayment() {
         return;
     }
 
+    //DB Insert
     var dbRef = firebase.database().ref(); // Reference to realtime db
     var amount = document.getElementById('input_amount').value;
     console.log("Amount" + amount);
@@ -260,9 +262,7 @@ function selectEzcashPaymentByID_PDF(paymentID) {
 function removeMobileFromPayment(paymentKey, index) {
     var dbRef = firebase.database().ref(); // Reference to realtime db
     dbRef.child('ezCashFoodPayments').child(paymentKey).child('mobiles').child(index).remove();
-    showSnackBar(" Mobile number is deleting now!");
-    console.log("Selected Mobile number is deleting now!");
-    alert("Selected Mobile number is deleting now!");
+    confirm("Are you sure you want to delecte this paymnet detail ?");
 
     //wait 2 second
     var start = new Date().getTime();
@@ -284,7 +284,7 @@ function deletePaymentsBulk() {
     alert("Selected Payment Bulk is deleting now!");
     console.log("Payment Bulk is deleting now!");
 
-    //wait 2 second
+    //wait 2 seconds
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
         if ((new Date().getTime() - start) > 2000) {

@@ -1,0 +1,16 @@
+
+steps to load the site.
+
+1). Run this folder in a local host
+
+//////////Log in details
+
+//Admin Login
+Name : admin1 itp
+Email:  itp.hr111@gmail.com
+Password: adminhr111
+
+//Organizer login
+email: reenarozelbfashions@gmail.com
+Password: organizer111
+

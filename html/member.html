@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Member Details</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/menubar.css">
     <link rel="stylesheet" type="text/css" href="../css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,10 +14,8 @@
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js"
-        integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js"
-        integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
     <script src="../js/base64Encodings.js"></script>
 
 
@@ -40,7 +37,7 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    
+
 
 </head>
 
@@ -78,7 +75,7 @@
         <header id="header">
             <nav><i class="fas fa-search" id="searchIcon"></i></nav>
             <input type="text" name="search" id="search">
-            <button id="logOut">
+            <button id="logOut" onclick="signOutUser()">
                 Sign Out
             </button>
         </header>
@@ -100,8 +97,7 @@
 
                     <tr>
                         <td>
-                            <button class="button" style="margin-left: 1px" name="pdf" id="pdf"
-                                onclick="makepdf()">Generate Individual Progress Report</button>
+                            <button class="button" style="margin-left: 1px" name="pdf" id="pdf" onclick="makepdf()">Generate Individual Progress Report</button>
                         </td>
 
                     </tr>
@@ -118,8 +114,7 @@
                 <table>
                     <tr>
                         <td>Event Title</td>
-                        <td><select  id="event_list"
-                                class="form-control form-control-me" style="background-color: #d1ecf1">
+                        <td><select id="event_list" class="form-control form-control-me" style="background-color: #d1ecf1">
                                 <option>Select the event </option>
 
                             </select>
@@ -131,14 +126,12 @@
                     </tr>
                     <tr>
                         <td>First Name</td>
-                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}"
-                                title="Use Only Alphabets" required>
+                        <td><input type="text" name="fname" id="fname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
                         </td>
                     </tr>
                     <tr>
                         <td>Last Name</td>
-                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}"
-                                title="Use Only Alphabets" required>
+                        <td><input type="text" name="lname" id="lname" pattern="[a-zA-Z]{2,30}" title="Use Only Alphabets" required>
                         </td>
                     </tr>
                     <tr>
@@ -204,8 +197,8 @@
 
         var rowIndex = 1;
 
-        databaseRef.once('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
+        databaseRef.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
                 var childKey = childSnapshot.key;
                 if (childKey >= 10000) {
                     var childData = childSnapshot.val();
@@ -217,13 +210,13 @@
                     var cell_lname = row.insertCell(3);
                     var cell_phone = row.insertCell(4);
                     var cell_email = row.insertCell(5);
-                    var editCell   = row.insertCell(6);
+                    var editCell = row.insertCell(6);
                     var reportCell = row.insertCell(7);
 
-                    editCell.innerHTML   = '<img src = "../images/edit.png" width="25" height="25">';
+                    editCell.innerHTML = '<img src = "../images/edit.png" width="25" height="25">';
                     reportCell.innerHTML = '<img src = "../images/report.png" width="25" height="25">';
 
-                    
+
                     //document.getElementById("tbl_users_list").style.border = "1px solid black";
 
                     cell_event.appendChild(document.createTextNode(childData.eventTitle));
@@ -233,12 +226,12 @@
                     cell_phone.appendChild(document.createTextNode(childData.mobile));
                     cell_email.appendChild(document.createTextNode(childData.email));
 
-                    editCell.onclick=function(){
+                    editCell.onclick = function() {
                         check();
                     }
 
-                    reportCell.onclick=function(){
-                        current_report(childKey,childData.eventTitle,childData.firstName,childData.lastName,childData.mobile,childData.email);
+                    reportCell.onclick = function() {
+                        current_report(childKey, childData.eventTitle, childData.firstName, childData.lastName, childData.mobile, childData.email);
                     }
 
                     rowIndex = rowIndex + 1;
@@ -254,20 +247,36 @@
 
 
         function save_user() {
-        var etitle = document.getElementById("event_list").value;
-        var id = document.getElementById('id').value;
-        var fname = document.getElementById('fname').value;
-        var lname = document.getElementById('lname').value;
-        var phone = document.getElementById('phone').value;
-        var email = document.getElementById('email').value;
-        
+            var etitle = document.getElementById("event_list").value;
+            var id = document.getElementById('id').value;
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
 
-    if (etitle == "" || id == "" || fname == "" || lname == "" || phone == "" || email == "" ) {
-        alert("Please Enter All data");
-    } else {
-        save_userr();
-    }
-}
+
+            if (etitle == "" || id == "" || fname == "" || lname == "" || phone == "" || email == "") {
+                alert("Please Enter All data");
+            } else {
+                save_userr();
+            }
+        }
+
+        function update_user() {
+            var etitle = document.getElementById("event_list").value;
+            var id = document.getElementById('id').value;
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+
+
+            if (etitle == "" || id == "" || fname == "" || lname == "" || phone == "" || email == "") {
+                alert("Please Enter All data");
+            } else {
+                update_userr();
+            }
+        }
 
 
 
@@ -276,7 +285,7 @@
 
 
         //search
-        
+
         function search_user() {
 
             var rowIndex = 1;
@@ -286,8 +295,8 @@
                 table.deleteRow(rowIndex);
             }
 
-            databaseRef.orderByChild('eventTitle').equalTo(document.getElementById("search_text_box").value).on("value", function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
+            databaseRef.orderByChild('eventTitle').equalTo(document.getElementById("search_text_box").value).on("value", function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
                     var childKey = childSnapshot.key;
                     if (childKey >= 10000) {
                         console.log("childKey", childKey);
@@ -329,7 +338,7 @@
 
 
         function save_userr() {
-            
+
             var user_event = document.getElementById("event_list").value;
             var user_id = document.getElementById('id').value;
             var user_fname = document.getElementById('fname').value;
@@ -354,7 +363,7 @@
 
         }
 
-        function update_user() {
+        function update_userr() {
             var user_event = document.getElementById("event_list").value;
             var user_id = document.getElementById('id').value;
             var user_fname = document.getElementById('fname').value;
@@ -394,7 +403,7 @@
     </script>
 
     <script>
-        setInterval(function () {
+        setInterval(function() {
             check();
         }, 1000);
 
@@ -402,7 +411,7 @@
             var table = document.getElementById('tbl_users_list');
 
             for (var i = 1; i < table.rows.length; i++) {
-                table.rows[i].onclick = function () {
+                table.rows[i].onclick = function() {
                     document.getElementById("event_list").value = this.cells[0].innerHTML;
                     document.getElementById("id").value = this.cells[1].innerHTML;
                     document.getElementById("fname").value = this.cells[2].innerHTML;
@@ -416,8 +425,8 @@
         var dbRef = firebase.database().ref(); // Reference to realtime db
         var eventRef = dbRef.child('events').orderByKey();
 
-        eventRef.once('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
+        eventRef.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
                 var childKey = childSnapshot.key;
                 var evenWt = childSnapshot.val();
                 console.log(childKey + event);
@@ -438,51 +447,101 @@
 
     <script>
         function current_report(id, title, fname, lname, phone, email) {
-    var docDefinition = {
-        info: {
-            title: "Event Report",
-            author: 'Dialog Internal Event Manager 2019',
-        },
-        content: [{
-                columns: [{
-                    text: "Dialog Internal Event Manager 2019",
-                    fontSize: 30,
+            var docDefinition = {
+                info: {
+                    title: "Event Report",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
+                content: [{
+                    columns: [{
+                        text: "Dialog Internal Event Manager 2019",
+                        fontSize: 30,
+                        bold: true,
+                        width: "*",
+                        // }, {
+                        //     image: getDialoLogoBASE64(),
+                        //     width: 60,
+                        //     height: 60 * 1.3376623376623376623376623376623
+                        // 
+                    }],
+                }, {
+                    text: "Event Report",
+                    fontSize: 25,
+                    margin: 20,
                     bold: true,
-                    width: "*",
-                // }, {
-                //     image: getDialoLogoBASE64(),
-                //     width: 60,
-                //     height: 60 * 1.3376623376623376623376623376623
-                // 
-                }
-                ],
-            },
-            {
-                text: "Event Report",
-                fontSize: 25,
-                margin: 20,
-                bold: true,
-            },
-            {
-                layout: 'lightHorizontalLines',
-                margin: 50,
-                table: {
-                    taxt: "Event Report",
-                    body: [
-                        [{ text: 'Event Title          ', bold: true, margin: 5, fontSize: 20 }, { text: id, margin: 5, fontSize: 20 }],
-                        [{ text: 'Member ID            ', bold: true, margin: 5, fontSize: 20 }, { text: title, margin: 5, fontSize: 20 }],
-                        [{ text: 'First Name           ', bold: true, margin: 5, fontSize: 20 }, { text: fname, margin: 5, fontSize: 20 }],
-                        [{ text: 'Last Name            ', bold: true, margin: 5, fontSize: 20 }, { text: lname, margin: 5, fontSize: 20 }],
-                        [{ text: 'Phone Number         ', bold: true, margin: 5, fontSize: 20 }, { text: phone, margin: 5, fontSize: 20 }],
-                        [{ text: 'Email Address        ', bold: true, margin: 5, fontSize: 20 }, { text: email, margin: 5, fontSize: 20 }]
-                        
-                    ]
-                }
-            }
-        ]
-    };
-    pdfMake.createPdf(docDefinition).open();
-}
+                }, {
+                    layout: 'lightHorizontalLines',
+                    margin: 50,
+                    table: {
+                        taxt: "Event Report",
+                        body: [
+                            [{
+                                text: 'Event Title          ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: id,
+                                margin: 5,
+                                fontSize: 20
+                            }],
+                            [{
+                                text: 'Member ID            ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: title,
+                                margin: 5,
+                                fontSize: 20
+                            }],
+                            [{
+                                text: 'First Name           ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: fname,
+                                margin: 5,
+                                fontSize: 20
+                            }],
+                            [{
+                                text: 'Last Name            ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: lname,
+                                margin: 5,
+                                fontSize: 20
+                            }],
+                            [{
+                                text: 'Phone Number         ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: phone,
+                                margin: 5,
+                                fontSize: 20
+                            }],
+                            [{
+                                text: 'Email Address        ',
+                                bold: true,
+                                margin: 5,
+                                fontSize: 20
+                            }, {
+                                text: email,
+                                margin: 5,
+                                fontSize: 20
+                            }]
+
+                        ]
+                    }
+                }]
+            };
+            pdfMake.createPdf(docDefinition).open();
+        }
     </script>
 
 
@@ -490,64 +549,62 @@
 
 
 
-<script>
-    function report() {
+    <script>
+        function report() {
 
-        var membersTableData = [];
+            var membersTableData = [];
 
-    $('#tbl_users_list tr').each(function(row, tr) {
-        membersTableData[row] = [
-            $(tr).find('td:eq(1)').text(),
-            $(tr).find('td:eq(0)').text(),
-            $(tr).find('td:eq(2)').text(),
-            $(tr).find('td:eq(3)').text(),
-            $(tr).find('td:eq(4)').text(),
-            $(tr).find('td:eq(5)').text()
-        ]
-    });
+            $('#tbl_users_list tr').each(function(row, tr) {
+                membersTableData[row] = [
+                    $(tr).find('td:eq(1)').text(),
+                    $(tr).find('td:eq(0)').text(),
+                    $(tr).find('td:eq(2)').text(),
+                    $(tr).find('td:eq(3)').text(),
+                    $(tr).find('td:eq(4)').text(),
+                    $(tr).find('td:eq(5)').text()
+                ]
+            });
 
-    membersTableData[0] = ['Member ID', 'Event Title', 'First Name','Last Name','Phone Number','Email Address'];
+            membersTableData[0] = ['Member ID', 'Event Title', 'First Name', 'Last Name', 'Phone Number', 'Email Address'];
 
-var docDefinition = {
-        info: {
-            title: "Member Details",
-            author: 'Dialog Internal Event Manager 2019',
-        },
-        content: [{
-                columns: [{
-                    text: "Dialog Internal Event Manager 2019",
-                    fontSize: 30,
-                    bold: true,
-                    width: "*",
-                //}, {
-                //    image: getDialoLogoBASE64(),
-                //    width: 60,
-                //    height: 60 * 1.3376623376623376623376623376623
+            var docDefinition = {
+                info: {
+                    title: "Member Details",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
+                content: [{
+                        columns: [{
+                            text: "Dialog Internal Event Manager 2019",
+                            fontSize: 30,
+                            bold: true,
+                            width: "*",
+                            //}, {
+                            //    image: getDialoLogoBASE64(),
+                            //    width: 60,
+                            //    height: 60 * 1.3376623376623376623376623376623
 
-                }
-                ],
+                        }],
 
-            }, 
-            {
-                text: "Members Report",
-                fontSize: 20
-            },
-            
-            {
-                layout: 'lightHorizontalLines',
-                marginTop: 20,
-                fontSize: 10,
+                    }, {
+                        text: "Members Report",
+                        fontSize: 20
+                    },
 
-                table: {
-                    body: membersTableData
-                }
-            }
-        ]
-    };
+                    {
+                        layout: 'lightHorizontalLines',
+                        marginTop: 20,
+                        fontSize: 10,
 
-    pdfMake.createPdf(docDefinition).open();
-    }
-</script>
+                        table: {
+                            body: membersTableData
+                        }
+                    }
+                ]
+            };
+
+            pdfMake.createPdf(docDefinition).open();
+        }
+    </script>
 
 
 
@@ -556,21 +613,21 @@ var docDefinition = {
 
 
 
-<script>
-    function makepdf() {
-        var MydocDefinition = {
-            info: {
-                title: "Previous Payments",
-                author: 'Dialog Internal Event Manager 2019',
-            },
+    <script>
+        function makepdf() {
+            var MydocDefinition = {
+                info: {
+                    title: "Previous Payments",
+                    author: 'Dialog Internal Event Manager 2019',
+                },
 
-            content: [
-                "This my first Cliend-Side PDF"
-            ]
-        };
-        pdfMake.createPdf(MydocDefinition).download();
-    }
-</script>
+                content: [
+                    "This my first Cliend-Side PDF"
+                ]
+            };
+            pdfMake.createPdf(MydocDefinition).download();
+        }
+    </script>
 
 </body>
 

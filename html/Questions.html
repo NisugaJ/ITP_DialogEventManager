@@ -10,14 +10,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/TextArea.css">
-	<link rel="stylesheet" href="../css/poll_table.css">
+    <link rel="stylesheet" href="../css/poll_table.css">
+    <script src="../js/common.js"></script>
 
-	
-	<!-- firebase -->
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+
+    <!-- firebase -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+
+    <script src="../js/base64Encodings.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -84,16 +90,19 @@
             margin-right: 20px;
         }
     </style>
-	
-	<script src="../organizerJS/QuestionFirebase.js"></script>
+
+    <script src="../organizerJS/QuestionFirebase.js"></script>
     <script src="../organizerJS/angular.min.js"></script>
     <script src="../organizerJS/angular-route.min.js"></script>
     <script src="../organizerJS/angularJSChangeWindow.js"></script>
-	<script src="../js/common.js"></script>
+    <script src="../js/common.js"></script>
     <script src="../organizerJS/searchpoll.js"></script>
-   
+    <script src="../organizerJS/updatepoll.js"></script>
 
-	
+    <!--load jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body ng-controller="MainCtrl">
@@ -126,6 +135,7 @@
     <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="buttons">
         <h3><a class="w3-button w3-light-purple" style="padding:8.22px 25px" href="Questions.html" target="_top">Questions</a>
             <a class="w3-button w3-light-purple" style="padding:8.22px 53.55px" href="Polls.html" target="_top">Polls</a>
+            <a class="w3-button w3-light-purple" style="padding:8.22px 42.55px" name="pdf" id="pdf" onclick="OverrollReport()" target="_top">Reports</a>
         </h3>
 
         <!-- For review Section -->
@@ -146,9 +156,8 @@
   
   <form class="modal-content animate">
     <div class="container">
-		<input type="text" placeholder="  Type Poll Id" name="pollid" id="pollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
+		<input type="text" placeholder="  Type Poll Id" name="shquesid" id="shquesid" onkeyup="searchFromTableName()"  style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
        
-      <button type="submit" id="searchbtn">Search</button>
       
     </div>
 
@@ -157,26 +166,48 @@
     </div>
   </form>
 </div>
+
+<!--popup window for update poll-->
+		<div id="updateques" class="modal">
+  
+  <form class="modal-content animate">
+    <div class="container">
+	
+	<input type="text" placeholder="  Type Poll Id" name="uppollid" id="uppollid" style="width:100%; margin-bottom:8px;  border-radius: 4px; font-size:23px;" required>
+ <textarea id="upques" name="upques" placeholder="Type Your Question here.." style="height:100px" required></textarea>
+
+      <button type="submit" id="updatebtn" onclick="updateCell_ques()">Update</button>
+      
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <!-- <button type="button" onclick="document.getElementById('updatepoll').style.display='none'" class="cancelbtn" id="cancelbtnpolls">Cancel</button> -->
+	  <button type="button" onclick="document.getElementById('searchpoll').style.display='none'" class="cancelbtn" id="cancelbtnpolls">Cancel</button>
+    </div>
+  </form>
+</div>
 		
 		<!--menu button-->
-		<button class="w3-btnPoll" onclick="document.getElementById('menupoll').style.display='block'" style="width:auto;">
-		<i class="fa fa-ellipsis-v w3-hover-opacity" style="margin-left:0px;"></i></button>
+		<!--<button class="w3-btnPoll" onclick="document.getElementById('menupoll').style.display='block'" style="width:auto;">
+		<i class="fa fa-ellipsis-v w3-hover-opacity" style="margin-left:0px;"></i></button>-->
 		</span></li>
 
                     <!--text area-->
                     <li class="w3-padding-16">
                         <div class="col-75">
-							<table id="QueationForm" align="center" width="100%">
-                           
-							<!--<td width="35%" >Poll_Id</td>-->
-							<td width="88%">Questions</td>
-							<td style="font-size:10px" width="3%">Like</td>
-							<td style="font-size:10px" width="3%">Dislike</td>
-							<td style="font-size:10px" width="3%">Reply</td>
-							<td style="font-size:10px" width="3%">Delete</td>
+                            <table id="QueationForm" align="center" width="100%">
 
-						</tr>
-					</table>		
+                                <!--<td width="35%" >Poll_Id</td>-->
+                                <td width="88%">Questions</td>
+                                <!-- <td style="font-size:10px" width="3%">Like</td> -->
+                                <!-- <td style="font-size:10px" width="3%">Dislike</td> -->
+                                <!-- <td style="font-size:10px" width="3%">Reply</td> -->
+                                <td style="font-size:10px" width="3%">Update</td>
+                                <td style="font-size:10px" width="3%">Delete</td>
+                                <td style="font-size:10px" width="3%">Genarate Reports</td>
+
+                                </tr>
+                            </table>
                         </div>
                     </li>
                 </ul>
@@ -186,7 +217,9 @@
             <div class="w3-third w3-section" style="width:50%;">
                 <ul class="w3-ul w3-white w3-hover-shadow">
                     <li class="w3-purple w3-xlarge w3-padding-32"><span style="padding-right:50%;">Your questions</span>
-                        <span><a href="#"><i class="fa fa-search w3-hover-opacity" style="padding-left:0%;"></i></a> <a href="#"><i class="fa fa-ellipsis-v w3-hover-opacity" style="margin-left:20px;"></i></a></span>
+                        <span><a href="#"><i class="fa fa-search w3-hover-opacity" style="padding-left:0%;"></i></a>
+						<!--<a href="#"><i class="fa fa-ellipsis-v w3-hover-opacity" style="margin-left:20px;"></i></a>-->
+					</span>
                     </li>
                     <li class="w3-padding-52bottom">
                         <div class="col-75">
@@ -197,7 +230,7 @@
                         </div>
                     </li>
                     <div>
-                        <li class="w3-padding-16"><textarea id="subject" name="subject" style="height:90px"></textarea></li>
+                        <!-- <li class="w3-padding-16"><textarea id="subject" name="subject" style="height:90px"></textarea></li> -->
                     </div>
                 </ul>
             </div>
@@ -221,7 +254,7 @@
 
     <script>
         // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {
+        /*window.onscroll = function() {
             scrollFunction()
         };
 
@@ -237,7 +270,7 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-        }
+        } */
     </script>
     <div ng-view></div>
 </body>

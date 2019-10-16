@@ -13,18 +13,18 @@ databaseRef.once('value', function(snapshot) {
 
         var row = poll_Form.insertRow(rowIndex);
 
-        var cellPollId = row.insertCell(0);
-        var cellQues = row.insertCell(1);
+        //var cellPollId = row.insertCell(0);
+        var cellQues = row.insertCell(0);
 		
-		var editCell = row.insertCell(2);
-		var deleteCell = row.insertCell(3);
-		var reportCell = row.insertCell(4);
+		var editCell = row.insertCell(1);
+		var deleteCell = row.insertCell(2);
+		var reportCell = row.insertCell(3);
 		
-		var likePoll = row.insertCell(5);
-		var dislikePoll = row.insertCell(6);
-		var cTimePoll = row.insertCell(7);
+		var likePoll = row.insertCell(4);
+		var dislikePoll = row.insertCell(5);
+		var cTimePoll = row.insertCell(6);
 
-        cellPollId.appendChild(document.createTextNode(childKey));
+        //cellPollId.appendChild(document.createTextNode(childKey));
 			
         cellQues.appendChild(document.createTextNode(childData.ques));
 			
@@ -48,6 +48,24 @@ databaseRef.once('value', function(snapshot) {
 	reportCell.onclick = function() {
             current_report(childKey, childData.ques, childData.like, childData.dislike, childData.cTime);
         }
+
+	//pass values for graph
+	cellQues.onclick = function(){
+		var IdG = childKey;
+		localStorage.setItem("ID",IdG);
+
+		var QuestionG = childData.ques;
+		localStorage.setItem("graphQuestion",QuestionG);
+		
+		var GoodG = childData.like;
+		localStorage.setItem("graphGood",GoodG);
+		
+		var BadG = childData.dislike;
+		localStorage.setItem("graphBad",BadG);
+		document.getElementById("chartContainer").style.display = "run-in";	
+		refresh()
+		return false;
+	}	
 	
     rowIndex = rowIndex + 1;
 
@@ -145,7 +163,7 @@ function updateCell_poll(){
     }
 
     var updates = {};
-  updates['/polls/' + poll_id] = data;
+	updates['/polls/' + poll_id] = data;
     firebase.database().ref().update(updates);
 
     alert("The poll is successfully updated.");
@@ -176,10 +194,10 @@ function updateCell_poll(){
 window.onload = function(){
 
   let original = sessionStorage.getItem("program");
-  let event = JSON.parse(original);
+  let poll = JSON.parse(original);
 
-  document.getElementById('uppollid').value = event[0];
-  document.getElementById('upques').value = event[1];
+  document.getElementById('uppollid').value = poll[0];
+  document.getElementById('upques').value = poll[1];
   
 }
 
@@ -224,6 +242,10 @@ function deleteCell_poll(dlpollid) {
 //reloadPage
 function reload_page() {
     window.location.reload();
+}
+
+function refresh(timeoutPeriod){
+  refresh = setTimeout(function(){window.location.reload(true);},timeoutPeriod);
 }
 
 
@@ -273,7 +295,7 @@ function makepdf() {
                 },
 
                 content: [
-                    "This my first Cliend-Side PDF"
+                    "This my first Polls PDF"
                 ]
             };
             pdfMake.createPdf(MydocDefinition).download();
@@ -325,3 +347,63 @@ function current_report(id, question, likes, dislikes, ctime) {
     pdfMake.createPdf(docDefinition).open();
 }
 
+
+
+// make pdf 
+function OverrollReport() {
+           
+	// reading payment details of the selected payment from the  table
+    var pollTableData = [];
+
+    $('#poll_table tr').each(function(row, tr) {
+        pollTableData[row] = [
+            $(tr).find('td:eq(0)').text(),
+            $(tr).find('td:eq(1)').text(),
+            $(tr).find('td:eq(2)').text(),
+			// $(tr).find('td:eq(3)').text(),
+        ]
+    });
+
+    pollTableData[0] = ['Questions', 'Likes', 'Dislikes'];
+ var docDefinition = {
+        info: {
+            title: "Poll Overroll Report",
+            author: 'Dialog Internal Event Manager 2019',
+        },
+        content: [{
+                columns: [{
+                    text: "Dialog Internal Event Manager 2019",
+                    fontSize: 30,
+                    bold: true,
+                    width: "*",
+                }, {
+                    image: getDialoLogoBASE64(),
+                    width: 60,
+                    height: 60 * 1.3376623376623376623376623376623
+                }],
+
+            }, {
+                text: "Poll Report",
+                fontSize: 20
+            },
+            
+			{
+			layout:'lightHorizontalLines',
+			marginTop:20,
+			marginLeft:100,
+			fontSize:13,
+			
+			table:{
+				body:pollTableData
+			}
+			}
+			]
+ };
+ pdfMake.createPdf(docDefinition).open();
+
+}
+
+
+
+
+//end

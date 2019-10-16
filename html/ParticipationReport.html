@@ -241,15 +241,14 @@
                 var user_name = document.getElementById('user_name').value;
                 var arrival_time = document.getElementById('time').value;
                 var status = document.getElementById('status').value;
-                var location = document.getElementById('location').value;
-
+                // var location = document.getElementById('location').value;
 
                 var data = {
                     user_id: uid,
                     user_name: user_name,
                     arrival_time: arrival_time,
                     status: status,
-                    location: location
+                    // location: location
                 }
                 var updates = {};
                 updates['/eventAttendees/   ' + uid] = data;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>program Table</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -15,62 +16,67 @@
         https://firebase.google.com/docs/web/setup#config-web-app -->
 
     <script>
-      // Your web app's Firebase configuration
-       var firebaseConfig = {
-        apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
-        authDomain: "dialog-internal-event-manager.firebaseapp.com",
-        databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
-        projectId: "dialog-internal-event-manager",
-        storageBucket: "dialog-internal-event-manager.appspot.com",
-        messagingSenderId: "168700423082",
-        appId: "1:168700423082:web:6ad2292be26320c9"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBOI0UdMeBBKVZtw4VsSrn0iGiK8RdLRG0",
+            authDomain: "dialog-internal-event-manager.firebaseapp.com",
+            databaseURL: "https://dialog-internal-event-manager.firebaseio.com",
+            projectId: "dialog-internal-event-manager",
+            storageBucket: "dialog-internal-event-manager.appspot.com",
+            messagingSenderId: "168700423082",
+            appId: "1:168700423082:web:6ad2292be26320c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
     </script>
 
     <script src="../js/programTable.js"></script>
-	<script src="../js/base64Encodings.js"></script>
-	
-	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>     
-	
-	
-	
-  </head>
-  <body>
+    <script src="../js/base64Encodings.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.js" integrity="sha256-VkPDwq3gOwJPjRQPaVzmyn4M1VXw5C0Qv1w6YbpmJp0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
     <div id="menubar">
 
-    	<span id="dialog">Dialog Events <br> Admin Panel</span><br>
-		<img src="../images/dialogLogo.png" width="144px" height="162px">
-		 
+        <span id="dialog">Dialog Events <br> Admin Panel</span><br>
+        <img src="../images/dialogLogo.png" width="144px" height="162px">
+
         <ul>
-          <li><a href = "dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
-          <li><a href = "eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
-          <li><a href = "admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
-          <li><a href = "organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
-          <li><a href = "member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
-          <li><a href = "eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
-          <li><a href = "report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
-          <li><a href = "programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
-          <li><a href = "calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calender</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-home menuIcons"></i> Dashboard</a></li>
+            <li><a href="eventTable.html"><i class="fas fa-calendar-week menuIcons"></i> Events</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-tie menuIcons"></i> Admin</a></li>
+            <li><a href="organizer.html"><i class="fas fa-users-cog menuIcons"></i> Organizers</a></li>
+            <li><a href="member.html"><i class="fas fa-users menuIcons"></i> Members</a></li>
+            <li><a href="eventExpenses.html"><i class="fas fa-money-bill-wave-alt menuIcons"></i> Event Expenses</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt menuIcons"></i> Reports</a></li>
+            <li><a href="programTable.html"><i class="far fa-calendar-alt menuIcons"></i> Event Agenda</a></li>
+            <li><a href="calander.html"><i class="far fa-calendar-alt menuIcons"></i> Event Calender</a></li>
         </ul>
-      </div>
-      <div id="actions">
-      <header id="header">
-      	<nav><i class="fas fa-search" id="searchIcon"></i></nav>
-        <input type="text" name="search" id="search" onkeyup="searchFromTableName()" >
-        <button id="logOut">
+    </div>
+    <div id="actions">
+        <header id="header">
+            <nav><i class="fas fa-search" id="searchIcon"></i></nav>
+            <input type="text" name="search" id="search" onkeyup="searchFromTableName()">
+            <button id="logOut" onclick="signOutUser()">
         	Sign Out
         </button>
-      </header>
-        <nav><h1 id="title"><center>Programs</center></h1></nav>
+        </header>
+        <nav>
+            <h1 id="title">
+                <center>Programs</center>
+            </h1>
+        </nav>
         <button type="button" name="Addevent" id="addEvent">
           <a href="registerProgram.html" onclick="remove_Item()">Add Program</a>
         </button>
-		<button type="button" name="pdf" id="pdf" onclick="makefullagendareport()">Full report</button>
+        <button type="button" name="pdf" id="pdf" onclick="makefullagendareport()">Full report</button>
         <!--<button type="button" name="addEvent" id="addEvent">
           <a href="registerProgram.html">Update</a></button>-->
         <br>
@@ -100,28 +106,28 @@
           </tr>
         </table> -->
         <table id="agenda_table">
-          <tr>
-            <!--<td>Program ID</td>-->
-            <td>Program</td>
-            <td>Start Time</td>
-            <td>End Time</td>
-			<td>Event List</td>
-			<td></td>
-            <td></td>
-			
-            <!--<td><span class="delete_id">ID</span>
+            <tr>
+                <!--<td>Program ID</td>-->
+                <td>Program</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Event List</td>
+                <td></td>
+                <td></td>
+
+                <!--<td><span class="delete_id">ID</span>
       <input type="text" name="title" class="inputs" id="id"><button class="delete" onclick="delete_program()">Delete</button>-->
-	  
-	 
-			</td>
-          </tr>
+
+
+                </td>
+            </tr>
         </table>
-      </div>
-	  
-	  
-	  <script>
-	  function makepdf(){
-	  var MydocDefinition = {
+    </div>
+
+
+    <script>
+        function makepdf() {
+            var MydocDefinition = {
                 info: {
                     title: "Previous Payments",
                     author: 'Dialog Internal Event Manager 2019',
@@ -131,12 +137,12 @@
                     "This my first Cliend-Side PDF"
                 ]
             };
-            pdfMake.createPdf(MydocDefinition).download();}
-			
-			
-	  </script>
+            pdfMake.createPdf(MydocDefinition).download();
+        }
+    </script>
 
-	  
-	  
-  </body>
+
+
+</body>
+
 </html>
