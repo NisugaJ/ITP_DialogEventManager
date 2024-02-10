@@ -1,6 +1,6 @@
 # ITP Project - DialogEventManager
 
-# EventManagement Application for Network Department unit at Dialog Axiata
+### EventManagement Application for Network Department unit at Dialog Axiata
 
 ## Abstract
 
