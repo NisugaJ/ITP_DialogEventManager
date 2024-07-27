@@ -87,9 +87,6 @@ function isUserLoggedInAtStart() {
                     var currentAdmin = childAdminSnapshot.key;
                     console.log(currentAdmin);
                     if (sessionStorage.getItem("userkey") == currentAdmin) {
-
-
-
                         sessionStorage.setItem("organizerKey", "null");
                         sessionStorage.setItem("adminKey", currentAdmin);
                         window.location.href = "adminDashboard.html";
@@ -115,10 +112,11 @@ function isUserLoggedInAtStart() {
         } else {
             // No user is signed in.
             console.log("user is  not logged in");
-            if (window.location.pathname != '/ITP_DialogEventManager_WebApp/html/Login.html') {
-                console.log("user is not logged in " + window.location.pathname);
+            console.log(window.location.href);
+            if (window.location.href != '/html/Login.html') {
+                console.log("user is not logged in " + window.location.href);
 
-                window.location.href = "Login.html";
+                // window.location.href = "Login.html";
             }
         }
     });
@@ -135,9 +133,9 @@ function isUserLoggedIn() {
         if (!user) {
             // No user is signed in.
             console.log("user is  not logged in");
-            if (window.location.pathname != '/ITP_DialogEventManager_WebApp/html/Login.html') {
-                console.log("user is not logged in " + window.location.pathname.toString());
-                alert("user is not logged in " + window.location.pathname.toString());
+            if (window.location.href != '/html/Login.html') {
+                console.log("user is not logged in " + window.location.href.toString());
+                alert("user is not logged in " + window.location.href.toString());
 
                 window.location.href = "Login.html";
             }

@@ -10,19 +10,23 @@ body {
 
 #myVideo {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ensures the video covers the area without distortion */
+  z-index: -1;
+  /* Places the video behind other content */
 }
 
 .content {
   position: fixed;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.224);
   color: #f1f1f1;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 

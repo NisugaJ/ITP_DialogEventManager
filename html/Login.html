@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
     <link rel="stylesheet" href="../css/Login.css">
     <link rel="stylesheet" href="../css/BackgroundVideo.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
@@ -30,40 +31,53 @@
         sessionStorage.setItem("userkey", "user");
         sessionStorage.setItem("adminKey", "admin");
         sessionStorage.setItem("organizerKey", "org");
-        isUserLoggedInAtStart();
+        // isUserLoggedInAtStart();
     </script>
 
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* Prevents scrolling */
+        }
+    </style>
 </head>
 
 <body>
     <!-- background video -->
     <video autoplay muted loop id="myVideo">
-  <source src="../Videos/Dialog.mp4" type="video/mp4">
-</video>
+        <source src="../Videos/Dialog.mp4" type="video/mp4">
+    </video>
 
     <div id="id01" class="modal">
 
         <form id="login-form" class="modal-content animate" method="POST" action="javascript:loginUser()">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
                 <img src="../images/avatar.png" alt="Avatar" class="avatar">
             </div>
 
             <div class="container">
                 <label for="uname"><b>Email</b></label>
-                <input id="login_email" type="email" placeholder="Enter email" name="uname" required onclick="document.getElementById('warning_div').style.display = 'none';document.getElementById('warning_div').innerHTML = '';">
+                <input id="login_email" type="email" placeholder="Enter email" name="uname" required
+                    onclick="document.getElementById('warning_div').style.display = 'none';document.getElementById('warning_div').innerHTML = '';">
 
                 <label for="psw"><b>Password</b></label>
-                <input id="login_password" type="password" placeholder="Enter Password" name="psw" required onclick="document.getElementById('warning_div').style.display = 'none';document.getElementById('warning_div').innerHTML = '';">
+                <input id="login_password" type="password" placeholder="Enter Password" name="psw" required
+                    onclick="document.getElementById('warning_div').style.display = 'none';document.getElementById('warning_div').innerHTML = '';">
                 <label class="alert alert-danger" role="alert" id="warning_div" style=" display: none;"></label>
                 <button id="login_submit" type="submit">Login</button>
                 <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
             </div>
         </form>
         <script>
@@ -75,7 +89,7 @@
         var modal = document.getElementById('id01');
 
         //When the user clicks anywhere outside of the modal, close it 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
@@ -84,7 +98,8 @@
 
     <div class="content">
         <h1 style="font-size: 50px;"> DIALOG INTERNAL EVENT MANAGER</h1>
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;font-size: larger;">Login</button>
+        <button onclick="document.getElementById('id01').style.display='block'"
+            style="width:auto;font-size: larger;">Login</button>
     </div>
 
     <script type="text/javascript">
@@ -93,7 +108,7 @@
             console.log("Inside Login method");
             var email = document.getElementById('login_email').value;
             var password = document.getElementById('login_password').value;
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -117,9 +132,9 @@
         }
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             //Preloader
-            $(window).on("load", function() {
+            $(window).on("load", function () {
                 var preloaderFadeOutTime = 1000;
 
                 function hidePreloader() {
@@ -131,7 +146,7 @@
             });
 
             //Preloader on submit
-            $("#login-form").on("submit", function() {
+            $("#login-form").on("submit", function () {
                 var preloaderFadeOutTime2 = 3000;
 
                 function hidePreloader2() {
